@@ -1,51 +1,63 @@
 #include <Arduino.h>
-#include "../include/wifi_manager.h"
-#include "../include/config.h"
+#include "config.h"
+#include "wifi_manager.h"
+#include "ntp_sync.h"
 
 void setup() {
     Serial.begin(115200);
-    delay(1000);  // aguarda Serial estabilizar
+    delay(1000);
 
     Serial.println("========================================");
-    Serial.println("  TESTE 1 — Wi-Fi Manager");
+    Serial.println("  TESTE 2 — NTP Sync");
     Serial.println("========================================");
 
-    bool ok = wifiManager.connect();
-
-    if (!ok) {
-        Serial.println("[TESTE] FALHOU: Não conectou ao Wi-Fi.");
-        Serial.println("[TESTE] Verifique WIFI_SSID e WIFI_PASSWORD em config.h");
-        while (true) { delay(5000); }  // trava aqui
+    if (!wifiManager.connect()) {
+        Serial.println("[TESTE] FALHOU: Sem Wi-Fi.");
+        while (true) delay(5000);
     }
 
-    Serial.println("[TESTE] Conexão inicial: OK");
-    Serial.println("[TESTE] Monitorando RSSI a cada 5s...");
-    Serial.println("[TESTE] Desligue o roteador para testar reconexão.");
+    bool ntpOk = ntpSync.begin();
+
+    if (!ntpOk) {
+        Serial.println("[TESTE] AVISO: NTP falhou, usando fallback.");
+    } else {
+        Serial.println("[TESTE] NTP sincronizado: OK");
+    }
+
+    Serial.println("[TESTE] Imprimindo timestamps a cada 1s por 2 minutos...");
+    Serial.println("[TESTE] Compare com horário UTC real para validar.");
     Serial.println("----------------------------------------");
 }
 
+uint32_t testStart = 0;
+uint8_t  count     = 0;
+
 void loop() {
     static uint32_t lastPrint = 0;
-    static uint32_t ciclo     = 0;
 
-    // Verifica e mantém conexão (chama a cada loop)
-    bool connected = wifiManager.check();
+    if (testStart == 0) testStart = millis();
 
-    // Imprime status a cada 5s
-    if (millis() - lastPrint >= 5000) {
-        lastPrint = millis();
-        ciclo++;
-
-        if (connected) {
-            Serial.printf("[TESTE] Ciclo %lu | IP: %s | RSSI: %d dBm | Status: CONECTADO\n",
-                          ciclo,
-                          wifiManager.getIP().c_str(),
-                          wifiManager.getRSSI());
-        } else {
-            Serial.printf("[TESTE] Ciclo %lu | Status: DESCONECTADO — aguardando reconexão...\n",
-                          ciclo);
-        }
+    // Encerra após 2 minutos
+    if (millis() - testStart > 120000) {
+        Serial.println("----------------------------------------");
+        Serial.printf("[TESTE] Concluído. %d timestamps gerados.\n", count);
+        Serial.println("[TESTE] RESULTADO: Se os segundos incrementaram corretamente => PASSOU");
+        while (true) delay(5000);
     }
 
-    delay(100);  // pequena pausa para não sobrecarregar o loop
+    ntpSync.update();
+
+    if (millis() - lastPrint >= 1000) {
+        lastPrint = millis();
+        count++;
+
+        String ts    = ntpSync.getTimestamp();
+        unsigned long epoch = ntpSync.getEpoch();
+        bool synced  = ntpSync.isSynced();
+
+        Serial.printf("[%03d] ts=%s | epoch=%lu | synced=%s\n",
+                      count, ts.c_str(), epoch, synced ? "SIM" : "NAO");
+    }
+
+    delay(10);
 }
