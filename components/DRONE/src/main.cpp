@@ -1,63 +1,73 @@
 #include <Arduino.h>
+#include <math.h>
 #include "config.h"
-#include "wifi_manager.h"
-#include "ntp_sync.h"
+#include "flight_state.h"
 
 void setup() {
     Serial.begin(115200);
     delay(1000);
 
     Serial.println("========================================");
-    Serial.println("  TESTE 2 — NTP Sync");
+    Serial.println("  TESTE 3 — Flight State Machine");
+    Serial.println("  (Sem Wi-Fi necessário)");
     Serial.println("========================================");
-
-    if (!wifiManager.connect()) {
-        Serial.println("[TESTE] FALHOU: Sem Wi-Fi.");
-        while (true) delay(5000);
-    }
-
-    bool ntpOk = ntpSync.begin();
-
-    if (!ntpOk) {
-        Serial.println("[TESTE] AVISO: NTP falhou, usando fallback.");
-    } else {
-        Serial.println("[TESTE] NTP sincronizado: OK");
-    }
-
-    Serial.println("[TESTE] Imprimindo timestamps a cada 1s por 2 minutos...");
-    Serial.println("[TESTE] Compare com horário UTC real para validar.");
+    Serial.println("Fases esperadas:");
+    Serial.println("  IDLE(10s) → TAKEOFF → MISSION/HOVER → RETURN → LANDING → IDLE");
     Serial.println("----------------------------------------");
+
+    flightState.begin();
 }
 
-uint32_t testStart = 0;
-uint8_t  count     = 0;
-
 void loop() {
-    static uint32_t lastPrint = 0;
+    static uint32_t lastPrint    = 0;
+    static uint32_t lastPhaseLog = 0;
+    static FlightPhase lastPhase = PHASE_IDLE;
+    static uint32_t ciclo        = 0;
 
-    if (testStart == 0) testStart = millis();
+    // Atualiza a máquina de estados
+    bool transitioned = flightState.update();
 
-    // Encerra após 2 minutos
-    if (millis() - testStart > 120000) {
-        Serial.println("----------------------------------------");
-        Serial.printf("[TESTE] Concluído. %d timestamps gerados.\n", count);
-        Serial.println("[TESTE] RESULTADO: Se os segundos incrementaram corretamente => PASSOU");
-        while (true) delay(5000);
+    // Loga transição de fase imediatamente
+    if (transitioned) {
+        Serial.println("========================================");
+        Serial.printf("  >> TRANSIÇÃO → %s <<\n", flightState.getPhaseName());
+        Serial.println("========================================");
     }
 
-    ntpSync.update();
-
+    // Imprime estado detalhado a cada 1s
     if (millis() - lastPrint >= 1000) {
         lastPrint = millis();
-        count++;
+        ciclo++;
 
-        String ts    = ntpSync.getTimestamp();
-        unsigned long epoch = ntpSync.getEpoch();
-        bool synced  = ntpSync.isSynced();
+        FlightPhase p = flightState.getPhase();
 
-        Serial.printf("[%03d] ts=%s | epoch=%lu | synced=%s\n",
-                      count, ts.c_str(), epoch, synced ? "SIM" : "NAO");
+        Serial.printf("[%04lu] Fase=%-8s | WP=%d | "
+                      "Lat=%.6f Lon=%.6f Alt=%.1fm | "
+                      "Vel=%.1fm/s Hdg=%.0f° | "
+                      "Bat=%d%% %s\n",
+                      ciclo,
+                      flightState.getPhaseName(),
+                      flightState.getWaypointIndex(),
+                      flightState.getLat(),
+                      flightState.getLon(),
+                      flightState.getAlt(),
+                      flightState.getVelocity(),
+                      flightState.getHeading(),
+                      flightState.getBattery(),
+                      flightState.isBatteryAlert() ? "[ALERTA BAT!]" : "");
+
+        // Detecta fim de missão
+        if (flightState.isMissionDone()) {
+            Serial.println("========================================");
+            Serial.println("  MISSÃO CONCLUÍDA!");
+            Serial.printf("  Duração total: %lums\n",
+                          flightState.getFlightDuration());
+            Serial.println("  RESULTADO: Verifique se todas as fases");
+            Serial.println("             foram percorridas => PASSOU");
+            Serial.println("========================================");
+            while (true) delay(5000);
+        }
     }
 
-    delay(10);
+    delay(50);  // 20Hz de atualização da máquina de estados
 }
