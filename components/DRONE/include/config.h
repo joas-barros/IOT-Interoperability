@@ -169,4 +169,4 @@ static const uint8_t NUM_WAYPOINTS = sizeof(WAYPOINTS) / sizeof(Waypoint);
 #define JSON_DOC_SIZE   512
 
 // Tamanho do buffer de serialização JSON (bytes)
-#define JSON_BUFFER_SIZE  400
+#define JSON_BUFFER_SIZE  512
