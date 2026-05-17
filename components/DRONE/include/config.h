@@ -16,7 +16,7 @@
 // ------------------------------------------------------------
 //  GATEWAY CoAP 
 // ------------------------------------------------------------
-#define GATEWAY_IP        "192.168.1.100"   
+#define GATEWAY_IP        "10.26.45.164"   
 #define GATEWAY_PORT      5683              // porta padrão CoAP
 #define COAP_ENDPOINT     "dados/drone"     // URI do recurso no servidor CoAP
 
