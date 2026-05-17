@@ -36,6 +36,7 @@
 #include "sensor_sim.h"
 #include "payload_builder.h"
 #include "coap_client.h"
+#include "led_manager.h"
 
 // Buffer de serialização do payload JSON
 static char jsonBuffer[JSON_BUFFER_SIZE];
@@ -137,7 +138,7 @@ void setup() {
     printBanner();
 
     // --- 1. Wi-Fi ---
-    Serial.println("[MAIN] [1/6] Conectando ao Wi-Fi...");
+    Serial.println("[MAIN] [1/7] Conectando ao Wi-Fi...");
     if (!wifiManager.connect()) {
         Serial.println("[MAIN] ERRO FATAL: Sem Wi-Fi. Verifique config.h.");
         Serial.println("[MAIN] Sistema travado. Resetar manualmente.");
@@ -145,25 +146,29 @@ void setup() {
     }
 
     // --- 2. NTP ---
-    Serial.println("[MAIN] [2/6] Sincronizando NTP...");
+    Serial.println("[MAIN] [2/7] Sincronizando NTP...");
     if (!ntpSync.begin()) {
         Serial.println("[MAIN] AVISO: NTP falhou. Timestamps serão relativos ao boot.");
     }
 
     // --- 3. Sensor ---
-    Serial.println("[MAIN] [3/6] Inicializando simulação de sensores...");
+    Serial.println("[MAIN] [3/7] Inicializando simulação de sensores...");
     sensorSim.begin();
 
     // --- 4. Máquina de estados ---
-    Serial.println("[MAIN] [4/6] Inicializando máquina de estados de voo...");
+    Serial.println("[MAIN] [4/7] Inicializando máquina de estados de voo...");
     flightState.begin();
 
     // --- 5. CoAP ---
-    Serial.println("[MAIN] [5/6] Inicializando cliente CoAP...");
+    Serial.println("[MAIN] [5/7] Inicializando cliente CoAP...");
     coapClient.begin();
 
-    // --- 6. Pausa pré-missão ---
-    Serial.println("[MAIN] [6/6] Sistema pronto!");
+    // --- 6. LED ---
+    Serial.println("[MAIN] [6/7] Inicializando LED RGB...");
+    ledManager.begin();
+
+    // --- 7. Pausa pré-missão ---
+    Serial.println("[MAIN] [7/7] Sistema pronto!");
     Serial.println();
     Serial.printf("[MAIN] Iniciando missão em %d segundos...\n",
                   PRE_MISSION_DELAY_MS / 1000);
@@ -190,6 +195,7 @@ void loop() {
     wifiManager.check();
     ntpSync.update();
     coapClient.loop();   // processa ACKs e gerencia timeouts/retransmissões
+    ledManager.loop();
 
     // ---- 2. Missão já concluída ----
     if (missionReported) {
@@ -228,6 +234,9 @@ void loop() {
         );
 
         if (payloadOk) {
+            
+            ledManager.flash(flightState.getPhase());
+
             // 4c. Envia via CoAP
             uint16_t msgId = coapClient.send(jsonBuffer);
 

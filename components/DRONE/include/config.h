@@ -46,7 +46,7 @@
 #define BASE_LON          -37.32216460818565
 
 // Altitude alvo de missão (metros)
-#define MISSION_ALT_M     5.0f
+#define MISSION_ALT_M     10.0f
 
 // Raio máximo de deslocamento horizontal em missão (metros)
 #define MISSION_RADIUS_M  200.0f
