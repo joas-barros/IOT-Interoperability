@@ -18,48 +18,48 @@ bool PayloadBuilder::build(char* buffer, size_t bufferSize,
         return false;
     }
 
-    // Monta o documento JSON (Sintaxe atualizada ArduinoJson v7)
+    // Documento JSON flat (sem sub-objetos) — menor overhead de chaves
     JsonDocument doc;
 
-    // ---- Identificação ----
-    doc["id"] = DRONE_ID;
-    doc["ts"] = ntpSync.getTimestamp();
+    doc["id"]     = DRONE_ID;
+    doc["ts"]     = ntpSync.getTimestamp();
 
-    // ---- Dados de voo ----
-    JsonObject voo = doc["voo"].to<JsonObject>();
-    voo["fase"]      = fs.getPhaseName();
-    voo["fase_cod"]  = (uint8_t)fs.getPhase();
-    voo["waypoint"]  = fs.getWaypointIndex();
-    voo["duracao_s"] = fs.getFlightDuration() / 1000;
+    // Voo
+    doc["f"]      = fs.getPhaseName();
+    doc["wp"]     = fs.getWaypointIndex();
 
-    // ---- Posição ----
-    JsonObject posicao = doc["posicao"].to<JsonObject>();
-    posicao["lat"]     = serialized(String(fs.getLat(), 6));
-    posicao["lon"]     = serialized(String(fs.getLon(), 6));
-    posicao["alt_m"]   = serialized(String(fs.getAlt(), 1));
-    posicao["heading"] = serialized(String(fs.getHeading(), 1));
-    posicao["vel_ms"]  = serialized(String(fs.getVelocity(), 1));
+    // Posição — lat/lon precisam de 6 decimais (~11cm precisão)
+    doc["lat"]    = serialized(String(fs.getLat(), 6));
+    doc["lon"]    = serialized(String(fs.getLon(), 6));
+    doc["alt"]    = serialized(String(fs.getAlt(), 1));
+    doc["hdg"]    = serialized(String(fs.getHeading(), 1));
+    doc["vel"]    = serialized(String(fs.getVelocity(), 1));
 
-    // ---- Dados ambientais ----
-    JsonObject ambiente = doc["ambiente"].to<JsonObject>();
-    ambiente["temp_c"]  = serialized(String(sd.temp_c, 2));
-    ambiente["hum_pct"] = serialized(String(sd.hum_pct, 1));
+    // Ambiente
+    doc["tmp"]    = serialized(String(sd.temp_c, 2));
+    doc["hum"]    = serialized(String(sd.hum_pct, 1));
 
-    // ---- Sistema ----
-    JsonObject sistema = doc["sistema"].to<JsonObject>();
-    sistema["bateria_pct"] = fs.getBattery();
-    sistema["alerta_bat"]  = fs.isBatteryAlert();
-    sistema["rssi_dbm"]    = sd.rssi_dbm;
-    sistema["seq"]         = seqNumber;
+    // Sistema
+    doc["bat"]    = fs.getBattery();
+    doc["bat_ok"] = !fs.isBatteryAlert();   // true = bateria saudável
+    doc["rssi"]   = sd.rssi_dbm;
+    doc["seq"]    = seqNumber;
 
     // Serializa para buffer
     size_t written = serializeJson(doc, buffer, bufferSize);
 
     if (written == 0 || written >= bufferSize) {
         snprintf(_lastError, sizeof(_lastError),
-                 "Erro de serialização (escrito=%d, buf=%d)", written, bufferSize);
+                 "Serialização falhou (written=%d, bufSize=%d)",
+                 (int)written, (int)bufferSize);
         Serial.printf("[PAYLOAD] %s\n", _lastError);
         return false;
+    }
+
+    // Avisa se estiver perto do limite do buffer CoAP
+    if (written > 180) {
+        Serial.printf("[PAYLOAD] AVISO: payload=%d bytes (limite CoAP ~490)\n",
+                      (int)written);
     }
 
     return true;
