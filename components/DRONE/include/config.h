@@ -46,7 +46,7 @@
 #define BASE_LON          -37.32216460818565
 
 // Altitude alvo de missão (metros)
-#define MISSION_ALT_M     5.0f
+#define MISSION_ALT_M     10.0f
 
 // Raio máximo de deslocamento horizontal em missão (metros)
 #define MISSION_RADIUS_M  200.0f
@@ -93,7 +93,7 @@ static const uint32_t PHASE_PUBLISH_INTERVAL_MS[] = {
     30000,  // IDLE     — a cada 30s (heartbeat)
     5000,   // TAKEOFF  — a cada 5s
     5000,   // MISSION  — a cada 5s
-    2000,   // HOVER    — a cada 2s (coleta intensiva)
+    1000,   // HOVER    — a cada 1s (coleta intensiva)
     5000,   // RETURN   — a cada 5s
     2000    // LANDING  — a cada 2s (descida cuidadosa)
 };
