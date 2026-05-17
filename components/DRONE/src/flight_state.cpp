@@ -240,3 +240,14 @@ uint32_t FlightState::getFlightDuration() const {
     if (_phase == PHASE_IDLE) return 0;
     return millis() - _takeoffStartMs;
 }
+
+// ------------------------------------------------------------
+double FlightState::getLat() const {
+    double jitter = ((double)random(-1000, 1001) / 1000.0) * GPS_JITTER_DEG;
+    return _lat + jitter;
+}
+
+double FlightState::getLon() const {
+    double jitter = ((double)random(-1000, 1001) / 1000.0) * GPS_JITTER_DEG;
+    return _lon + jitter;
+}

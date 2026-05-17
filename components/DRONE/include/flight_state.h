@@ -23,8 +23,8 @@ public:
     uint8_t     getWaypointIndex() const { return _wpIndex; }
 
     // ---- Getters de posição e movimento ----
-    double  getLat()      const { return _lat; }
-    double  getLon()      const { return _lon; }
+    double  getLat() const;
+    double  getLon() const;
     float   getAlt()      const { return _alt; }
     float   getVelocity() const { return _velocity; }
     float   getHeading()  const { return _heading; }

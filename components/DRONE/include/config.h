@@ -93,7 +93,7 @@ static const uint32_t PHASE_PUBLISH_INTERVAL_MS[] = {
     30000,  // IDLE     — a cada 30s (heartbeat)
     5000,   // TAKEOFF  — a cada 5s
     5000,   // MISSION  — a cada 5s
-    2000,   // HOVER    — a cada 2s (coleta intensiva)
+    1000,   // HOVER    — a cada 1s (coleta intensiva)
     5000,   // RETURN   — a cada 5s
     2000    // LANDING  — a cada 2s (descida cuidadosa)
 };
