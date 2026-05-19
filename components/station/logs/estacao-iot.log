@@ -7260,3 +7260,279 @@
 2026-05-19T17:16:21.567Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=198 | tmp=29.52 | hum=70.9 | pres=1013.99 | co2=412.1 | uv=1.1 | rssi=-72
 2026-05-19T17:16:21.567Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=199 | tmp=28.94 | hum=71.9 | pres=1014.12 | co2=417.3 | uv=1.9 | rssi=-49
 2026-05-19T17:16:21.567Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=200 | tmp=27.97 | hum=72.6 | pres=1013.93 | co2=416.1 | uv=0.6 | rssi=-60
+2026-05-19T17:30:44.390Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station.properties
+2026-05-19T17:30:44.391Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station-local.properties
+2026-05-19T17:30:44.392Z [INFO ] [config.AppConfig    ] [Config] station-local.properties carregado — sobrescrevendo valores base.
+2026-05-19T17:30:44.394Z [INFO ] [config.AppConfig    ] ╔══════════════════════════════════════════╗
+2026-05-19T17:30:44.394Z [INFO ] [config.AppConfig    ] ║       Configuração Carregada             ║
+2026-05-19T17:30:44.394Z [INFO ] [config.AppConfig    ] ╠══════════════════════════════════════════╣
+2026-05-19T17:30:44.394Z [INFO ] [config.AppConfig    ] ║ Estação ID : estacao_01
+2026-05-19T17:30:44.394Z [INFO ] [config.AppConfig    ] ║ Broker     : 192.168.1.100:1883
+2026-05-19T17:30:44.394Z [INFO ] [config.AppConfig    ] ║ Tópico     : ambiente/estacao/estacao_01/telemetria
+2026-05-19T17:30:44.394Z [INFO ] [config.AppConfig    ] ║ Status     : ambiente/estacao/estacao_01/status
+2026-05-19T17:30:44.394Z [INFO ] [config.AppConfig    ] ║ Intervalo  : 10000 ms
+2026-05-19T17:30:44.394Z [INFO ] [config.AppConfig    ] ║ QoS        : 1
+2026-05-19T17:30:44.394Z [INFO ] [config.AppConfig    ] ║ Lat/Lon    : -5.207645788981328, -37.32216460818565
+2026-05-19T17:30:44.395Z [INFO ] [config.AppConfig    ] ║ Seed       : 42
+2026-05-19T17:30:44.395Z [INFO ] [config.AppConfig    ] ╚══════════════════════════════════════════╝
+2026-05-19T17:30:44.395Z [INFO ] [sensor.SensorSim    ] [Sensor] Inicializado | seed=42 | temp_base=29.0°C | hum_base=71.0%
+2026-05-19T17:30:44.494Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=1 | tmp=29.46 | hum=71.5 | pres=1013.53 | co2=412.2 | uv=1.4 | rssi=-47
+2026-05-19T17:30:44.539Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=1 | 179 bytes | {"id":"estacao_01","ts":"2026-05-19T17:30:44.493Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.46,"hum":71.5,"pres":1013.53,"co2":412.2,"uv":1.4,"rssi":-47,"seq":1}
+2026-05-19T17:31:08.771Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station.properties
+2026-05-19T17:31:08.773Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station-local.properties
+2026-05-19T17:31:08.774Z [INFO ] [config.AppConfig    ] [Config] station-local.properties carregado — sobrescrevendo valores base.
+2026-05-19T17:31:08.777Z [INFO ] [config.AppConfig    ] ╔══════════════════════════════════════════╗
+2026-05-19T17:31:08.777Z [INFO ] [config.AppConfig    ] ║       Configuração Carregada             ║
+2026-05-19T17:31:08.777Z [INFO ] [config.AppConfig    ] ╠══════════════════════════════════════════╣
+2026-05-19T17:31:08.777Z [INFO ] [config.AppConfig    ] ║ Estação ID : estacao_01
+2026-05-19T17:31:08.777Z [INFO ] [config.AppConfig    ] ║ Broker     : 192.168.1.100:1883
+2026-05-19T17:31:08.777Z [INFO ] [config.AppConfig    ] ║ Tópico     : ambiente/estacao/estacao_01/telemetria
+2026-05-19T17:31:08.777Z [INFO ] [config.AppConfig    ] ║ Status     : ambiente/estacao/estacao_01/status
+2026-05-19T17:31:08.777Z [INFO ] [config.AppConfig    ] ║ Intervalo  : 10000 ms
+2026-05-19T17:31:08.777Z [INFO ] [config.AppConfig    ] ║ QoS        : 1
+2026-05-19T17:31:08.777Z [INFO ] [config.AppConfig    ] ║ Lat/Lon    : -5.207645788981328, -37.32216460818565
+2026-05-19T17:31:08.778Z [INFO ] [config.AppConfig    ] ║ Seed       : 42
+2026-05-19T17:31:08.778Z [INFO ] [config.AppConfig    ] ╚══════════════════════════════════════════╝
+2026-05-19T17:31:08.779Z [INFO ] [sensor.SensorSim    ] [Sensor] Inicializado | seed=42 | temp_base=29.0°C | hum_base=71.0%
+2026-05-19T17:31:08.854Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=1 | tmp=29.46 | hum=71.5 | pres=1013.54 | co2=412.2 | uv=1.4 | rssi=-47
+2026-05-19T17:31:08.889Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=1 | 179 bytes | {"id":"estacao_01","ts":"2026-05-19T17:31:08.853Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.46,"hum":71.5,"pres":1013.54,"co2":412.2,"uv":1.4,"rssi":-47,"seq":1}
+2026-05-19T17:31:36.474Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station.properties
+2026-05-19T17:31:36.476Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station-local.properties
+2026-05-19T17:31:36.476Z [INFO ] [config.AppConfig    ] [Config] station-local.properties carregado — sobrescrevendo valores base.
+2026-05-19T17:31:36.478Z [INFO ] [config.AppConfig    ] ╔══════════════════════════════════════════╗
+2026-05-19T17:31:36.478Z [INFO ] [config.AppConfig    ] ║       Configuração Carregada             ║
+2026-05-19T17:31:36.478Z [INFO ] [config.AppConfig    ] ╠══════════════════════════════════════════╣
+2026-05-19T17:31:36.478Z [INFO ] [config.AppConfig    ] ║ Estação ID : estacao_01
+2026-05-19T17:31:36.478Z [INFO ] [config.AppConfig    ] ║ Broker     : 192.168.1.100:1883
+2026-05-19T17:31:36.478Z [INFO ] [config.AppConfig    ] ║ Tópico     : ambiente/estacao/estacao_01/telemetria
+2026-05-19T17:31:36.478Z [INFO ] [config.AppConfig    ] ║ Status     : ambiente/estacao/estacao_01/status
+2026-05-19T17:31:36.478Z [INFO ] [config.AppConfig    ] ║ Intervalo  : 10000 ms
+2026-05-19T17:31:36.478Z [INFO ] [config.AppConfig    ] ║ QoS        : 1
+2026-05-19T17:31:36.479Z [INFO ] [config.AppConfig    ] ║ Lat/Lon    : -5.207645788981328, -37.32216460818565
+2026-05-19T17:31:36.479Z [INFO ] [config.AppConfig    ] ║ Seed       : 42
+2026-05-19T17:31:36.479Z [INFO ] [config.AppConfig    ] ╚══════════════════════════════════════════╝
+2026-05-19T17:31:36.479Z [INFO ] [sensor.SensorSim    ] [Sensor] Inicializado | seed=42 | temp_base=29.0°C | hum_base=71.0%
+2026-05-19T17:31:36.564Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=1 | tmp=29.46 | hum=71.5 | pres=1013.54 | co2=412.2 | uv=1.4 | rssi=-47
+2026-05-19T17:31:36.602Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=1 | 179 bytes | {"id":"estacao_01","ts":"2026-05-19T17:31:36.563Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.46,"hum":71.5,"pres":1013.54,"co2":412.2,"uv":1.4,"rssi":-47,"seq":1}
+2026-05-19T17:32:32.021Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station.properties
+2026-05-19T17:32:32.023Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station-local.properties
+2026-05-19T17:32:32.023Z [INFO ] [config.AppConfig    ] [Config] station-local.properties carregado — sobrescrevendo valores base.
+2026-05-19T17:32:32.025Z [INFO ] [config.AppConfig    ] ╔══════════════════════════════════════════╗
+2026-05-19T17:32:32.025Z [INFO ] [config.AppConfig    ] ║       Configuração Carregada             ║
+2026-05-19T17:32:32.025Z [INFO ] [config.AppConfig    ] ╠══════════════════════════════════════════╣
+2026-05-19T17:32:32.025Z [INFO ] [config.AppConfig    ] ║ Estação ID : estacao_01
+2026-05-19T17:32:32.025Z [INFO ] [config.AppConfig    ] ║ Broker     : 192.168.1.100:1883
+2026-05-19T17:32:32.025Z [INFO ] [config.AppConfig    ] ║ Tópico     : ambiente/estacao/estacao_01/telemetria
+2026-05-19T17:32:32.025Z [INFO ] [config.AppConfig    ] ║ Status     : ambiente/estacao/estacao_01/status
+2026-05-19T17:32:32.025Z [INFO ] [config.AppConfig    ] ║ Intervalo  : 10000 ms
+2026-05-19T17:32:32.025Z [INFO ] [config.AppConfig    ] ║ QoS        : 1
+2026-05-19T17:32:32.025Z [INFO ] [config.AppConfig    ] ║ Lat/Lon    : -5.207645788981328, -37.32216460818565
+2026-05-19T17:32:32.026Z [INFO ] [config.AppConfig    ] ║ Seed       : 42
+2026-05-19T17:32:32.026Z [INFO ] [config.AppConfig    ] ╚══════════════════════════════════════════╝
+2026-05-19T17:32:32.026Z [INFO ] [sensor.SensorSim    ] [Sensor] Inicializado | seed=42 | temp_base=29.0°C | hum_base=71.0%
+2026-05-19T17:32:32.114Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=1 | tmp=29.46 | hum=71.5 | pres=1013.54 | co2=412.2 | uv=1.4 | rssi=-47
+2026-05-19T17:32:32.155Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=1 | 179 bytes | {"id":"estacao_01","ts":"2026-05-19T17:32:32.114Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.46,"hum":71.5,"pres":1013.54,"co2":412.2,"uv":1.4,"rssi":-47,"seq":1}
+2026-05-19T17:33:34.804Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station.properties
+2026-05-19T17:33:34.805Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station-local.properties
+2026-05-19T17:33:34.805Z [INFO ] [config.AppConfig    ] [Config] station-local.properties carregado — sobrescrevendo valores base.
+2026-05-19T17:33:34.807Z [INFO ] [config.AppConfig    ] ╔══════════════════════════════════════════╗
+2026-05-19T17:33:34.807Z [INFO ] [config.AppConfig    ] ║       Configuração Carregada             ║
+2026-05-19T17:33:34.807Z [INFO ] [config.AppConfig    ] ╠══════════════════════════════════════════╣
+2026-05-19T17:33:34.807Z [INFO ] [config.AppConfig    ] ║ Estação ID : estacao_01
+2026-05-19T17:33:34.808Z [INFO ] [config.AppConfig    ] ║ Broker     : 192.168.1.100:1883
+2026-05-19T17:33:34.808Z [INFO ] [config.AppConfig    ] ║ Tópico     : ambiente/estacao/estacao_01/telemetria
+2026-05-19T17:33:34.808Z [INFO ] [config.AppConfig    ] ║ Status     : ambiente/estacao/estacao_01/status
+2026-05-19T17:33:34.808Z [INFO ] [config.AppConfig    ] ║ Intervalo  : 10000 ms
+2026-05-19T17:33:34.808Z [INFO ] [config.AppConfig    ] ║ QoS        : 1
+2026-05-19T17:33:34.808Z [INFO ] [config.AppConfig    ] ║ Lat/Lon    : -5.207645788981328, -37.32216460818565
+2026-05-19T17:33:34.808Z [INFO ] [config.AppConfig    ] ║ Seed       : 42
+2026-05-19T17:33:34.808Z [INFO ] [config.AppConfig    ] ╚══════════════════════════════════════════╝
+2026-05-19T17:33:34.809Z [INFO ] [sensor.SensorSim    ] [Sensor] Inicializado | seed=42 | temp_base=29.0°C | hum_base=71.0%
+2026-05-19T17:33:34.886Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=1 | tmp=29.46 | hum=71.5 | pres=1013.55 | co2=412.2 | uv=1.4 | rssi=-47
+2026-05-19T17:33:34.922Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=1 | 179 bytes | {"id":"estacao_01","ts":"2026-05-19T17:33:34.886Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.46,"hum":71.5,"pres":1013.55,"co2":412.2,"uv":1.4,"rssi":-47,"seq":1}
+2026-05-19T17:35:08.871Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station.properties
+2026-05-19T17:35:08.873Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station-local.properties
+2026-05-19T17:35:08.873Z [INFO ] [config.AppConfig    ] [Config] station-local.properties carregado — sobrescrevendo valores base.
+2026-05-19T17:35:08.875Z [INFO ] [config.AppConfig    ] ╔══════════════════════════════════════════╗
+2026-05-19T17:35:08.875Z [INFO ] [config.AppConfig    ] ║       Configuração Carregada             ║
+2026-05-19T17:35:08.875Z [INFO ] [config.AppConfig    ] ╠══════════════════════════════════════════╣
+2026-05-19T17:35:08.875Z [INFO ] [config.AppConfig    ] ║ Estação ID : estacao_01
+2026-05-19T17:35:08.875Z [INFO ] [config.AppConfig    ] ║ Broker     : 192.168.1.100:1883
+2026-05-19T17:35:08.875Z [INFO ] [config.AppConfig    ] ║ Tópico     : ambiente/estacao/estacao_01/telemetria
+2026-05-19T17:35:08.875Z [INFO ] [config.AppConfig    ] ║ Status     : ambiente/estacao/estacao_01/status
+2026-05-19T17:35:08.875Z [INFO ] [config.AppConfig    ] ║ Intervalo  : 10000 ms
+2026-05-19T17:35:08.875Z [INFO ] [config.AppConfig    ] ║ QoS        : 1
+2026-05-19T17:35:08.875Z [INFO ] [config.AppConfig    ] ║ Lat/Lon    : -5.207645788981328, -37.32216460818565
+2026-05-19T17:35:08.876Z [INFO ] [config.AppConfig    ] ║ Seed       : 42
+2026-05-19T17:35:08.876Z [INFO ] [config.AppConfig    ] ╚══════════════════════════════════════════╝
+2026-05-19T17:35:08.876Z [INFO ] [sensor.SensorSim    ] [Sensor] Inicializado | seed=42 | temp_base=29.0°C | hum_base=71.0%
+2026-05-19T17:35:08.947Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=1 | tmp=29.46 | hum=71.5 | pres=1013.55 | co2=412.2 | uv=1.4 | rssi=-47
+2026-05-19T17:35:08.984Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=1 | 179 bytes | {"id":"estacao_01","ts":"2026-05-19T17:35:08.946Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.46,"hum":71.5,"pres":1013.55,"co2":412.2,"uv":1.4,"rssi":-47,"seq":1}
+2026-05-19T17:35:09.008Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=2 | tmp=28.67 | hum=70.0 | pres=1013.78 | co2=418.7 | uv=1.5 | rssi=-52
+2026-05-19T17:35:09.008Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=2 | 179 bytes | {"id":"estacao_01","ts":"2026-05-19T17:35:09.008Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.67,"hum":70.0,"pres":1013.78,"co2":418.7,"uv":1.5,"rssi":-52,"seq":2}
+2026-05-19T17:35:09.009Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=3 | tmp=29.56 | hum=70.2 | pres=1013.48 | co2=415.9 | uv=1.1 | rssi=-48
+2026-05-19T17:35:09.009Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=3 | 179 bytes | {"id":"estacao_01","ts":"2026-05-19T17:35:09.009Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.56,"hum":70.2,"pres":1013.48,"co2":415.9,"uv":1.1,"rssi":-48,"seq":3}
+2026-05-19T17:35:09.009Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=4 | tmp=28.52 | hum=71.5 | pres=1014.31 | co2=416.1 | uv=1.4 | rssi=-40
+2026-05-19T17:35:09.010Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=4 | 179 bytes | {"id":"estacao_01","ts":"2026-05-19T17:35:09.009Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.52,"hum":71.5,"pres":1014.31,"co2":416.1,"uv":1.4,"rssi":-40,"seq":4}
+2026-05-19T17:35:09.010Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=5 | tmp=28.89 | hum=71.0 | pres=1014.22 | co2=414.2 | uv=1.2 | rssi=-66
+2026-05-19T17:35:09.010Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=5 | 179 bytes | {"id":"estacao_01","ts":"2026-05-19T17:35:09.010Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.89,"hum":71.0,"pres":1014.22,"co2":414.2,"uv":1.2,"rssi":-66,"seq":5}
+2026-05-19T17:35:49.846Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station.properties
+2026-05-19T17:35:49.847Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station-local.properties
+2026-05-19T17:35:49.847Z [INFO ] [config.AppConfig    ] [Config] station-local.properties carregado — sobrescrevendo valores base.
+2026-05-19T17:35:49.850Z [INFO ] [config.AppConfig    ] ╔══════════════════════════════════════════╗
+2026-05-19T17:35:49.850Z [INFO ] [config.AppConfig    ] ║       Configuração Carregada             ║
+2026-05-19T17:35:49.850Z [INFO ] [config.AppConfig    ] ╠══════════════════════════════════════════╣
+2026-05-19T17:35:49.850Z [INFO ] [config.AppConfig    ] ║ Estação ID : estacao_01
+2026-05-19T17:35:49.850Z [INFO ] [config.AppConfig    ] ║ Broker     : 192.168.1.100:1883
+2026-05-19T17:35:49.850Z [INFO ] [config.AppConfig    ] ║ Tópico     : ambiente/estacao/estacao_01/telemetria
+2026-05-19T17:35:49.850Z [INFO ] [config.AppConfig    ] ║ Status     : ambiente/estacao/estacao_01/status
+2026-05-19T17:35:49.850Z [INFO ] [config.AppConfig    ] ║ Intervalo  : 10000 ms
+2026-05-19T17:35:49.851Z [INFO ] [config.AppConfig    ] ║ QoS        : 1
+2026-05-19T17:35:49.851Z [INFO ] [config.AppConfig    ] ║ Lat/Lon    : -5.207645788981328, -37.32216460818565
+2026-05-19T17:35:49.851Z [INFO ] [config.AppConfig    ] ║ Seed       : 42
+2026-05-19T17:35:49.851Z [INFO ] [config.AppConfig    ] ╚══════════════════════════════════════════╝
+2026-05-19T17:35:49.852Z [INFO ] [sensor.SensorSim    ] [Sensor] Inicializado | seed=42 | temp_base=29.0°C | hum_base=71.0%
+2026-05-19T17:35:49.927Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=1 | tmp=29.46 | hum=71.5 | pres=1013.55 | co2=412.2 | uv=1.4 | rssi=-47
+2026-05-19T17:35:49.964Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=1 | 179 bytes | {"id":"estacao_01","ts":"2026-05-19T17:35:49.926Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.46,"hum":71.5,"pres":1013.55,"co2":412.2,"uv":1.4,"rssi":-47,"seq":1}
+2026-05-19T17:35:49.964Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=2 | tmp=28.67 | hum=70.0 | pres=1013.78 | co2=418.7 | uv=1.5 | rssi=-52
+2026-05-19T17:35:49.965Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=2 | 179 bytes | {"id":"estacao_01","ts":"2026-05-19T17:35:49.964Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.67,"hum":70.0,"pres":1013.78,"co2":418.7,"uv":1.5,"rssi":-52,"seq":2}
+2026-05-19T17:35:49.965Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=3 | tmp=29.56 | hum=70.2 | pres=1013.48 | co2=415.9 | uv=1.1 | rssi=-48
+2026-05-19T17:35:49.965Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=3 | 179 bytes | {"id":"estacao_01","ts":"2026-05-19T17:35:49.965Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.56,"hum":70.2,"pres":1013.48,"co2":415.9,"uv":1.1,"rssi":-48,"seq":3}
+2026-05-19T17:35:57.697Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station.properties
+2026-05-19T17:35:57.699Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station-local.properties
+2026-05-19T17:35:57.699Z [INFO ] [config.AppConfig    ] [Config] station-local.properties carregado — sobrescrevendo valores base.
+2026-05-19T17:35:57.701Z [INFO ] [config.AppConfig    ] ╔══════════════════════════════════════════╗
+2026-05-19T17:35:57.701Z [INFO ] [config.AppConfig    ] ║       Configuração Carregada             ║
+2026-05-19T17:35:57.702Z [INFO ] [config.AppConfig    ] ╠══════════════════════════════════════════╣
+2026-05-19T17:35:57.702Z [INFO ] [config.AppConfig    ] ║ Estação ID : estacao_01
+2026-05-19T17:35:57.702Z [INFO ] [config.AppConfig    ] ║ Broker     : 192.168.1.100:1883
+2026-05-19T17:35:57.702Z [INFO ] [config.AppConfig    ] ║ Tópico     : ambiente/estacao/estacao_01/telemetria
+2026-05-19T17:35:57.702Z [INFO ] [config.AppConfig    ] ║ Status     : ambiente/estacao/estacao_01/status
+2026-05-19T17:35:57.702Z [INFO ] [config.AppConfig    ] ║ Intervalo  : 10000 ms
+2026-05-19T17:35:57.702Z [INFO ] [config.AppConfig    ] ║ QoS        : 1
+2026-05-19T17:35:57.702Z [INFO ] [config.AppConfig    ] ║ Lat/Lon    : -5.207645788981328, -37.32216460818565
+2026-05-19T17:35:57.703Z [INFO ] [config.AppConfig    ] ║ Seed       : 42
+2026-05-19T17:35:57.703Z [INFO ] [config.AppConfig    ] ╚══════════════════════════════════════════╝
+2026-05-19T17:35:57.703Z [INFO ] [sensor.SensorSim    ] [Sensor] Inicializado | seed=42 | temp_base=29.0°C | hum_base=71.0%
+2026-05-19T17:35:57.779Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=1 | tmp=29.46 | hum=71.5 | pres=1013.55 | co2=412.2 | uv=1.4 | rssi=-47
+2026-05-19T17:35:57.817Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=1 | 179 bytes | {"id":"estacao_01","ts":"2026-05-19T17:35:57.778Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.46,"hum":71.5,"pres":1013.55,"co2":412.2,"uv":1.4,"rssi":-47,"seq":1}
+2026-05-19T17:35:57.853Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station.properties
+2026-05-19T17:35:57.853Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station-local.properties
+2026-05-19T17:35:57.854Z [INFO ] [config.AppConfig    ] [Config] station-local.properties carregado — sobrescrevendo valores base.
+2026-05-19T17:35:57.854Z [INFO ] [config.AppConfig    ] ╔══════════════════════════════════════════╗
+2026-05-19T17:35:57.854Z [INFO ] [config.AppConfig    ] ║       Configuração Carregada             ║
+2026-05-19T17:35:57.854Z [INFO ] [config.AppConfig    ] ╠══════════════════════════════════════════╣
+2026-05-19T17:35:57.854Z [INFO ] [config.AppConfig    ] ║ Estação ID : estacao_01
+2026-05-19T17:35:57.854Z [INFO ] [config.AppConfig    ] ║ Broker     : 192.168.1.100:1883
+2026-05-19T17:35:57.854Z [INFO ] [config.AppConfig    ] ║ Tópico     : ambiente/estacao/estacao_01/telemetria
+2026-05-19T17:35:57.854Z [INFO ] [config.AppConfig    ] ║ Status     : ambiente/estacao/estacao_01/status
+2026-05-19T17:35:57.854Z [INFO ] [config.AppConfig    ] ║ Intervalo  : 10000 ms
+2026-05-19T17:35:57.854Z [INFO ] [config.AppConfig    ] ║ QoS        : 1
+2026-05-19T17:35:57.854Z [INFO ] [config.AppConfig    ] ║ Lat/Lon    : -5.207645788981328, -37.32216460818565
+2026-05-19T17:35:57.855Z [INFO ] [config.AppConfig    ] ║ Seed       : 42
+2026-05-19T17:35:57.855Z [INFO ] [config.AppConfig    ] ╚══════════════════════════════════════════╝
+2026-05-19T17:35:57.855Z [INFO ] [sensor.SensorSim    ] [Sensor] Inicializado | seed=42 | temp_base=29.0°C | hum_base=71.0%
+2026-05-19T17:35:57.855Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=1 | tmp=29.46 | hum=71.5 | pres=1013.55 | co2=412.2 | uv=1.4 | rssi=-47
+2026-05-19T17:35:57.858Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=1 | 179 bytes | {"id":"estacao_01","ts":"2026-05-19T17:35:57.855Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.46,"hum":71.5,"pres":1013.55,"co2":412.2,"uv":1.4,"rssi":-47,"seq":1}
+2026-05-19T17:35:57.861Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station.properties
+2026-05-19T17:35:57.861Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station-local.properties
+2026-05-19T17:35:57.862Z [INFO ] [config.AppConfig    ] [Config] station-local.properties carregado — sobrescrevendo valores base.
+2026-05-19T17:35:57.862Z [INFO ] [config.AppConfig    ] ╔══════════════════════════════════════════╗
+2026-05-19T17:35:57.862Z [INFO ] [config.AppConfig    ] ║       Configuração Carregada             ║
+2026-05-19T17:35:57.862Z [INFO ] [config.AppConfig    ] ╠══════════════════════════════════════════╣
+2026-05-19T17:35:57.862Z [INFO ] [config.AppConfig    ] ║ Estação ID : estacao_01
+2026-05-19T17:35:57.862Z [INFO ] [config.AppConfig    ] ║ Broker     : 192.168.1.100:1883
+2026-05-19T17:35:57.862Z [INFO ] [config.AppConfig    ] ║ Tópico     : ambiente/estacao/estacao_01/telemetria
+2026-05-19T17:35:57.862Z [INFO ] [config.AppConfig    ] ║ Status     : ambiente/estacao/estacao_01/status
+2026-05-19T17:35:57.862Z [INFO ] [config.AppConfig    ] ║ Intervalo  : 10000 ms
+2026-05-19T17:35:57.862Z [INFO ] [config.AppConfig    ] ║ QoS        : 1
+2026-05-19T17:35:57.862Z [INFO ] [config.AppConfig    ] ║ Lat/Lon    : -5.207645788981328, -37.32216460818565
+2026-05-19T17:35:57.862Z [INFO ] [config.AppConfig    ] ║ Seed       : 42
+2026-05-19T17:35:57.863Z [INFO ] [config.AppConfig    ] ╚══════════════════════════════════════════╝
+2026-05-19T17:35:57.863Z [INFO ] [sensor.SensorSim    ] [Sensor] Inicializado | seed=42 | temp_base=29.0°C | hum_base=71.0%
+2026-05-19T17:35:57.863Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=1 | tmp=29.46 | hum=71.5 | pres=1013.55 | co2=412.2 | uv=1.4 | rssi=-47
+2026-05-19T17:35:57.866Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=1 | 179 bytes | {"id":"estacao_01","ts":"2026-05-19T17:35:57.863Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.46,"hum":71.5,"pres":1013.55,"co2":412.2,"uv":1.4,"rssi":-47,"seq":1}
+2026-05-19T17:35:57.869Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station.properties
+2026-05-19T17:35:57.869Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station-local.properties
+2026-05-19T17:35:57.869Z [INFO ] [config.AppConfig    ] [Config] station-local.properties carregado — sobrescrevendo valores base.
+2026-05-19T17:35:57.869Z [INFO ] [config.AppConfig    ] ╔══════════════════════════════════════════╗
+2026-05-19T17:35:57.869Z [INFO ] [config.AppConfig    ] ║       Configuração Carregada             ║
+2026-05-19T17:35:57.869Z [INFO ] [config.AppConfig    ] ╠══════════════════════════════════════════╣
+2026-05-19T17:35:57.869Z [INFO ] [config.AppConfig    ] ║ Estação ID : estacao_01
+2026-05-19T17:35:57.870Z [INFO ] [config.AppConfig    ] ║ Broker     : 192.168.1.100:1883
+2026-05-19T17:35:57.870Z [INFO ] [config.AppConfig    ] ║ Tópico     : ambiente/estacao/estacao_01/telemetria
+2026-05-19T17:35:57.870Z [INFO ] [config.AppConfig    ] ║ Status     : ambiente/estacao/estacao_01/status
+2026-05-19T17:35:57.870Z [INFO ] [config.AppConfig    ] ║ Intervalo  : 10000 ms
+2026-05-19T17:35:57.870Z [INFO ] [config.AppConfig    ] ║ QoS        : 1
+2026-05-19T17:35:57.870Z [INFO ] [config.AppConfig    ] ║ Lat/Lon    : -5.207645788981328, -37.32216460818565
+2026-05-19T17:35:57.870Z [INFO ] [config.AppConfig    ] ║ Seed       : 42
+2026-05-19T17:35:57.870Z [INFO ] [config.AppConfig    ] ╚══════════════════════════════════════════╝
+2026-05-19T17:35:57.870Z [INFO ] [sensor.SensorSim    ] [Sensor] Inicializado | seed=42 | temp_base=29.0°C | hum_base=71.0%
+2026-05-19T17:35:57.871Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=1 | tmp=29.46 | hum=71.5 | pres=1013.55 | co2=412.2 | uv=1.4 | rssi=-47
+2026-05-19T17:35:57.874Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=1 | 179 bytes | {"id":"estacao_01","ts":"2026-05-19T17:35:57.871Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.46,"hum":71.5,"pres":1013.55,"co2":412.2,"uv":1.4,"rssi":-47,"seq":1}
+2026-05-19T17:35:57.874Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=2 | tmp=28.67 | hum=70.0 | pres=1013.78 | co2=418.7 | uv=1.5 | rssi=-52
+2026-05-19T17:35:57.875Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=2 | 179 bytes | {"id":"estacao_01","ts":"2026-05-19T17:35:57.874Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.67,"hum":70.0,"pres":1013.78,"co2":418.7,"uv":1.5,"rssi":-52,"seq":2}
+2026-05-19T17:35:57.875Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=3 | tmp=29.56 | hum=70.2 | pres=1013.48 | co2=415.9 | uv=1.1 | rssi=-48
+2026-05-19T17:35:57.876Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=3 | 179 bytes | {"id":"estacao_01","ts":"2026-05-19T17:35:57.875Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.56,"hum":70.2,"pres":1013.48,"co2":415.9,"uv":1.1,"rssi":-48,"seq":3}
+2026-05-19T17:35:57.878Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station.properties
+2026-05-19T17:35:57.879Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station-local.properties
+2026-05-19T17:35:57.879Z [INFO ] [config.AppConfig    ] [Config] station-local.properties carregado — sobrescrevendo valores base.
+2026-05-19T17:35:57.879Z [INFO ] [config.AppConfig    ] ╔══════════════════════════════════════════╗
+2026-05-19T17:35:57.879Z [INFO ] [config.AppConfig    ] ║       Configuração Carregada             ║
+2026-05-19T17:35:57.879Z [INFO ] [config.AppConfig    ] ╠══════════════════════════════════════════╣
+2026-05-19T17:35:57.879Z [INFO ] [config.AppConfig    ] ║ Estação ID : estacao_01
+2026-05-19T17:35:57.879Z [INFO ] [config.AppConfig    ] ║ Broker     : 192.168.1.100:1883
+2026-05-19T17:35:57.879Z [INFO ] [config.AppConfig    ] ║ Tópico     : ambiente/estacao/estacao_01/telemetria
+2026-05-19T17:35:57.879Z [INFO ] [config.AppConfig    ] ║ Status     : ambiente/estacao/estacao_01/status
+2026-05-19T17:35:57.879Z [INFO ] [config.AppConfig    ] ║ Intervalo  : 10000 ms
+2026-05-19T17:35:57.879Z [INFO ] [config.AppConfig    ] ║ QoS        : 1
+2026-05-19T17:35:57.879Z [INFO ] [config.AppConfig    ] ║ Lat/Lon    : -5.207645788981328, -37.32216460818565
+2026-05-19T17:35:57.879Z [INFO ] [config.AppConfig    ] ║ Seed       : 42
+2026-05-19T17:35:57.880Z [INFO ] [config.AppConfig    ] ╚══════════════════════════════════════════╝
+2026-05-19T17:35:57.880Z [INFO ] [sensor.SensorSim    ] [Sensor] Inicializado | seed=42 | temp_base=29.0°C | hum_base=71.0%
+2026-05-19T17:35:57.880Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=1 | tmp=29.46 | hum=71.5 | pres=1013.55 | co2=412.2 | uv=1.4 | rssi=-47
+2026-05-19T17:35:57.883Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=1 | 179 bytes | {"id":"estacao_01","ts":"2026-05-19T17:35:57.880Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.46,"hum":71.5,"pres":1013.55,"co2":412.2,"uv":1.4,"rssi":-47,"seq":1}
+2026-05-19T17:35:57.885Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station.properties
+2026-05-19T17:35:57.886Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station-local.properties
+2026-05-19T17:35:57.886Z [INFO ] [config.AppConfig    ] [Config] station-local.properties carregado — sobrescrevendo valores base.
+2026-05-19T17:35:57.886Z [INFO ] [config.AppConfig    ] ╔══════════════════════════════════════════╗
+2026-05-19T17:35:57.886Z [INFO ] [config.AppConfig    ] ║       Configuração Carregada             ║
+2026-05-19T17:35:57.886Z [INFO ] [config.AppConfig    ] ╠══════════════════════════════════════════╣
+2026-05-19T17:35:57.886Z [INFO ] [config.AppConfig    ] ║ Estação ID : estacao_01
+2026-05-19T17:35:57.886Z [INFO ] [config.AppConfig    ] ║ Broker     : 192.168.1.100:1883
+2026-05-19T17:35:57.886Z [INFO ] [config.AppConfig    ] ║ Tópico     : ambiente/estacao/estacao_01/telemetria
+2026-05-19T17:35:57.886Z [INFO ] [config.AppConfig    ] ║ Status     : ambiente/estacao/estacao_01/status
+2026-05-19T17:35:57.886Z [INFO ] [config.AppConfig    ] ║ Intervalo  : 10000 ms
+2026-05-19T17:35:57.886Z [INFO ] [config.AppConfig    ] ║ QoS        : 1
+2026-05-19T17:35:57.887Z [INFO ] [config.AppConfig    ] ║ Lat/Lon    : -5.207645788981328, -37.32216460818565
+2026-05-19T17:35:57.887Z [INFO ] [config.AppConfig    ] ║ Seed       : 42
+2026-05-19T17:35:57.887Z [INFO ] [config.AppConfig    ] ╚══════════════════════════════════════════╝
+2026-05-19T17:35:57.887Z [INFO ] [sensor.SensorSim    ] [Sensor] Inicializado | seed=42 | temp_base=29.0°C | hum_base=71.0%
+2026-05-19T17:35:57.887Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=1 | tmp=29.46 | hum=71.5 | pres=1013.55 | co2=412.2 | uv=1.4 | rssi=-47
+2026-05-19T17:35:57.891Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=1 | 179 bytes | {"id":"estacao_01","ts":"2026-05-19T17:35:57.887Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.46,"hum":71.5,"pres":1013.55,"co2":412.2,"uv":1.4,"rssi":-47,"seq":1}
+2026-05-19T17:35:57.894Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=2 | tmp=28.67 | hum=70.0 | pres=1013.78 | co2=418.7 | uv=1.5 | rssi=-52
+2026-05-19T17:35:57.894Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=2 | 179 bytes | {"id":"estacao_01","ts":"2026-05-19T17:35:57.893Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.67,"hum":70.0,"pres":1013.78,"co2":418.7,"uv":1.5,"rssi":-52,"seq":2}
+2026-05-19T17:35:57.894Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=3 | tmp=29.56 | hum=70.2 | pres=1013.48 | co2=415.9 | uv=1.1 | rssi=-48
+2026-05-19T17:35:57.895Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=3 | 179 bytes | {"id":"estacao_01","ts":"2026-05-19T17:35:57.894Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.56,"hum":70.2,"pres":1013.48,"co2":415.9,"uv":1.1,"rssi":-48,"seq":3}
+2026-05-19T17:35:57.895Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=4 | tmp=28.52 | hum=71.5 | pres=1014.31 | co2=416.1 | uv=1.4 | rssi=-40
+2026-05-19T17:35:57.895Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=4 | 179 bytes | {"id":"estacao_01","ts":"2026-05-19T17:35:57.895Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.52,"hum":71.5,"pres":1014.31,"co2":416.1,"uv":1.4,"rssi":-40,"seq":4}
+2026-05-19T17:35:57.896Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=5 | tmp=28.89 | hum=71.0 | pres=1014.22 | co2=414.2 | uv=1.2 | rssi=-66
+2026-05-19T17:35:57.896Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=5 | 179 bytes | {"id":"estacao_01","ts":"2026-05-19T17:35:57.896Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.89,"hum":71.0,"pres":1014.22,"co2":414.2,"uv":1.2,"rssi":-66,"seq":5}
+2026-05-19T17:35:57.898Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station.properties
+2026-05-19T17:35:57.899Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station-local.properties
+2026-05-19T17:35:57.899Z [INFO ] [config.AppConfig    ] [Config] station-local.properties carregado — sobrescrevendo valores base.
+2026-05-19T17:35:57.899Z [INFO ] [config.AppConfig    ] ╔══════════════════════════════════════════╗
+2026-05-19T17:35:57.899Z [INFO ] [config.AppConfig    ] ║       Configuração Carregada             ║
+2026-05-19T17:35:57.899Z [INFO ] [config.AppConfig    ] ╠══════════════════════════════════════════╣
+2026-05-19T17:35:57.899Z [INFO ] [config.AppConfig    ] ║ Estação ID : estacao_01
+2026-05-19T17:35:57.899Z [INFO ] [config.AppConfig    ] ║ Broker     : 192.168.1.100:1883
+2026-05-19T17:35:57.899Z [INFO ] [config.AppConfig    ] ║ Tópico     : ambiente/estacao/estacao_01/telemetria
+2026-05-19T17:35:57.900Z [INFO ] [config.AppConfig    ] ║ Status     : ambiente/estacao/estacao_01/status
+2026-05-19T17:35:57.900Z [INFO ] [config.AppConfig    ] ║ Intervalo  : 10000 ms
+2026-05-19T17:35:57.900Z [INFO ] [config.AppConfig    ] ║ QoS        : 1
+2026-05-19T17:35:57.900Z [INFO ] [config.AppConfig    ] ║ Lat/Lon    : -5.207645788981328, -37.32216460818565
+2026-05-19T17:35:57.900Z [INFO ] [config.AppConfig    ] ║ Seed       : 42
+2026-05-19T17:35:57.900Z [INFO ] [config.AppConfig    ] ╚══════════════════════════════════════════╝
+2026-05-19T17:35:57.900Z [INFO ] [sensor.SensorSim    ] [Sensor] Inicializado | seed=42 | temp_base=29.0°C | hum_base=71.0%
+2026-05-19T17:35:57.901Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=1 | tmp=29.46 | hum=71.5 | pres=1013.55 | co2=412.2 | uv=1.4 | rssi=-47
+2026-05-19T17:35:57.903Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=1 | 179 bytes | {"id":"estacao_01","ts":"2026-05-19T17:35:57.900Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.46,"hum":71.5,"pres":1013.55,"co2":412.2,"uv":1.4,"rssi":-47,"seq":1}
