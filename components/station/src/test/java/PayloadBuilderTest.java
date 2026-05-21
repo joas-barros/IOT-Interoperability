@@ -9,7 +9,6 @@ import sensor.SensorData;
 import sensor.SensorSim;
 
 import java.util.Optional;
-import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
