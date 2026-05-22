@@ -745,3 +745,1504 @@
 2026-05-21T17:05:09.076Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=2 | latência=1 ms
 2026-05-21T17:05:09.115Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Status publicado: online=false
 2026-05-21T17:05:09.117Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Desconectado graciosamente.
+2026-05-21T17:38:36.651Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station.properties
+2026-05-21T17:38:36.653Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station-local.properties
+2026-05-21T17:38:36.654Z [INFO ] [config.AppConfig    ] [Config] station-local.properties carregado — sobrescrevendo valores base.
+2026-05-21T17:38:36.655Z [INFO ] [config.AppConfig    ] ╔══════════════════════════════════════════╗
+2026-05-21T17:38:36.655Z [INFO ] [config.AppConfig    ] ║       Configuração Carregada             ║
+2026-05-21T17:38:36.655Z [INFO ] [config.AppConfig    ] ╠══════════════════════════════════════════╣
+2026-05-21T17:38:36.655Z [INFO ] [config.AppConfig    ] ║ Estação ID : estacao_01
+2026-05-21T17:38:36.655Z [INFO ] [config.AppConfig    ] ║ Broker     : localhost:1883
+2026-05-21T17:38:36.656Z [INFO ] [config.AppConfig    ] ║ Tópico     : ambiente/estacao/estacao_01/telemetria
+2026-05-21T17:38:36.656Z [INFO ] [config.AppConfig    ] ║ Status     : ambiente/estacao/estacao_01/status
+2026-05-21T17:38:36.656Z [INFO ] [config.AppConfig    ] ║ Intervalo  : 10000 ms
+2026-05-21T17:38:36.656Z [INFO ] [config.AppConfig    ] ║ QoS        : 1
+2026-05-21T17:38:36.656Z [INFO ] [config.AppConfig    ] ║ Lat/Lon    : -5.207645788981328, -37.32216460818565
+2026-05-21T17:38:36.657Z [INFO ] [config.AppConfig    ] ║ Seed       : 42
+2026-05-21T17:38:36.657Z [INFO ] [config.AppConfig    ] ╚══════════════════════════════════════════╝
+2026-05-21T17:38:36.792Z [INFO ] [sensor.SensorSim    ] [Sensor] Inicializado | seed=42 | temp_base=29.0°C | hum_base=71.0%
+2026-05-21T17:38:36.865Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] LWT configurado: ambiente/estacao/estacao_01/status
+2026-05-21T17:38:36.865Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Conectando ao broker: tcp://localhost:1883 | clientId: estacao_01_1779385116793
+2026-05-21T17:38:37.188Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Conectado com sucesso!
+2026-05-21T17:38:37.188Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] connectComplete (conexão inicial): tcp://localhost:1883
+2026-05-21T17:38:37.193Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Status publicado: online=true
+2026-05-21T17:38:37.213Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=1 | tmp=29.46 | hum=71.5 | pres=1013.57 | co2=412.2 | uv=1.4 | rssi=-47
+2026-05-21T17:38:37.259Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=1 | 179 bytes | {"id":"estacao_01","ts":"2026-05-21T17:38:37.212Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.46,"hum":71.5,"pres":1013.57,"co2":412.2,"uv":1.4,"rssi":-47,"seq":1}
+2026-05-21T17:38:37.260Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=2 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-21T17:38:37.261Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=2 | latência=2 ms
+2026-05-21T17:38:37.460Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=2 | tmp=28.67 | hum=70.0 | pres=1013.8 | co2=418.7 | uv=1.5 | rssi=-52
+2026-05-21T17:38:37.461Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=2 | 178 bytes | {"id":"estacao_01","ts":"2026-05-21T17:38:37.460Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.67,"hum":70.0,"pres":1013.8,"co2":418.7,"uv":1.5,"rssi":-52,"seq":2}
+2026-05-21T17:38:37.462Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=3 | topic=ambiente/estacao/estacao_01/telemetria | 178 bytes | QoS=1
+2026-05-21T17:38:37.465Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=3 | latência=3 ms
+2026-05-21T17:38:37.663Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=3 | tmp=29.56 | hum=70.2 | pres=1013.49 | co2=415.9 | uv=1.1 | rssi=-48
+2026-05-21T17:38:37.664Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=3 | 179 bytes | {"id":"estacao_01","ts":"2026-05-21T17:38:37.663Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.56,"hum":70.2,"pres":1013.49,"co2":415.9,"uv":1.1,"rssi":-48,"seq":3}
+2026-05-21T17:38:37.665Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=4 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-21T17:38:37.666Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=4 | latência=1 ms
+2026-05-21T17:38:37.866Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=4 | tmp=28.52 | hum=71.5 | pres=1014.32 | co2=416.1 | uv=1.4 | rssi=-40
+2026-05-21T17:38:37.867Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=4 | 179 bytes | {"id":"estacao_01","ts":"2026-05-21T17:38:37.865Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.52,"hum":71.5,"pres":1014.32,"co2":416.1,"uv":1.4,"rssi":-40,"seq":4}
+2026-05-21T17:38:37.867Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=5 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-21T17:38:37.869Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=5 | latência=2 ms
+2026-05-21T17:38:38.068Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=5 | tmp=28.89 | hum=71.0 | pres=1014.23 | co2=414.2 | uv=1.2 | rssi=-66
+2026-05-21T17:38:38.070Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=5 | 179 bytes | {"id":"estacao_01","ts":"2026-05-21T17:38:38.068Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.89,"hum":71.0,"pres":1014.23,"co2":414.2,"uv":1.2,"rssi":-66,"seq":5}
+2026-05-21T17:38:38.071Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=6 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-21T17:38:38.072Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=6 | latência=2 ms
+2026-05-21T17:38:38.271Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=6 | tmp=29.57 | hum=69.6 | pres=1013.26 | co2=412.7 | uv=0.5 | rssi=-65
+2026-05-21T17:38:38.273Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=6 | 179 bytes | {"id":"estacao_01","ts":"2026-05-21T17:38:38.271Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.57,"hum":69.6,"pres":1013.26,"co2":412.7,"uv":0.5,"rssi":-65,"seq":6}
+2026-05-21T17:38:38.273Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=7 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-21T17:38:38.275Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=7 | latência=2 ms
+2026-05-21T17:38:38.474Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=7 | tmp=28.95 | hum=72.1 | pres=1013.77 | co2=415.7 | uv=1.2 | rssi=-66
+2026-05-21T17:38:38.475Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=7 | 179 bytes | {"id":"estacao_01","ts":"2026-05-21T17:38:38.474Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.95,"hum":72.1,"pres":1013.77,"co2":415.7,"uv":1.2,"rssi":-66,"seq":7}
+2026-05-21T17:38:38.476Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=8 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-21T17:38:38.478Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=8 | latência=2 ms
+2026-05-21T17:38:38.677Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=8 | tmp=28.81 | hum=70.7 | pres=1014.19 | co2=414.9 | uv=1.0 | rssi=-38
+2026-05-21T17:38:38.679Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=8 | 179 bytes | {"id":"estacao_01","ts":"2026-05-21T17:38:38.677Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.81,"hum":70.7,"pres":1014.19,"co2":414.9,"uv":1.0,"rssi":-38,"seq":8}
+2026-05-21T17:38:38.680Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=9 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-21T17:38:38.682Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=9 | latência=3 ms
+2026-05-21T17:38:38.881Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=9 | tmp=29.46 | hum=69.9 | pres=1014.18 | co2=410.2 | uv=1.4 | rssi=-51
+2026-05-21T17:38:38.882Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=9 | 179 bytes | {"id":"estacao_01","ts":"2026-05-21T17:38:38.880Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.46,"hum":69.9,"pres":1014.18,"co2":410.2,"uv":1.4,"rssi":-51,"seq":9}
+2026-05-21T17:38:38.883Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=10 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-21T17:38:38.884Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=10 | latência=2 ms
+2026-05-21T17:38:39.084Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=10 | tmp=29.56 | hum=69.5 | pres=1013.94 | co2=416.4 | uv=1.1 | rssi=-48
+2026-05-21T17:38:39.085Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=10 | 180 bytes | {"id":"estacao_01","ts":"2026-05-21T17:38:39.083Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.56,"hum":69.5,"pres":1013.94,"co2":416.4,"uv":1.1,"rssi":-48,"seq":10}
+2026-05-21T17:38:39.086Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=11 | topic=ambiente/estacao/estacao_01/telemetria | 180 bytes | QoS=1
+2026-05-21T17:38:39.087Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=11 | latência=2 ms
+2026-05-21T17:38:41.305Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Status publicado: online=false
+2026-05-21T17:38:41.312Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Desconectado graciosamente.
+2026-05-21T17:38:41.333Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station.properties
+2026-05-21T17:38:41.334Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station-local.properties
+2026-05-21T17:38:41.334Z [INFO ] [config.AppConfig    ] [Config] station-local.properties carregado — sobrescrevendo valores base.
+2026-05-21T17:38:41.335Z [INFO ] [config.AppConfig    ] ╔══════════════════════════════════════════╗
+2026-05-21T17:38:41.335Z [INFO ] [config.AppConfig    ] ║       Configuração Carregada             ║
+2026-05-21T17:38:41.335Z [INFO ] [config.AppConfig    ] ╠══════════════════════════════════════════╣
+2026-05-21T17:38:41.335Z [INFO ] [config.AppConfig    ] ║ Estação ID : estacao_01
+2026-05-21T17:38:41.335Z [INFO ] [config.AppConfig    ] ║ Broker     : localhost:1883
+2026-05-21T17:38:41.335Z [INFO ] [config.AppConfig    ] ║ Tópico     : ambiente/estacao/estacao_01/telemetria
+2026-05-21T17:38:41.336Z [INFO ] [config.AppConfig    ] ║ Status     : ambiente/estacao/estacao_01/status
+2026-05-21T17:38:41.336Z [INFO ] [config.AppConfig    ] ║ Intervalo  : 10000 ms
+2026-05-21T17:38:41.336Z [INFO ] [config.AppConfig    ] ║ QoS        : 1
+2026-05-21T17:38:41.336Z [INFO ] [config.AppConfig    ] ║ Lat/Lon    : -5.207645788981328, -37.32216460818565
+2026-05-21T17:38:41.336Z [INFO ] [config.AppConfig    ] ║ Seed       : 42
+2026-05-21T17:38:41.337Z [INFO ] [config.AppConfig    ] ╚══════════════════════════════════════════╝
+2026-05-21T17:38:41.337Z [INFO ] [sensor.SensorSim    ] [Sensor] Inicializado | seed=42 | temp_base=29.0°C | hum_base=71.0%
+2026-05-21T17:38:41.341Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] LWT configurado: ambiente/estacao/estacao_01/status
+2026-05-21T17:38:41.341Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Conectando ao broker: tcp://localhost:1883 | clientId: estacao_01_1779385121337
+2026-05-21T17:38:41.646Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Conectado com sucesso!
+2026-05-21T17:38:41.646Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] connectComplete (conexão inicial): tcp://localhost:1883
+2026-05-21T17:38:41.649Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Status publicado: online=true
+2026-05-21T17:38:42.023Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Status publicado: online=false
+2026-05-21T17:38:42.024Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Desconectado graciosamente.
+2026-05-21T17:38:42.030Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station.properties
+2026-05-21T17:38:42.031Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station-local.properties
+2026-05-21T17:38:42.031Z [INFO ] [config.AppConfig    ] [Config] station-local.properties carregado — sobrescrevendo valores base.
+2026-05-21T17:38:42.032Z [INFO ] [config.AppConfig    ] ╔══════════════════════════════════════════╗
+2026-05-21T17:38:42.032Z [INFO ] [config.AppConfig    ] ║       Configuração Carregada             ║
+2026-05-21T17:38:42.032Z [INFO ] [config.AppConfig    ] ╠══════════════════════════════════════════╣
+2026-05-21T17:38:42.032Z [INFO ] [config.AppConfig    ] ║ Estação ID : estacao_01
+2026-05-21T17:38:42.032Z [INFO ] [config.AppConfig    ] ║ Broker     : localhost:1883
+2026-05-21T17:38:42.033Z [INFO ] [config.AppConfig    ] ║ Tópico     : ambiente/estacao/estacao_01/telemetria
+2026-05-21T17:38:42.033Z [INFO ] [config.AppConfig    ] ║ Status     : ambiente/estacao/estacao_01/status
+2026-05-21T17:38:42.033Z [INFO ] [config.AppConfig    ] ║ Intervalo  : 10000 ms
+2026-05-21T17:38:42.033Z [INFO ] [config.AppConfig    ] ║ QoS        : 1
+2026-05-21T17:38:42.033Z [INFO ] [config.AppConfig    ] ║ Lat/Lon    : -5.207645788981328, -37.32216460818565
+2026-05-21T17:38:42.034Z [INFO ] [config.AppConfig    ] ║ Seed       : 42
+2026-05-21T17:38:42.034Z [INFO ] [config.AppConfig    ] ╚══════════════════════════════════════════╝
+2026-05-21T17:38:42.034Z [INFO ] [sensor.SensorSim    ] [Sensor] Inicializado | seed=42 | temp_base=29.0°C | hum_base=71.0%
+2026-05-21T17:38:42.039Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] LWT configurado: ambiente/estacao/estacao_01/status
+2026-05-21T17:38:42.039Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Conectando ao broker: tcp://localhost:1883 | clientId: estacao_01_1779385122035
+2026-05-21T17:38:42.345Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] connectComplete (conexão inicial): tcp://localhost:1883
+2026-05-21T17:38:42.345Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Conectado com sucesso!
+2026-05-21T17:38:42.347Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Status publicado: online=true
+2026-05-21T17:38:42.351Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Status publicado: online=false
+2026-05-21T17:38:42.353Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Desconectado graciosamente.
+2026-05-21T17:38:42.358Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station.properties
+2026-05-21T17:38:42.359Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station-local.properties
+2026-05-21T17:38:42.359Z [INFO ] [config.AppConfig    ] [Config] station-local.properties carregado — sobrescrevendo valores base.
+2026-05-21T17:38:42.360Z [INFO ] [config.AppConfig    ] ╔══════════════════════════════════════════╗
+2026-05-21T17:38:42.360Z [INFO ] [config.AppConfig    ] ║       Configuração Carregada             ║
+2026-05-21T17:38:42.360Z [INFO ] [config.AppConfig    ] ╠══════════════════════════════════════════╣
+2026-05-21T17:38:42.360Z [INFO ] [config.AppConfig    ] ║ Estação ID : estacao_01
+2026-05-21T17:38:42.361Z [INFO ] [config.AppConfig    ] ║ Broker     : localhost:1883
+2026-05-21T17:38:42.361Z [INFO ] [config.AppConfig    ] ║ Tópico     : ambiente/estacao/estacao_01/telemetria
+2026-05-21T17:38:42.361Z [INFO ] [config.AppConfig    ] ║ Status     : ambiente/estacao/estacao_01/status
+2026-05-21T17:38:42.361Z [INFO ] [config.AppConfig    ] ║ Intervalo  : 10000 ms
+2026-05-21T17:38:42.361Z [INFO ] [config.AppConfig    ] ║ QoS        : 1
+2026-05-21T17:38:42.362Z [INFO ] [config.AppConfig    ] ║ Lat/Lon    : -5.207645788981328, -37.32216460818565
+2026-05-21T17:38:42.362Z [INFO ] [config.AppConfig    ] ║ Seed       : 42
+2026-05-21T17:38:42.362Z [INFO ] [config.AppConfig    ] ╚══════════════════════════════════════════╝
+2026-05-21T17:38:42.363Z [INFO ] [sensor.SensorSim    ] [Sensor] Inicializado | seed=42 | temp_base=29.0°C | hum_base=71.0%
+2026-05-21T17:38:42.367Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] LWT configurado: ambiente/estacao/estacao_01/status
+2026-05-21T17:38:42.367Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Conectando ao broker: tcp://localhost:1883 | clientId: estacao_01_1779385122363
+2026-05-21T17:38:42.673Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Conectado com sucesso!
+2026-05-21T17:38:42.673Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] connectComplete (conexão inicial): tcp://localhost:1883
+2026-05-21T17:38:42.674Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Status publicado: online=true
+2026-05-21T17:38:42.675Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=1 | tmp=29.46 | hum=71.5 | pres=1013.57 | co2=412.2 | uv=1.4 | rssi=-47
+2026-05-21T17:38:42.677Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=1 | 179 bytes | {"id":"estacao_01","ts":"2026-05-21T17:38:42.675Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.46,"hum":71.5,"pres":1013.57,"co2":412.2,"uv":1.4,"rssi":-47,"seq":1}
+2026-05-21T17:38:42.679Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=2 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-21T17:38:42.680Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=2 | latência=1 ms
+2026-05-21T17:38:42.680Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Status publicado: online=false
+2026-05-21T17:38:42.681Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Desconectado graciosamente.
+2026-05-21T17:38:42.684Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station.properties
+2026-05-21T17:38:42.684Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station-local.properties
+2026-05-21T17:38:42.684Z [INFO ] [config.AppConfig    ] [Config] station-local.properties carregado — sobrescrevendo valores base.
+2026-05-21T17:38:42.685Z [INFO ] [config.AppConfig    ] ╔══════════════════════════════════════════╗
+2026-05-21T17:38:42.685Z [INFO ] [config.AppConfig    ] ║       Configuração Carregada             ║
+2026-05-21T17:38:42.685Z [INFO ] [config.AppConfig    ] ╠══════════════════════════════════════════╣
+2026-05-21T17:38:42.685Z [INFO ] [config.AppConfig    ] ║ Estação ID : estacao_01
+2026-05-21T17:38:42.685Z [INFO ] [config.AppConfig    ] ║ Broker     : localhost:1883
+2026-05-21T17:38:42.685Z [INFO ] [config.AppConfig    ] ║ Tópico     : ambiente/estacao/estacao_01/telemetria
+2026-05-21T17:38:42.685Z [INFO ] [config.AppConfig    ] ║ Status     : ambiente/estacao/estacao_01/status
+2026-05-21T17:38:42.685Z [INFO ] [config.AppConfig    ] ║ Intervalo  : 10000 ms
+2026-05-21T17:38:42.685Z [INFO ] [config.AppConfig    ] ║ QoS        : 1
+2026-05-21T17:38:42.685Z [INFO ] [config.AppConfig    ] ║ Lat/Lon    : -5.207645788981328, -37.32216460818565
+2026-05-21T17:38:42.685Z [INFO ] [config.AppConfig    ] ║ Seed       : 42
+2026-05-21T17:38:42.685Z [INFO ] [config.AppConfig    ] ╚══════════════════════════════════════════╝
+2026-05-21T17:38:42.685Z [INFO ] [sensor.SensorSim    ] [Sensor] Inicializado | seed=42 | temp_base=29.0°C | hum_base=71.0%
+2026-05-21T17:38:42.688Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] LWT configurado: ambiente/estacao/estacao_01/status
+2026-05-21T17:38:42.688Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Conectando ao broker: tcp://localhost:1883 | clientId: estacao_01_1779385122686
+2026-05-21T17:38:42.992Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Conectado com sucesso!
+2026-05-21T17:38:42.992Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] connectComplete (conexão inicial): tcp://localhost:1883
+2026-05-21T17:38:42.994Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Status publicado: online=true
+2026-05-21T17:38:42.995Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=1 | tmp=29.46 | hum=71.5 | pres=1013.57 | co2=412.2 | uv=1.4 | rssi=-47
+2026-05-21T17:38:42.999Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=1 | 179 bytes | {"id":"estacao_01","ts":"2026-05-21T17:38:42.995Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.46,"hum":71.5,"pres":1013.57,"co2":412.2,"uv":1.4,"rssi":-47,"seq":1}
+2026-05-21T17:38:43.000Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=2 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-21T17:38:43.000Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=2 | tmp=28.67 | hum=70.0 | pres=1013.8 | co2=418.7 | uv=1.5 | rssi=-52
+2026-05-21T17:38:43.001Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=2 | 174 bytes | {"id":"estacao_01","ts":"2026-05-21T17:38:43Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.67,"hum":70.0,"pres":1013.8,"co2":418.7,"uv":1.5,"rssi":-52,"seq":2}
+2026-05-21T17:38:43.001Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=2 | latência=1 ms
+2026-05-21T17:38:43.001Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=3 | topic=ambiente/estacao/estacao_01/telemetria | 174 bytes | QoS=1
+2026-05-21T17:38:43.002Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=3 | tmp=29.56 | hum=70.2 | pres=1013.49 | co2=415.9 | uv=1.1 | rssi=-48
+2026-05-21T17:38:43.002Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=3 | latência=1 ms
+2026-05-21T17:38:43.002Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=3 | 179 bytes | {"id":"estacao_01","ts":"2026-05-21T17:38:43.002Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.56,"hum":70.2,"pres":1013.49,"co2":415.9,"uv":1.1,"rssi":-48,"seq":3}
+2026-05-21T17:38:43.003Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=4 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-21T17:38:43.003Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=4 | tmp=28.52 | hum=71.5 | pres=1014.32 | co2=416.1 | uv=1.4 | rssi=-40
+2026-05-21T17:38:43.004Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=4 | 179 bytes | {"id":"estacao_01","ts":"2026-05-21T17:38:43.003Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.52,"hum":71.5,"pres":1014.32,"co2":416.1,"uv":1.4,"rssi":-40,"seq":4}
+2026-05-21T17:38:43.004Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=5 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-21T17:38:43.004Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=4 | latência=1 ms
+2026-05-21T17:38:43.005Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=5 | tmp=28.89 | hum=71.0 | pres=1014.23 | co2=414.2 | uv=1.2 | rssi=-66
+2026-05-21T17:38:43.005Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=5 | latência=1 ms
+2026-05-21T17:38:43.006Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=5 | 179 bytes | {"id":"estacao_01","ts":"2026-05-21T17:38:43.004Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.89,"hum":71.0,"pres":1014.23,"co2":414.2,"uv":1.2,"rssi":-66,"seq":5}
+2026-05-21T17:38:43.006Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=6 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-21T17:38:43.007Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=6 | latência=1 ms
+2026-05-21T17:38:46.010Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Status publicado: online=false
+2026-05-21T17:38:46.011Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Desconectado graciosamente.
+2026-05-21T17:38:46.017Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station.properties
+2026-05-21T17:38:46.018Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station-local.properties
+2026-05-21T17:38:46.018Z [INFO ] [config.AppConfig    ] [Config] station-local.properties carregado — sobrescrevendo valores base.
+2026-05-21T17:38:46.018Z [INFO ] [config.AppConfig    ] ╔══════════════════════════════════════════╗
+2026-05-21T17:38:46.018Z [INFO ] [config.AppConfig    ] ║       Configuração Carregada             ║
+2026-05-21T17:38:46.018Z [INFO ] [config.AppConfig    ] ╠══════════════════════════════════════════╣
+2026-05-21T17:38:46.019Z [INFO ] [config.AppConfig    ] ║ Estação ID : estacao_01
+2026-05-21T17:38:46.019Z [INFO ] [config.AppConfig    ] ║ Broker     : localhost:1883
+2026-05-21T17:38:46.019Z [INFO ] [config.AppConfig    ] ║ Tópico     : ambiente/estacao/estacao_01/telemetria
+2026-05-21T17:38:46.019Z [INFO ] [config.AppConfig    ] ║ Status     : ambiente/estacao/estacao_01/status
+2026-05-21T17:38:46.019Z [INFO ] [config.AppConfig    ] ║ Intervalo  : 10000 ms
+2026-05-21T17:38:46.019Z [INFO ] [config.AppConfig    ] ║ QoS        : 1
+2026-05-21T17:38:46.019Z [INFO ] [config.AppConfig    ] ║ Lat/Lon    : -5.207645788981328, -37.32216460818565
+2026-05-21T17:38:46.019Z [INFO ] [config.AppConfig    ] ║ Seed       : 42
+2026-05-21T17:38:46.019Z [INFO ] [config.AppConfig    ] ╚══════════════════════════════════════════╝
+2026-05-21T17:38:46.020Z [INFO ] [sensor.SensorSim    ] [Sensor] Inicializado | seed=42 | temp_base=29.0°C | hum_base=71.0%
+2026-05-21T17:38:46.023Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] LWT configurado: ambiente/estacao/estacao_01/status
+2026-05-21T17:38:46.023Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Conectando ao broker: tcp://localhost:1883 | clientId: estacao_01_1779385126020
+2026-05-21T17:38:46.328Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Conectado com sucesso!
+2026-05-21T17:38:46.328Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] connectComplete (conexão inicial): tcp://localhost:1883
+2026-05-21T17:38:46.330Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Status publicado: online=true
+2026-05-21T17:38:46.656Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=1 | tmp=29.46 | hum=71.5 | pres=1013.57 | co2=412.2 | uv=1.4 | rssi=-47
+2026-05-21T17:38:46.661Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=1 | 179 bytes | {"id":"estacao_01","ts":"2026-05-21T17:38:46.656Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.46,"hum":71.5,"pres":1013.57,"co2":412.2,"uv":1.4,"rssi":-47,"seq":1}
+2026-05-21T17:38:46.661Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=2 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-21T17:38:46.663Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=2 | latência=2 ms
+2026-05-21T17:38:46.703Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Status publicado: online=false
+2026-05-21T17:38:46.705Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Desconectado graciosamente.
+2026-05-21T17:47:26.606Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station.properties
+2026-05-21T17:47:26.608Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station-local.properties
+2026-05-21T17:47:26.608Z [INFO ] [config.AppConfig    ] [Config] station-local.properties carregado — sobrescrevendo valores base.
+2026-05-21T17:47:26.609Z [INFO ] [config.AppConfig    ] ╔══════════════════════════════════════════╗
+2026-05-21T17:47:26.610Z [INFO ] [config.AppConfig    ] ║       Configuração Carregada             ║
+2026-05-21T17:47:26.610Z [INFO ] [config.AppConfig    ] ╠══════════════════════════════════════════╣
+2026-05-21T17:47:26.610Z [INFO ] [config.AppConfig    ] ║ Estação ID : estacao_01
+2026-05-21T17:47:26.610Z [INFO ] [config.AppConfig    ] ║ Broker     : localhost:1883
+2026-05-21T17:47:26.610Z [INFO ] [config.AppConfig    ] ║ Tópico     : ambiente/estacao/estacao_01/telemetria
+2026-05-21T17:47:26.610Z [INFO ] [config.AppConfig    ] ║ Status     : ambiente/estacao/estacao_01/status
+2026-05-21T17:47:26.610Z [INFO ] [config.AppConfig    ] ║ Intervalo  : 10000 ms
+2026-05-21T17:47:26.610Z [INFO ] [config.AppConfig    ] ║ QoS        : 1
+2026-05-21T17:47:26.611Z [INFO ] [config.AppConfig    ] ║ Lat/Lon    : -5.207645788981328, -37.32216460818565
+2026-05-21T17:47:26.611Z [INFO ] [config.AppConfig    ] ║ Seed       : 42
+2026-05-21T17:47:26.611Z [INFO ] [config.AppConfig    ] ╚══════════════════════════════════════════╝
+2026-05-21T17:47:26.726Z [INFO ] [sensor.SensorSim    ] [Sensor] Inicializado | seed=42 | temp_base=29.0°C | hum_base=71.0%
+2026-05-21T17:47:26.812Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] LWT configurado: ambiente/estacao/estacao_01/status
+2026-05-21T17:47:26.813Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Conectando ao broker: tcp://localhost:1883 | clientId: estacao_01_1779385646727
+2026-05-21T17:47:26.893Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station.properties
+2026-05-21T17:47:26.893Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station-local.properties
+2026-05-21T17:47:26.893Z [INFO ] [config.AppConfig    ] [Config] station-local.properties carregado — sobrescrevendo valores base.
+2026-05-21T17:47:26.894Z [INFO ] [config.AppConfig    ] ╔══════════════════════════════════════════╗
+2026-05-21T17:47:26.894Z [INFO ] [config.AppConfig    ] ║       Configuração Carregada             ║
+2026-05-21T17:47:26.894Z [INFO ] [config.AppConfig    ] ╠══════════════════════════════════════════╣
+2026-05-21T17:47:26.894Z [INFO ] [config.AppConfig    ] ║ Estação ID : estacao_01
+2026-05-21T17:47:26.894Z [INFO ] [config.AppConfig    ] ║ Broker     : localhost:1883
+2026-05-21T17:47:26.894Z [INFO ] [config.AppConfig    ] ║ Tópico     : ambiente/estacao/estacao_01/telemetria
+2026-05-21T17:47:26.894Z [INFO ] [config.AppConfig    ] ║ Status     : ambiente/estacao/estacao_01/status
+2026-05-21T17:47:26.895Z [INFO ] [config.AppConfig    ] ║ Intervalo  : 10000 ms
+2026-05-21T17:47:26.895Z [INFO ] [config.AppConfig    ] ║ QoS        : 1
+2026-05-21T17:47:26.895Z [INFO ] [config.AppConfig    ] ║ Lat/Lon    : -5.207645788981328, -37.32216460818565
+2026-05-21T17:47:26.895Z [INFO ] [config.AppConfig    ] ║ Seed       : 42
+2026-05-21T17:47:26.895Z [INFO ] [config.AppConfig    ] ╚══════════════════════════════════════════╝
+2026-05-21T17:47:26.895Z [INFO ] [sensor.SensorSim    ] [Sensor] Inicializado | seed=42 | temp_base=29.0°C | hum_base=71.0%
+2026-05-21T17:47:26.898Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] LWT configurado: ambiente/estacao/estacao_01/status
+2026-05-21T17:47:26.898Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Conectando ao broker: tcp://localhost:1883 | clientId: estacao_01_1779385646896
+2026-05-21T17:47:26.904Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station.properties
+2026-05-21T17:47:26.904Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station-local.properties
+2026-05-21T17:47:26.904Z [INFO ] [config.AppConfig    ] [Config] station-local.properties carregado — sobrescrevendo valores base.
+2026-05-21T17:47:26.905Z [INFO ] [config.AppConfig    ] ╔══════════════════════════════════════════╗
+2026-05-21T17:47:26.905Z [INFO ] [config.AppConfig    ] ║       Configuração Carregada             ║
+2026-05-21T17:47:26.905Z [INFO ] [config.AppConfig    ] ╠══════════════════════════════════════════╣
+2026-05-21T17:47:26.905Z [INFO ] [config.AppConfig    ] ║ Estação ID : estacao_01
+2026-05-21T17:47:26.905Z [INFO ] [config.AppConfig    ] ║ Broker     : localhost:1883
+2026-05-21T17:47:26.905Z [INFO ] [config.AppConfig    ] ║ Tópico     : ambiente/estacao/estacao_01/telemetria
+2026-05-21T17:47:26.905Z [INFO ] [config.AppConfig    ] ║ Status     : ambiente/estacao/estacao_01/status
+2026-05-21T17:47:26.905Z [INFO ] [config.AppConfig    ] ║ Intervalo  : 10000 ms
+2026-05-21T17:47:26.905Z [INFO ] [config.AppConfig    ] ║ QoS        : 1
+2026-05-21T17:47:26.905Z [INFO ] [config.AppConfig    ] ║ Lat/Lon    : -5.207645788981328, -37.32216460818565
+2026-05-21T17:47:26.905Z [INFO ] [config.AppConfig    ] ║ Seed       : 42
+2026-05-21T17:47:26.905Z [INFO ] [config.AppConfig    ] ╚══════════════════════════════════════════╝
+2026-05-21T17:47:26.906Z [INFO ] [sensor.SensorSim    ] [Sensor] Inicializado | seed=42 | temp_base=29.0°C | hum_base=71.0%
+2026-05-21T17:47:26.908Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] LWT configurado: ambiente/estacao/estacao_01/status
+2026-05-21T17:47:26.908Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Conectando ao broker: tcp://localhost:1883 | clientId: estacao_01_1779385646906
+2026-05-21T17:47:26.915Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station.properties
+2026-05-21T17:47:26.916Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station-local.properties
+2026-05-21T17:47:26.916Z [INFO ] [config.AppConfig    ] [Config] station-local.properties carregado — sobrescrevendo valores base.
+2026-05-21T17:47:26.916Z [INFO ] [config.AppConfig    ] ╔══════════════════════════════════════════╗
+2026-05-21T17:47:26.917Z [INFO ] [config.AppConfig    ] ║       Configuração Carregada             ║
+2026-05-21T17:47:26.917Z [INFO ] [config.AppConfig    ] ╠══════════════════════════════════════════╣
+2026-05-21T17:47:26.917Z [INFO ] [config.AppConfig    ] ║ Estação ID : estacao_01
+2026-05-21T17:47:26.917Z [INFO ] [config.AppConfig    ] ║ Broker     : localhost:1883
+2026-05-21T17:47:26.917Z [INFO ] [config.AppConfig    ] ║ Tópico     : ambiente/estacao/estacao_01/telemetria
+2026-05-21T17:47:26.917Z [INFO ] [config.AppConfig    ] ║ Status     : ambiente/estacao/estacao_01/status
+2026-05-21T17:47:26.917Z [INFO ] [config.AppConfig    ] ║ Intervalo  : 10000 ms
+2026-05-21T17:47:26.917Z [INFO ] [config.AppConfig    ] ║ QoS        : 1
+2026-05-21T17:47:26.917Z [INFO ] [config.AppConfig    ] ║ Lat/Lon    : -5.207645788981328, -37.32216460818565
+2026-05-21T17:47:26.917Z [INFO ] [config.AppConfig    ] ║ Seed       : 42
+2026-05-21T17:47:26.917Z [INFO ] [config.AppConfig    ] ╚══════════════════════════════════════════╝
+2026-05-21T17:47:26.918Z [INFO ] [sensor.SensorSim    ] [Sensor] Inicializado | seed=42 | temp_base=29.0°C | hum_base=71.0%
+2026-05-21T17:47:26.919Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] LWT configurado: ambiente/estacao/estacao_01/status
+2026-05-21T17:47:26.919Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Conectando ao broker: tcp://localhost:1883 | clientId: estacao_01_1779385646918
+2026-05-21T17:47:26.932Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station.properties
+2026-05-21T17:47:26.932Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station-local.properties
+2026-05-21T17:47:26.932Z [INFO ] [config.AppConfig    ] [Config] station-local.properties carregado — sobrescrevendo valores base.
+2026-05-21T17:47:26.933Z [INFO ] [config.AppConfig    ] ╔══════════════════════════════════════════╗
+2026-05-21T17:47:26.933Z [INFO ] [config.AppConfig    ] ║       Configuração Carregada             ║
+2026-05-21T17:47:26.933Z [INFO ] [config.AppConfig    ] ╠══════════════════════════════════════════╣
+2026-05-21T17:47:26.933Z [INFO ] [config.AppConfig    ] ║ Estação ID : estacao_01
+2026-05-21T17:47:26.933Z [INFO ] [config.AppConfig    ] ║ Broker     : localhost:1883
+2026-05-21T17:47:26.933Z [INFO ] [config.AppConfig    ] ║ Tópico     : ambiente/estacao/estacao_01/telemetria
+2026-05-21T17:47:26.933Z [INFO ] [config.AppConfig    ] ║ Status     : ambiente/estacao/estacao_01/status
+2026-05-21T17:47:26.933Z [INFO ] [config.AppConfig    ] ║ Intervalo  : 10000 ms
+2026-05-21T17:47:26.933Z [INFO ] [config.AppConfig    ] ║ QoS        : 1
+2026-05-21T17:47:26.933Z [INFO ] [config.AppConfig    ] ║ Lat/Lon    : -5.207645788981328, -37.32216460818565
+2026-05-21T17:47:26.933Z [INFO ] [config.AppConfig    ] ║ Seed       : 42
+2026-05-21T17:47:26.934Z [INFO ] [config.AppConfig    ] ╚══════════════════════════════════════════╝
+2026-05-21T17:47:26.934Z [INFO ] [sensor.SensorSim    ] [Sensor] Inicializado | seed=42 | temp_base=29.0°C | hum_base=71.0%
+2026-05-21T17:47:26.935Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] LWT configurado: ambiente/estacao/estacao_01/status
+2026-05-21T17:47:26.936Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Conectando ao broker: tcp://localhost:1883 | clientId: estacao_01_1779385646934
+2026-05-21T17:47:26.941Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station.properties
+2026-05-21T17:47:26.941Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station-local.properties
+2026-05-21T17:47:26.942Z [INFO ] [config.AppConfig    ] [Config] station-local.properties carregado — sobrescrevendo valores base.
+2026-05-21T17:47:26.942Z [INFO ] [config.AppConfig    ] ╔══════════════════════════════════════════╗
+2026-05-21T17:47:26.942Z [INFO ] [config.AppConfig    ] ║       Configuração Carregada             ║
+2026-05-21T17:47:26.942Z [INFO ] [config.AppConfig    ] ╠══════════════════════════════════════════╣
+2026-05-21T17:47:26.942Z [INFO ] [config.AppConfig    ] ║ Estação ID : estacao_01
+2026-05-21T17:47:26.942Z [INFO ] [config.AppConfig    ] ║ Broker     : localhost:1883
+2026-05-21T17:47:26.942Z [INFO ] [config.AppConfig    ] ║ Tópico     : ambiente/estacao/estacao_01/telemetria
+2026-05-21T17:47:26.942Z [INFO ] [config.AppConfig    ] ║ Status     : ambiente/estacao/estacao_01/status
+2026-05-21T17:47:26.942Z [INFO ] [config.AppConfig    ] ║ Intervalo  : 10000 ms
+2026-05-21T17:47:26.942Z [INFO ] [config.AppConfig    ] ║ QoS        : 1
+2026-05-21T17:47:26.942Z [INFO ] [config.AppConfig    ] ║ Lat/Lon    : -5.207645788981328, -37.32216460818565
+2026-05-21T17:47:26.942Z [INFO ] [config.AppConfig    ] ║ Seed       : 42
+2026-05-21T17:47:26.942Z [INFO ] [config.AppConfig    ] ╚══════════════════════════════════════════╝
+2026-05-21T17:47:26.942Z [INFO ] [sensor.SensorSim    ] [Sensor] Inicializado | seed=42 | temp_base=29.0°C | hum_base=71.0%
+2026-05-21T17:47:26.944Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] LWT configurado: ambiente/estacao/estacao_01/status
+2026-05-21T17:47:26.944Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Conectando ao broker: tcp://localhost:1883 | clientId: estacao_01_1779385646943
+2026-05-21T17:48:21.878Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station.properties
+2026-05-21T17:48:21.880Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station-local.properties
+2026-05-21T17:48:21.880Z [INFO ] [config.AppConfig    ] [Config] station-local.properties carregado — sobrescrevendo valores base.
+2026-05-21T17:48:21.881Z [INFO ] [config.AppConfig    ] ╔══════════════════════════════════════════╗
+2026-05-21T17:48:21.881Z [INFO ] [config.AppConfig    ] ║       Configuração Carregada             ║
+2026-05-21T17:48:21.882Z [INFO ] [config.AppConfig    ] ╠══════════════════════════════════════════╣
+2026-05-21T17:48:21.882Z [INFO ] [config.AppConfig    ] ║ Estação ID : estacao_01
+2026-05-21T17:48:21.882Z [INFO ] [config.AppConfig    ] ║ Broker     : localhost:1883
+2026-05-21T17:48:21.882Z [INFO ] [config.AppConfig    ] ║ Tópico     : ambiente/estacao/estacao_01/telemetria
+2026-05-21T17:48:21.882Z [INFO ] [config.AppConfig    ] ║ Status     : ambiente/estacao/estacao_01/status
+2026-05-21T17:48:21.882Z [INFO ] [config.AppConfig    ] ║ Intervalo  : 10000 ms
+2026-05-21T17:48:21.882Z [INFO ] [config.AppConfig    ] ║ QoS        : 1
+2026-05-21T17:48:21.882Z [INFO ] [config.AppConfig    ] ║ Lat/Lon    : -5.207645788981328, -37.32216460818565
+2026-05-21T17:48:21.883Z [INFO ] [config.AppConfig    ] ║ Seed       : 42
+2026-05-21T17:48:21.883Z [INFO ] [config.AppConfig    ] ╚══════════════════════════════════════════╝
+2026-05-21T17:48:21.997Z [INFO ] [sensor.SensorSim    ] [Sensor] Inicializado | seed=42 | temp_base=29.0°C | hum_base=71.0%
+2026-05-21T17:48:22.059Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] LWT configurado: ambiente/estacao/estacao_01/status
+2026-05-21T17:48:22.059Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Conectando ao broker: tcp://localhost:1883 | clientId: estacao_01_1779385701998
+2026-05-21T17:48:22.376Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] connectComplete (conexão inicial): tcp://localhost:1883
+2026-05-21T17:48:22.376Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Conectado com sucesso!
+2026-05-21T17:48:22.381Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Status publicado: online=true
+2026-05-21T17:48:22.399Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=1 | tmp=29.46 | hum=71.5 | pres=1013.61 | co2=412.2 | uv=1.4 | rssi=-47
+2026-05-21T17:48:22.443Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=1 | 179 bytes | {"id":"estacao_01","ts":"2026-05-21T17:48:22.398Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.46,"hum":71.5,"pres":1013.61,"co2":412.2,"uv":1.4,"rssi":-47,"seq":1}
+2026-05-21T17:48:22.443Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=2 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-21T17:48:22.445Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=2 | latência=1 ms
+2026-05-21T17:48:22.644Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=2 | tmp=28.67 | hum=70.0 | pres=1013.84 | co2=418.7 | uv=1.5 | rssi=-52
+2026-05-21T17:48:22.645Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=2 | 179 bytes | {"id":"estacao_01","ts":"2026-05-21T17:48:22.644Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.67,"hum":70.0,"pres":1013.84,"co2":418.7,"uv":1.5,"rssi":-52,"seq":2}
+2026-05-21T17:48:22.646Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=3 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-21T17:48:22.647Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=3 | latência=1 ms
+2026-05-21T17:48:22.847Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=3 | tmp=29.56 | hum=70.2 | pres=1013.53 | co2=415.9 | uv=1.1 | rssi=-48
+2026-05-21T17:48:22.848Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=3 | 179 bytes | {"id":"estacao_01","ts":"2026-05-21T17:48:22.846Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.56,"hum":70.2,"pres":1013.53,"co2":415.9,"uv":1.1,"rssi":-48,"seq":3}
+2026-05-21T17:48:22.849Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=4 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-21T17:48:22.850Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=4 | latência=1 ms
+2026-05-21T17:48:23.050Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=4 | tmp=28.52 | hum=71.5 | pres=1014.36 | co2=416.1 | uv=1.4 | rssi=-40
+2026-05-21T17:48:23.051Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=4 | 179 bytes | {"id":"estacao_01","ts":"2026-05-21T17:48:23.050Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.52,"hum":71.5,"pres":1014.36,"co2":416.1,"uv":1.4,"rssi":-40,"seq":4}
+2026-05-21T17:48:23.052Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=5 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-21T17:48:23.054Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=5 | latência=3 ms
+2026-05-21T17:48:23.253Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=5 | tmp=28.89 | hum=71.0 | pres=1014.27 | co2=414.2 | uv=1.2 | rssi=-66
+2026-05-21T17:48:23.254Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=5 | 179 bytes | {"id":"estacao_01","ts":"2026-05-21T17:48:23.252Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.89,"hum":71.0,"pres":1014.27,"co2":414.2,"uv":1.2,"rssi":-66,"seq":5}
+2026-05-21T17:48:23.255Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=6 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-21T17:48:23.257Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=6 | latência=3 ms
+2026-05-21T17:48:23.455Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=6 | tmp=29.57 | hum=69.6 | pres=1013.31 | co2=412.7 | uv=0.5 | rssi=-65
+2026-05-21T17:48:23.457Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=6 | 179 bytes | {"id":"estacao_01","ts":"2026-05-21T17:48:23.455Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.57,"hum":69.6,"pres":1013.31,"co2":412.7,"uv":0.5,"rssi":-65,"seq":6}
+2026-05-21T17:48:23.458Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=7 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-21T17:48:23.459Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=7 | latência=2 ms
+2026-05-21T17:48:23.658Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=7 | tmp=28.95 | hum=72.1 | pres=1013.82 | co2=415.7 | uv=1.2 | rssi=-66
+2026-05-21T17:48:23.660Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=7 | 179 bytes | {"id":"estacao_01","ts":"2026-05-21T17:48:23.658Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.95,"hum":72.1,"pres":1013.82,"co2":415.7,"uv":1.2,"rssi":-66,"seq":7}
+2026-05-21T17:48:23.660Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=8 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-21T17:48:23.662Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=8 | latência=2 ms
+2026-05-21T17:48:23.861Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=8 | tmp=28.81 | hum=70.7 | pres=1014.23 | co2=414.9 | uv=1.0 | rssi=-38
+2026-05-21T17:48:23.862Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=8 | 179 bytes | {"id":"estacao_01","ts":"2026-05-21T17:48:23.861Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.81,"hum":70.7,"pres":1014.23,"co2":414.9,"uv":1.0,"rssi":-38,"seq":8}
+2026-05-21T17:48:23.863Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=9 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-21T17:48:23.865Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=9 | latência=2 ms
+2026-05-21T17:48:24.064Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=9 | tmp=29.46 | hum=69.9 | pres=1014.22 | co2=410.2 | uv=1.4 | rssi=-51
+2026-05-21T17:48:24.065Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=9 | 179 bytes | {"id":"estacao_01","ts":"2026-05-21T17:48:24.064Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.46,"hum":69.9,"pres":1014.22,"co2":410.2,"uv":1.4,"rssi":-51,"seq":9}
+2026-05-21T17:48:24.066Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=10 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-21T17:48:24.068Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=10 | latência=2 ms
+2026-05-21T17:48:24.267Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=10 | tmp=29.56 | hum=69.5 | pres=1013.98 | co2=416.4 | uv=1.1 | rssi=-48
+2026-05-21T17:48:24.268Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=10 | 180 bytes | {"id":"estacao_01","ts":"2026-05-21T17:48:24.267Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.56,"hum":69.5,"pres":1013.98,"co2":416.4,"uv":1.1,"rssi":-48,"seq":10}
+2026-05-21T17:48:24.269Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=11 | topic=ambiente/estacao/estacao_01/telemetria | 180 bytes | QoS=1
+2026-05-21T17:48:24.271Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=11 | latência=2 ms
+2026-05-21T17:48:26.485Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Status publicado: online=false
+2026-05-21T17:48:26.492Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Desconectado graciosamente.
+2026-05-21T17:48:26.514Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station.properties
+2026-05-21T17:48:26.515Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station-local.properties
+2026-05-21T17:48:26.515Z [INFO ] [config.AppConfig    ] [Config] station-local.properties carregado — sobrescrevendo valores base.
+2026-05-21T17:48:26.516Z [INFO ] [config.AppConfig    ] ╔══════════════════════════════════════════╗
+2026-05-21T17:48:26.516Z [INFO ] [config.AppConfig    ] ║       Configuração Carregada             ║
+2026-05-21T17:48:26.516Z [INFO ] [config.AppConfig    ] ╠══════════════════════════════════════════╣
+2026-05-21T17:48:26.516Z [INFO ] [config.AppConfig    ] ║ Estação ID : estacao_01
+2026-05-21T17:48:26.517Z [INFO ] [config.AppConfig    ] ║ Broker     : localhost:1883
+2026-05-21T17:48:26.517Z [INFO ] [config.AppConfig    ] ║ Tópico     : ambiente/estacao/estacao_01/telemetria
+2026-05-21T17:48:26.517Z [INFO ] [config.AppConfig    ] ║ Status     : ambiente/estacao/estacao_01/status
+2026-05-21T17:48:26.517Z [INFO ] [config.AppConfig    ] ║ Intervalo  : 10000 ms
+2026-05-21T17:48:26.517Z [INFO ] [config.AppConfig    ] ║ QoS        : 1
+2026-05-21T17:48:26.517Z [INFO ] [config.AppConfig    ] ║ Lat/Lon    : -5.207645788981328, -37.32216460818565
+2026-05-21T17:48:26.518Z [INFO ] [config.AppConfig    ] ║ Seed       : 42
+2026-05-21T17:48:26.518Z [INFO ] [config.AppConfig    ] ╚══════════════════════════════════════════╝
+2026-05-21T17:48:26.518Z [INFO ] [sensor.SensorSim    ] [Sensor] Inicializado | seed=42 | temp_base=29.0°C | hum_base=71.0%
+2026-05-21T17:48:26.522Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] LWT configurado: ambiente/estacao/estacao_01/status
+2026-05-21T17:48:26.522Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Conectando ao broker: tcp://localhost:1883 | clientId: estacao_01_1779385706519
+2026-05-21T17:48:26.827Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] connectComplete (conexão inicial): tcp://localhost:1883
+2026-05-21T17:48:26.827Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Conectado com sucesso!
+2026-05-21T17:48:26.830Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Status publicado: online=true
+2026-05-21T17:48:27.203Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Status publicado: online=false
+2026-05-21T17:48:27.205Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Desconectado graciosamente.
+2026-05-21T17:48:27.210Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station.properties
+2026-05-21T17:48:27.211Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station-local.properties
+2026-05-21T17:48:27.212Z [INFO ] [config.AppConfig    ] [Config] station-local.properties carregado — sobrescrevendo valores base.
+2026-05-21T17:48:27.213Z [INFO ] [config.AppConfig    ] ╔══════════════════════════════════════════╗
+2026-05-21T17:48:27.213Z [INFO ] [config.AppConfig    ] ║       Configuração Carregada             ║
+2026-05-21T17:48:27.213Z [INFO ] [config.AppConfig    ] ╠══════════════════════════════════════════╣
+2026-05-21T17:48:27.213Z [INFO ] [config.AppConfig    ] ║ Estação ID : estacao_01
+2026-05-21T17:48:27.213Z [INFO ] [config.AppConfig    ] ║ Broker     : localhost:1883
+2026-05-21T17:48:27.214Z [INFO ] [config.AppConfig    ] ║ Tópico     : ambiente/estacao/estacao_01/telemetria
+2026-05-21T17:48:27.214Z [INFO ] [config.AppConfig    ] ║ Status     : ambiente/estacao/estacao_01/status
+2026-05-21T17:48:27.214Z [INFO ] [config.AppConfig    ] ║ Intervalo  : 10000 ms
+2026-05-21T17:48:27.215Z [INFO ] [config.AppConfig    ] ║ QoS        : 1
+2026-05-21T17:48:27.215Z [INFO ] [config.AppConfig    ] ║ Lat/Lon    : -5.207645788981328, -37.32216460818565
+2026-05-21T17:48:27.216Z [INFO ] [config.AppConfig    ] ║ Seed       : 42
+2026-05-21T17:48:27.216Z [INFO ] [config.AppConfig    ] ╚══════════════════════════════════════════╝
+2026-05-21T17:48:27.216Z [INFO ] [sensor.SensorSim    ] [Sensor] Inicializado | seed=42 | temp_base=29.0°C | hum_base=71.0%
+2026-05-21T17:48:27.220Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] LWT configurado: ambiente/estacao/estacao_01/status
+2026-05-21T17:48:27.220Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Conectando ao broker: tcp://localhost:1883 | clientId: estacao_01_1779385707217
+2026-05-21T17:48:27.526Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Conectado com sucesso!
+2026-05-21T17:48:27.526Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] connectComplete (conexão inicial): tcp://localhost:1883
+2026-05-21T17:48:27.528Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Status publicado: online=true
+2026-05-21T17:48:27.531Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Status publicado: online=false
+2026-05-21T17:48:27.533Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Desconectado graciosamente.
+2026-05-21T17:48:27.540Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station.properties
+2026-05-21T17:48:27.540Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station-local.properties
+2026-05-21T17:48:27.541Z [INFO ] [config.AppConfig    ] [Config] station-local.properties carregado — sobrescrevendo valores base.
+2026-05-21T17:48:27.541Z [INFO ] [config.AppConfig    ] ╔══════════════════════════════════════════╗
+2026-05-21T17:48:27.541Z [INFO ] [config.AppConfig    ] ║       Configuração Carregada             ║
+2026-05-21T17:48:27.541Z [INFO ] [config.AppConfig    ] ╠══════════════════════════════════════════╣
+2026-05-21T17:48:27.541Z [INFO ] [config.AppConfig    ] ║ Estação ID : estacao_01
+2026-05-21T17:48:27.541Z [INFO ] [config.AppConfig    ] ║ Broker     : localhost:1883
+2026-05-21T17:48:27.541Z [INFO ] [config.AppConfig    ] ║ Tópico     : ambiente/estacao/estacao_01/telemetria
+2026-05-21T17:48:27.541Z [INFO ] [config.AppConfig    ] ║ Status     : ambiente/estacao/estacao_01/status
+2026-05-21T17:48:27.542Z [INFO ] [config.AppConfig    ] ║ Intervalo  : 10000 ms
+2026-05-21T17:48:27.542Z [INFO ] [config.AppConfig    ] ║ QoS        : 1
+2026-05-21T17:48:27.542Z [INFO ] [config.AppConfig    ] ║ Lat/Lon    : -5.207645788981328, -37.32216460818565
+2026-05-21T17:48:27.542Z [INFO ] [config.AppConfig    ] ║ Seed       : 42
+2026-05-21T17:48:27.542Z [INFO ] [config.AppConfig    ] ╚══════════════════════════════════════════╝
+2026-05-21T17:48:27.542Z [INFO ] [sensor.SensorSim    ] [Sensor] Inicializado | seed=42 | temp_base=29.0°C | hum_base=71.0%
+2026-05-21T17:48:27.545Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] LWT configurado: ambiente/estacao/estacao_01/status
+2026-05-21T17:48:27.545Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Conectando ao broker: tcp://localhost:1883 | clientId: estacao_01_1779385707542
+2026-05-21T17:48:27.849Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Conectado com sucesso!
+2026-05-21T17:48:27.849Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] connectComplete (conexão inicial): tcp://localhost:1883
+2026-05-21T17:48:27.852Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Status publicado: online=true
+2026-05-21T17:48:27.853Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=1 | tmp=29.46 | hum=71.5 | pres=1013.61 | co2=412.2 | uv=1.4 | rssi=-47
+2026-05-21T17:48:27.858Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=1 | 179 bytes | {"id":"estacao_01","ts":"2026-05-21T17:48:27.853Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.46,"hum":71.5,"pres":1013.61,"co2":412.2,"uv":1.4,"rssi":-47,"seq":1}
+2026-05-21T17:48:27.861Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=2 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-21T17:48:27.862Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=2 | latência=2 ms
+2026-05-21T17:48:27.863Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Status publicado: online=false
+2026-05-21T17:48:27.864Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Desconectado graciosamente.
+2026-05-21T17:48:27.868Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station.properties
+2026-05-21T17:48:27.869Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station-local.properties
+2026-05-21T17:48:27.869Z [INFO ] [config.AppConfig    ] [Config] station-local.properties carregado — sobrescrevendo valores base.
+2026-05-21T17:48:27.869Z [INFO ] [config.AppConfig    ] ╔══════════════════════════════════════════╗
+2026-05-21T17:48:27.869Z [INFO ] [config.AppConfig    ] ║       Configuração Carregada             ║
+2026-05-21T17:48:27.869Z [INFO ] [config.AppConfig    ] ╠══════════════════════════════════════════╣
+2026-05-21T17:48:27.870Z [INFO ] [config.AppConfig    ] ║ Estação ID : estacao_01
+2026-05-21T17:48:27.870Z [INFO ] [config.AppConfig    ] ║ Broker     : localhost:1883
+2026-05-21T17:48:27.870Z [INFO ] [config.AppConfig    ] ║ Tópico     : ambiente/estacao/estacao_01/telemetria
+2026-05-21T17:48:27.870Z [INFO ] [config.AppConfig    ] ║ Status     : ambiente/estacao/estacao_01/status
+2026-05-21T17:48:27.870Z [INFO ] [config.AppConfig    ] ║ Intervalo  : 10000 ms
+2026-05-21T17:48:27.870Z [INFO ] [config.AppConfig    ] ║ QoS        : 1
+2026-05-21T17:48:27.870Z [INFO ] [config.AppConfig    ] ║ Lat/Lon    : -5.207645788981328, -37.32216460818565
+2026-05-21T17:48:27.870Z [INFO ] [config.AppConfig    ] ║ Seed       : 42
+2026-05-21T17:48:27.870Z [INFO ] [config.AppConfig    ] ╚══════════════════════════════════════════╝
+2026-05-21T17:48:27.871Z [INFO ] [sensor.SensorSim    ] [Sensor] Inicializado | seed=42 | temp_base=29.0°C | hum_base=71.0%
+2026-05-21T17:48:27.875Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] LWT configurado: ambiente/estacao/estacao_01/status
+2026-05-21T17:48:27.875Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Conectando ao broker: tcp://localhost:1883 | clientId: estacao_01_1779385707871
+2026-05-21T17:48:28.182Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Conectado com sucesso!
+2026-05-21T17:48:28.182Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] connectComplete (conexão inicial): tcp://localhost:1883
+2026-05-21T17:48:28.184Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Status publicado: online=true
+2026-05-21T17:48:28.186Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=1 | tmp=29.46 | hum=71.5 | pres=1013.61 | co2=412.2 | uv=1.4 | rssi=-47
+2026-05-21T17:48:28.191Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=1 | 179 bytes | {"id":"estacao_01","ts":"2026-05-21T17:48:28.185Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.46,"hum":71.5,"pres":1013.61,"co2":412.2,"uv":1.4,"rssi":-47,"seq":1}
+2026-05-21T17:48:28.191Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=2 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-21T17:48:28.192Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=2 | tmp=28.67 | hum=70.0 | pres=1013.84 | co2=418.7 | uv=1.5 | rssi=-52
+2026-05-21T17:48:28.192Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=2 | 179 bytes | {"id":"estacao_01","ts":"2026-05-21T17:48:28.191Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.67,"hum":70.0,"pres":1013.84,"co2":418.7,"uv":1.5,"rssi":-52,"seq":2}
+2026-05-21T17:48:28.193Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=3 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-21T17:48:28.193Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=2 | latência=2 ms
+2026-05-21T17:48:28.193Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=3 | tmp=29.56 | hum=70.2 | pres=1013.53 | co2=415.9 | uv=1.1 | rssi=-48
+2026-05-21T17:48:28.194Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=3 | 179 bytes | {"id":"estacao_01","ts":"2026-05-21T17:48:28.193Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.56,"hum":70.2,"pres":1013.53,"co2":415.9,"uv":1.1,"rssi":-48,"seq":3}
+2026-05-21T17:48:28.194Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=3 | latência=1 ms
+2026-05-21T17:48:28.194Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=4 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-21T17:48:28.194Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=4 | tmp=28.52 | hum=71.5 | pres=1014.36 | co2=416.1 | uv=1.4 | rssi=-40
+2026-05-21T17:48:28.195Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=4 | 179 bytes | {"id":"estacao_01","ts":"2026-05-21T17:48:28.194Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.52,"hum":71.5,"pres":1014.36,"co2":416.1,"uv":1.4,"rssi":-40,"seq":4}
+2026-05-21T17:48:28.196Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=5 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-21T17:48:28.196Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=4 | latência=2 ms
+2026-05-21T17:48:28.196Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=5 | tmp=28.89 | hum=71.0 | pres=1014.27 | co2=414.2 | uv=1.2 | rssi=-66
+2026-05-21T17:48:28.197Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=5 | 179 bytes | {"id":"estacao_01","ts":"2026-05-21T17:48:28.196Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.89,"hum":71.0,"pres":1014.27,"co2":414.2,"uv":1.2,"rssi":-66,"seq":5}
+2026-05-21T17:48:28.197Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=6 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-21T17:48:28.197Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=5 | latência=2 ms
+2026-05-21T17:48:28.198Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=6 | latência=1 ms
+2026-05-21T17:48:31.203Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Status publicado: online=false
+2026-05-21T17:48:31.205Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Desconectado graciosamente.
+2026-05-21T17:48:31.212Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station.properties
+2026-05-21T17:48:31.213Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station-local.properties
+2026-05-21T17:48:31.213Z [INFO ] [config.AppConfig    ] [Config] station-local.properties carregado — sobrescrevendo valores base.
+2026-05-21T17:48:31.214Z [INFO ] [config.AppConfig    ] ╔══════════════════════════════════════════╗
+2026-05-21T17:48:31.214Z [INFO ] [config.AppConfig    ] ║       Configuração Carregada             ║
+2026-05-21T17:48:31.214Z [INFO ] [config.AppConfig    ] ╠══════════════════════════════════════════╣
+2026-05-21T17:48:31.214Z [INFO ] [config.AppConfig    ] ║ Estação ID : estacao_01
+2026-05-21T17:48:31.214Z [INFO ] [config.AppConfig    ] ║ Broker     : localhost:1883
+2026-05-21T17:48:31.214Z [INFO ] [config.AppConfig    ] ║ Tópico     : ambiente/estacao/estacao_01/telemetria
+2026-05-21T17:48:31.214Z [INFO ] [config.AppConfig    ] ║ Status     : ambiente/estacao/estacao_01/status
+2026-05-21T17:48:31.214Z [INFO ] [config.AppConfig    ] ║ Intervalo  : 10000 ms
+2026-05-21T17:48:31.214Z [INFO ] [config.AppConfig    ] ║ QoS        : 1
+2026-05-21T17:48:31.214Z [INFO ] [config.AppConfig    ] ║ Lat/Lon    : -5.207645788981328, -37.32216460818565
+2026-05-21T17:48:31.215Z [INFO ] [config.AppConfig    ] ║ Seed       : 42
+2026-05-21T17:48:31.215Z [INFO ] [config.AppConfig    ] ╚══════════════════════════════════════════╝
+2026-05-21T17:48:31.215Z [INFO ] [sensor.SensorSim    ] [Sensor] Inicializado | seed=42 | temp_base=29.0°C | hum_base=71.0%
+2026-05-21T17:48:31.218Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] LWT configurado: ambiente/estacao/estacao_01/status
+2026-05-21T17:48:31.218Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Conectando ao broker: tcp://localhost:1883 | clientId: estacao_01_1779385711215
+2026-05-21T17:48:31.523Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] connectComplete (conexão inicial): tcp://localhost:1883
+2026-05-21T17:48:31.523Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Conectado com sucesso!
+2026-05-21T17:48:31.526Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Status publicado: online=true
+2026-05-21T17:48:31.848Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=1 | tmp=29.46 | hum=71.5 | pres=1013.61 | co2=412.2 | uv=1.4 | rssi=-47
+2026-05-21T17:48:31.854Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=1 | 179 bytes | {"id":"estacao_01","ts":"2026-05-21T17:48:31.848Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.46,"hum":71.5,"pres":1013.61,"co2":412.2,"uv":1.4,"rssi":-47,"seq":1}
+2026-05-21T17:48:31.855Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=2 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-21T17:48:31.856Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=2 | latência=1 ms
+2026-05-21T17:48:31.896Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Status publicado: online=false
+2026-05-21T17:48:31.897Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Desconectado graciosamente.
+2026-05-21T18:24:52.366Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station.properties
+2026-05-21T18:24:52.368Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station-local.properties
+2026-05-21T18:24:52.369Z [INFO ] [config.AppConfig    ] [Config] station-local.properties carregado — sobrescrevendo valores base.
+2026-05-21T18:24:52.369Z [INFO ] [config.AppConfig    ] ╔══════════════════════════════════════════╗
+2026-05-21T18:24:52.370Z [INFO ] [config.AppConfig    ] ║       Configuração Carregada             ║
+2026-05-21T18:24:52.370Z [INFO ] [config.AppConfig    ] ╠══════════════════════════════════════════╣
+2026-05-21T18:24:52.370Z [INFO ] [config.AppConfig    ] ║ Estação ID : estacao_01
+2026-05-21T18:24:52.370Z [INFO ] [config.AppConfig    ] ║ Broker     : localhost:1883
+2026-05-21T18:24:52.370Z [INFO ] [config.AppConfig    ] ║ Tópico     : ambiente/estacao/estacao_01/telemetria
+2026-05-21T18:24:52.370Z [INFO ] [config.AppConfig    ] ║ Status     : ambiente/estacao/estacao_01/status
+2026-05-21T18:24:52.370Z [INFO ] [config.AppConfig    ] ║ Intervalo  : 10000 ms
+2026-05-21T18:24:52.370Z [INFO ] [config.AppConfig    ] ║ QoS        : 1
+2026-05-21T18:24:52.370Z [INFO ] [config.AppConfig    ] ║ Lat/Lon    : -5.207645788981328, -37.32216460818565
+2026-05-21T18:24:52.371Z [INFO ] [config.AppConfig    ] ║ Seed       : 42
+2026-05-21T18:24:52.371Z [INFO ] [config.AppConfig    ] ╚══════════════════════════════════════════╝
+2026-05-21T18:24:52.371Z [INFO ] [sensor.SensorSim    ] [Sensor] Inicializado | seed=42 | temp_base=29.0°C | hum_base=71.0%
+2026-05-21T18:24:52.547Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] LWT configurado: ambiente/estacao/estacao_01/status
+2026-05-21T18:24:52.547Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Conectando ao broker: tcp://localhost:1883 | clientId: estacao_01_1779387892480
+2026-05-21T18:24:52.866Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Conectado com sucesso!
+2026-05-21T18:24:52.866Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] connectComplete (conexão inicial): tcp://localhost:1883
+2026-05-21T18:24:52.871Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Status publicado: online=true
+2026-05-21T18:24:53.221Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=1 | tmp=29.46 | hum=71.5 | pres=1013.73 | co2=412.2 | uv=0.0 | rssi=-50
+2026-05-21T18:24:53.277Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=1 | 179 bytes | {"id":"estacao_01","ts":"2026-05-21T18:24:53.219Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.46,"hum":71.5,"pres":1013.73,"co2":412.2,"uv":0.0,"rssi":-50,"seq":1}
+2026-05-21T18:24:53.282Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=2 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-21T18:24:53.283Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=2 | latência=2 ms
+2026-05-21T18:24:53.782Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=2 | tmp=29.27 | hum=70.2 | pres=1013.59 | co2=414.5 | uv=0.0 | rssi=-41
+2026-05-21T18:24:53.784Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=2 | 179 bytes | {"id":"estacao_01","ts":"2026-05-21T18:24:53.782Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.27,"hum":70.2,"pres":1013.59,"co2":414.5,"uv":0.0,"rssi":-41,"seq":2}
+2026-05-21T18:24:53.784Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=3 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-21T18:24:53.786Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=3 | latência=2 ms
+2026-05-21T18:24:54.285Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=3 | tmp=29.32 | hum=70.7 | pres=1014.43 | co2=413.4 | uv=0.0 | rssi=-61
+2026-05-21T18:24:54.287Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=3 | 179 bytes | {"id":"estacao_01","ts":"2026-05-21T18:24:54.285Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.32,"hum":70.7,"pres":1014.43,"co2":413.4,"uv":0.0,"rssi":-61,"seq":3}
+2026-05-21T18:24:54.287Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=4 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-21T18:24:54.289Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=4 | latência=2 ms
+2026-05-21T18:24:54.788Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=4 | tmp=29.14 | hum=70.5 | pres=1014.18 | co2=412.0 | uv=0.0 | rssi=-50
+2026-05-21T18:24:54.789Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=4 | 179 bytes | {"id":"estacao_01","ts":"2026-05-21T18:24:54.788Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.14,"hum":70.5,"pres":1014.18,"co2":412.0,"uv":0.0,"rssi":-50,"seq":4}
+2026-05-21T18:24:54.790Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=5 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-21T18:24:54.791Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=5 | latência=2 ms
+2026-05-21T18:24:55.291Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=5 | tmp=29.62 | hum=71.0 | pres=1014.16 | co2=418.8 | uv=0.0 | rssi=-54
+2026-05-21T18:24:55.292Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=5 | 179 bytes | {"id":"estacao_01","ts":"2026-05-21T18:24:55.290Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.62,"hum":71.0,"pres":1014.16,"co2":418.8,"uv":0.0,"rssi":-54,"seq":5}
+2026-05-21T18:24:55.293Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=6 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-21T18:24:55.295Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=6 | latência=2 ms
+2026-05-21T18:24:55.794Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=6 | tmp=28.97 | hum=72.0 | pres=1013.91 | co2=414.6 | uv=0.0 | rssi=-66
+2026-05-21T18:24:55.795Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=6 | 179 bytes | {"id":"estacao_01","ts":"2026-05-21T18:24:55.794Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.97,"hum":72.0,"pres":1013.91,"co2":414.6,"uv":0.0,"rssi":-66,"seq":6}
+2026-05-21T18:24:55.796Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=7 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-21T18:24:55.798Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=7 | latência=2 ms
+2026-05-21T18:24:56.297Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=7 | tmp=29.57 | hum=69.6 | pres=1013.42 | co2=412.7 | uv=0.0 | rssi=-72
+2026-05-21T18:24:56.298Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=7 | 179 bytes | {"id":"estacao_01","ts":"2026-05-21T18:24:56.297Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.57,"hum":69.6,"pres":1013.42,"co2":412.7,"uv":0.0,"rssi":-72,"seq":7}
+2026-05-21T18:24:56.299Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=8 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-21T18:24:56.301Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=8 | latência=2 ms
+2026-05-21T18:24:56.800Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=8 | tmp=28.35 | hum=71.2 | pres=1014.4 | co2=414.3 | uv=0.0 | rssi=-50
+2026-05-21T18:24:56.801Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=8 | 178 bytes | {"id":"estacao_01","ts":"2026-05-21T18:24:56.800Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.35,"hum":71.2,"pres":1014.4,"co2":414.3,"uv":0.0,"rssi":-50,"seq":8}
+2026-05-21T18:24:56.802Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=9 | topic=ambiente/estacao/estacao_01/telemetria | 178 bytes | QoS=1
+2026-05-21T18:24:56.803Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=9 | latência=2 ms
+2026-05-21T18:24:57.302Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=9 | tmp=28.87 | hum=69.6 | pres=1013.87 | co2=413.7 | uv=0.0 | rssi=-44
+2026-05-21T18:24:57.304Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=9 | 179 bytes | {"id":"estacao_01","ts":"2026-05-21T18:24:57.302Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.87,"hum":69.6,"pres":1013.87,"co2":413.7,"uv":0.0,"rssi":-44,"seq":9}
+2026-05-21T18:24:57.304Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=10 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-21T18:24:57.306Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=10 | latência=2 ms
+2026-05-21T18:24:57.805Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=10 | tmp=28.98 | hum=70.1 | pres=1014.57 | co2=417.9 | uv=0.0 | rssi=-60
+2026-05-21T18:24:57.806Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=10 | 180 bytes | {"id":"estacao_01","ts":"2026-05-21T18:24:57.805Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.98,"hum":70.1,"pres":1014.57,"co2":417.9,"uv":0.0,"rssi":-60,"seq":10}
+2026-05-21T18:24:57.807Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=11 | topic=ambiente/estacao/estacao_01/telemetria | 180 bytes | QoS=1
+2026-05-21T18:24:57.808Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=11 | latência=2 ms
+2026-05-21T18:24:58.307Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=11 | tmp=29.43 | hum=69.2 | pres=1014.1 | co2=415.6 | uv=0.0 | rssi=-41
+2026-05-21T18:24:58.308Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=11 | 179 bytes | {"id":"estacao_01","ts":"2026-05-21T18:24:58.307Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.43,"hum":69.2,"pres":1014.1,"co2":415.6,"uv":0.0,"rssi":-41,"seq":11}
+2026-05-21T18:24:58.309Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=12 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-21T18:24:58.310Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=12 | latência=1 ms
+2026-05-21T18:24:58.810Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=12 | tmp=28.39 | hum=71.5 | pres=1014.18 | co2=413.7 | uv=0.0 | rssi=-48
+2026-05-21T18:24:58.811Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=12 | 180 bytes | {"id":"estacao_01","ts":"2026-05-21T18:24:58.810Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.39,"hum":71.5,"pres":1014.18,"co2":413.7,"uv":0.0,"rssi":-48,"seq":12}
+2026-05-21T18:24:58.811Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=13 | topic=ambiente/estacao/estacao_01/telemetria | 180 bytes | QoS=1
+2026-05-21T18:24:58.813Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=13 | latência=2 ms
+2026-05-21T18:24:59.344Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Status publicado: online=false
+2026-05-21T18:24:59.346Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Desconectado graciosamente.
+2026-05-21T18:25:56.000Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station.properties
+2026-05-21T18:25:56.002Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station-local.properties
+2026-05-21T18:25:56.002Z [INFO ] [config.AppConfig    ] [Config] station-local.properties carregado — sobrescrevendo valores base.
+2026-05-21T18:25:56.003Z [INFO ] [config.AppConfig    ] ╔══════════════════════════════════════════╗
+2026-05-21T18:25:56.003Z [INFO ] [config.AppConfig    ] ║       Configuração Carregada             ║
+2026-05-21T18:25:56.003Z [INFO ] [config.AppConfig    ] ╠══════════════════════════════════════════╣
+2026-05-21T18:25:56.003Z [INFO ] [config.AppConfig    ] ║ Estação ID : estacao_01
+2026-05-21T18:25:56.003Z [INFO ] [config.AppConfig    ] ║ Broker     : localhost:1883
+2026-05-21T18:25:56.004Z [INFO ] [config.AppConfig    ] ║ Tópico     : ambiente/estacao/estacao_01/telemetria
+2026-05-21T18:25:56.004Z [INFO ] [config.AppConfig    ] ║ Status     : ambiente/estacao/estacao_01/status
+2026-05-21T18:25:56.004Z [INFO ] [config.AppConfig    ] ║ Intervalo  : 10000 ms
+2026-05-21T18:25:56.004Z [INFO ] [config.AppConfig    ] ║ QoS        : 1
+2026-05-21T18:25:56.004Z [INFO ] [config.AppConfig    ] ║ Lat/Lon    : -5.207645788981328, -37.32216460818565
+2026-05-21T18:25:56.005Z [INFO ] [config.AppConfig    ] ║ Seed       : 42
+2026-05-21T18:25:56.005Z [INFO ] [config.AppConfig    ] ╚══════════════════════════════════════════╝
+2026-05-21T18:25:56.005Z [INFO ] [sensor.SensorSim    ] [Sensor] Inicializado | seed=42 | temp_base=29.0°C | hum_base=71.0%
+2026-05-21T18:25:56.176Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] LWT configurado: ambiente/estacao/estacao_01/status
+2026-05-21T18:25:56.177Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Conectando ao broker: tcp://localhost:1883 | clientId: estacao_01_1779387956112
+2026-05-21T18:25:56.494Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] connectComplete (conexão inicial): tcp://localhost:1883
+2026-05-21T18:25:56.494Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Conectado com sucesso!
+2026-05-21T18:25:56.497Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Status publicado: online=true
+2026-05-21T18:25:56.837Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=1 | tmp=29.46 | hum=71.5 | pres=1013.73 | co2=412.2 | uv=0.0 | rssi=-50
+2026-05-21T18:25:56.880Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=1 | 179 bytes | {"id":"estacao_01","ts":"2026-05-21T18:25:56.836Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.46,"hum":71.5,"pres":1013.73,"co2":412.2,"uv":0.0,"rssi":-50,"seq":1}
+2026-05-21T18:25:56.885Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=2 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-21T18:25:56.886Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=2 | latência=2 ms
+2026-05-21T18:25:57.386Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=2 | tmp=29.27 | hum=70.2 | pres=1013.59 | co2=414.5 | uv=0.0 | rssi=-41
+2026-05-21T18:25:57.387Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=2 | 179 bytes | {"id":"estacao_01","ts":"2026-05-21T18:25:57.385Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.27,"hum":70.2,"pres":1013.59,"co2":414.5,"uv":0.0,"rssi":-41,"seq":2}
+2026-05-21T18:25:57.388Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=3 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-21T18:25:57.391Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=3 | latência=3 ms
+2026-05-21T18:25:57.889Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=3 | tmp=29.32 | hum=70.7 | pres=1014.44 | co2=413.4 | uv=0.0 | rssi=-61
+2026-05-21T18:25:57.890Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=3 | 179 bytes | {"id":"estacao_01","ts":"2026-05-21T18:25:57.889Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.32,"hum":70.7,"pres":1014.44,"co2":413.4,"uv":0.0,"rssi":-61,"seq":3}
+2026-05-21T18:25:57.890Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=4 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-21T18:25:57.891Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=4 | latência=1 ms
+2026-05-21T18:25:58.390Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=4 | tmp=29.14 | hum=70.5 | pres=1014.18 | co2=412.0 | uv=0.0 | rssi=-50
+2026-05-21T18:25:58.391Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=4 | 179 bytes | {"id":"estacao_01","ts":"2026-05-21T18:25:58.390Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.14,"hum":70.5,"pres":1014.18,"co2":412.0,"uv":0.0,"rssi":-50,"seq":4}
+2026-05-21T18:25:58.392Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=5 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-21T18:25:58.393Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=5 | latência=2 ms
+2026-05-21T18:25:58.892Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=5 | tmp=29.62 | hum=71.0 | pres=1014.16 | co2=418.8 | uv=0.0 | rssi=-54
+2026-05-21T18:25:58.894Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=5 | 179 bytes | {"id":"estacao_01","ts":"2026-05-21T18:25:58.892Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.62,"hum":71.0,"pres":1014.16,"co2":418.8,"uv":0.0,"rssi":-54,"seq":5}
+2026-05-21T18:25:58.894Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=6 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-21T18:25:58.896Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=6 | latência=2 ms
+2026-05-21T18:25:59.395Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=6 | tmp=28.97 | hum=72.0 | pres=1013.92 | co2=414.6 | uv=0.0 | rssi=-66
+2026-05-21T18:25:59.396Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=6 | 179 bytes | {"id":"estacao_01","ts":"2026-05-21T18:25:59.395Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.97,"hum":72.0,"pres":1013.92,"co2":414.6,"uv":0.0,"rssi":-66,"seq":6}
+2026-05-21T18:25:59.397Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=7 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-21T18:25:59.398Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=7 | latência=1 ms
+2026-05-21T18:25:59.898Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=7 | tmp=29.57 | hum=69.6 | pres=1013.42 | co2=412.7 | uv=0.0 | rssi=-72
+2026-05-21T18:25:59.899Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=7 | 179 bytes | {"id":"estacao_01","ts":"2026-05-21T18:25:59.898Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.57,"hum":69.6,"pres":1013.42,"co2":412.7,"uv":0.0,"rssi":-72,"seq":7}
+2026-05-21T18:25:59.900Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=8 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-21T18:25:59.901Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=8 | latência=2 ms
+2026-05-21T18:26:00.400Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=8 | tmp=28.35 | hum=71.2 | pres=1014.4 | co2=414.3 | uv=0.0 | rssi=-50
+2026-05-21T18:26:00.401Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=8 | 178 bytes | {"id":"estacao_01","ts":"2026-05-21T18:26:00.400Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.35,"hum":71.2,"pres":1014.4,"co2":414.3,"uv":0.0,"rssi":-50,"seq":8}
+2026-05-21T18:26:00.402Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=9 | topic=ambiente/estacao/estacao_01/telemetria | 178 bytes | QoS=1
+2026-05-21T18:26:00.404Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=9 | latência=2 ms
+2026-05-21T18:26:00.903Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=9 | tmp=28.87 | hum=69.6 | pres=1013.87 | co2=413.7 | uv=0.0 | rssi=-44
+2026-05-21T18:26:00.904Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=9 | 179 bytes | {"id":"estacao_01","ts":"2026-05-21T18:26:00.903Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.87,"hum":69.6,"pres":1013.87,"co2":413.7,"uv":0.0,"rssi":-44,"seq":9}
+2026-05-21T18:26:00.905Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=10 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-21T18:26:00.906Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=10 | latência=2 ms
+2026-05-21T18:26:01.405Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=10 | tmp=28.98 | hum=70.1 | pres=1014.57 | co2=417.9 | uv=0.0 | rssi=-60
+2026-05-21T18:26:01.406Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=10 | 180 bytes | {"id":"estacao_01","ts":"2026-05-21T18:26:01.405Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.98,"hum":70.1,"pres":1014.57,"co2":417.9,"uv":0.0,"rssi":-60,"seq":10}
+2026-05-21T18:26:01.407Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=11 | topic=ambiente/estacao/estacao_01/telemetria | 180 bytes | QoS=1
+2026-05-21T18:26:01.408Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=11 | latência=1 ms
+2026-05-21T18:26:01.908Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=11 | tmp=29.43 | hum=69.2 | pres=1014.11 | co2=415.6 | uv=0.0 | rssi=-41
+2026-05-21T18:26:01.909Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=11 | 180 bytes | {"id":"estacao_01","ts":"2026-05-21T18:26:01.907Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.43,"hum":69.2,"pres":1014.11,"co2":415.6,"uv":0.0,"rssi":-41,"seq":11}
+2026-05-21T18:26:01.910Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=12 | topic=ambiente/estacao/estacao_01/telemetria | 180 bytes | QoS=1
+2026-05-21T18:26:01.911Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=12 | latência=2 ms
+2026-05-21T18:26:02.410Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=12 | tmp=28.39 | hum=71.5 | pres=1014.18 | co2=413.7 | uv=0.0 | rssi=-48
+2026-05-21T18:26:02.412Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=12 | 180 bytes | {"id":"estacao_01","ts":"2026-05-21T18:26:02.410Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.39,"hum":71.5,"pres":1014.18,"co2":413.7,"uv":0.0,"rssi":-48,"seq":12}
+2026-05-21T18:26:02.412Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=13 | topic=ambiente/estacao/estacao_01/telemetria | 180 bytes | QoS=1
+2026-05-21T18:26:02.414Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=13 | latência=2 ms
+2026-05-21T18:26:02.942Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Status publicado: online=false
+2026-05-21T18:26:02.944Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Desconectado graciosamente.
+2026-05-22T02:20:42.508Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station.properties
+2026-05-22T02:20:42.514Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station-local.properties
+2026-05-22T02:20:42.514Z [INFO ] [config.AppConfig    ] [Config] station-local.properties carregado — sobrescrevendo valores base.
+2026-05-22T02:20:42.515Z [INFO ] [config.AppConfig    ] ╔══════════════════════════════════════════╗
+2026-05-22T02:20:42.515Z [INFO ] [config.AppConfig    ] ║       Configuração Carregada             ║
+2026-05-22T02:20:42.515Z [INFO ] [config.AppConfig    ] ╠══════════════════════════════════════════╣
+2026-05-22T02:20:42.515Z [INFO ] [config.AppConfig    ] ║ Estação ID : estacao_01
+2026-05-22T02:20:42.515Z [INFO ] [config.AppConfig    ] ║ Broker     : localhost:1883
+2026-05-22T02:20:42.515Z [INFO ] [config.AppConfig    ] ║ Tópico     : ambiente/estacao/estacao_01/telemetria
+2026-05-22T02:20:42.515Z [INFO ] [config.AppConfig    ] ║ Status     : ambiente/estacao/estacao_01/status
+2026-05-22T02:20:42.515Z [INFO ] [config.AppConfig    ] ║ Intervalo  : 10000 ms
+2026-05-22T02:20:42.516Z [INFO ] [config.AppConfig    ] ║ QoS        : 1
+2026-05-22T02:20:42.516Z [INFO ] [config.AppConfig    ] ║ Lat/Lon    : -5.207645788981328, -37.32216460818565
+2026-05-22T02:20:42.516Z [INFO ] [config.AppConfig    ] ║ Seed       : 42
+2026-05-22T02:20:42.516Z [INFO ] [config.AppConfig    ] ╚══════════════════════════════════════════╝
+2026-05-22T02:20:42.517Z [INFO ] [sensor.SensorSim    ] [Sensor] Inicializado | seed=42 | temp_base=29.0°C | hum_base=71.0%
+2026-05-22T02:20:42.676Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] LWT configurado: ambiente/estacao/estacao_01/status
+2026-05-22T02:20:42.676Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Conectando ao broker: tcp://localhost:1883 | clientId: estacao_01_1779416442634
+2026-05-22T02:20:42.988Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Conectado com sucesso!
+2026-05-22T02:20:42.988Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] connectComplete (conexão inicial): tcp://localhost:1883
+2026-05-22T02:20:42.993Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Status publicado: online=true
+2026-05-22T02:20:43.317Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=1 | tmp=29.46 | hum=71.5 | pres=1012.35 | co2=412.2 | uv=0.0 | rssi=-50
+2026-05-22T02:20:43.347Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=1 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:20:43.315Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.46,"hum":71.5,"pres":1012.35,"co2":412.2,"uv":0.0,"rssi":-50,"seq":1}
+2026-05-22T02:20:43.349Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=2 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:20:43.349Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=2 | latência=1 ms
+2026-05-22T02:20:43.849Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=2 | tmp=29.27 | hum=70.2 | pres=1012.22 | co2=414.5 | uv=0.0 | rssi=-41
+2026-05-22T02:20:43.851Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=2 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:20:43.849Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.27,"hum":70.2,"pres":1012.22,"co2":414.5,"uv":0.0,"rssi":-41,"seq":2}
+2026-05-22T02:20:43.852Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=3 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:20:43.853Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=3 | latência=2 ms
+2026-05-22T02:20:44.352Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=3 | tmp=29.32 | hum=70.7 | pres=1013.06 | co2=413.4 | uv=0.0 | rssi=-61
+2026-05-22T02:20:44.354Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=3 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:20:44.352Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.32,"hum":70.7,"pres":1013.06,"co2":413.4,"uv":0.0,"rssi":-61,"seq":3}
+2026-05-22T02:20:44.355Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=4 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:20:44.356Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=4 | latência=1 ms
+2026-05-22T02:20:44.856Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=4 | tmp=29.14 | hum=70.5 | pres=1012.8 | co2=412.0 | uv=0.0 | rssi=-50
+2026-05-22T02:20:44.857Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=4 | 178 bytes | {"id":"estacao_01","ts":"2026-05-22T02:20:44.856Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.14,"hum":70.5,"pres":1012.8,"co2":412.0,"uv":0.0,"rssi":-50,"seq":4}
+2026-05-22T02:20:44.858Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=5 | topic=ambiente/estacao/estacao_01/telemetria | 178 bytes | QoS=1
+2026-05-22T02:20:44.859Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=5 | latência=1 ms
+2026-05-22T02:20:45.359Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=5 | tmp=29.62 | hum=71.0 | pres=1012.78 | co2=418.8 | uv=0.0 | rssi=-54
+2026-05-22T02:20:45.360Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=5 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:20:45.358Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.62,"hum":71.0,"pres":1012.78,"co2":418.8,"uv":0.0,"rssi":-54,"seq":5}
+2026-05-22T02:20:45.360Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=6 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:20:45.362Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=6 | latência=2 ms
+2026-05-22T02:20:45.861Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=6 | tmp=28.97 | hum=72.0 | pres=1012.54 | co2=414.6 | uv=0.0 | rssi=-66
+2026-05-22T02:20:45.862Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=6 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:20:45.861Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.97,"hum":72.0,"pres":1012.54,"co2":414.6,"uv":0.0,"rssi":-66,"seq":6}
+2026-05-22T02:20:45.863Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=7 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:20:45.864Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=7 | latência=2 ms
+2026-05-22T02:20:46.363Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=7 | tmp=29.57 | hum=69.6 | pres=1012.05 | co2=412.7 | uv=0.0 | rssi=-72
+2026-05-22T02:20:46.364Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=7 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:20:46.363Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.57,"hum":69.6,"pres":1012.05,"co2":412.7,"uv":0.0,"rssi":-72,"seq":7}
+2026-05-22T02:20:46.364Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=8 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:20:46.364Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=8 | latência=0 ms
+2026-05-22T02:20:46.864Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=8 | tmp=28.35 | hum=71.2 | pres=1013.02 | co2=414.3 | uv=0.0 | rssi=-50
+2026-05-22T02:20:46.866Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=8 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:20:46.864Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.35,"hum":71.2,"pres":1013.02,"co2":414.3,"uv":0.0,"rssi":-50,"seq":8}
+2026-05-22T02:20:46.866Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=9 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:20:46.868Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=9 | latência=2 ms
+2026-05-22T02:20:47.367Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=9 | tmp=28.87 | hum=69.6 | pres=1012.49 | co2=413.7 | uv=0.0 | rssi=-44
+2026-05-22T02:20:47.368Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=9 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:20:47.367Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.87,"hum":69.6,"pres":1012.49,"co2":413.7,"uv":0.0,"rssi":-44,"seq":9}
+2026-05-22T02:20:47.369Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=10 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:20:47.370Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=10 | latência=2 ms
+2026-05-22T02:20:47.869Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=10 | tmp=28.98 | hum=70.1 | pres=1013.2 | co2=417.9 | uv=0.0 | rssi=-60
+2026-05-22T02:20:47.870Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=10 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:20:47.869Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.98,"hum":70.1,"pres":1013.2,"co2":417.9,"uv":0.0,"rssi":-60,"seq":10}
+2026-05-22T02:20:47.871Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=11 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:20:47.872Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=11 | latência=1 ms
+2026-05-22T02:20:48.372Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=11 | tmp=29.43 | hum=69.2 | pres=1012.73 | co2=415.6 | uv=0.0 | rssi=-41
+2026-05-22T02:20:48.373Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=11 | 180 bytes | {"id":"estacao_01","ts":"2026-05-22T02:20:48.371Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.43,"hum":69.2,"pres":1012.73,"co2":415.6,"uv":0.0,"rssi":-41,"seq":11}
+2026-05-22T02:20:48.373Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=12 | topic=ambiente/estacao/estacao_01/telemetria | 180 bytes | QoS=1
+2026-05-22T02:20:48.375Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=12 | latência=2 ms
+2026-05-22T02:20:48.874Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=12 | tmp=28.39 | hum=71.5 | pres=1012.81 | co2=413.7 | uv=0.0 | rssi=-48
+2026-05-22T02:20:48.875Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=12 | 180 bytes | {"id":"estacao_01","ts":"2026-05-22T02:20:48.874Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.39,"hum":71.5,"pres":1012.81,"co2":413.7,"uv":0.0,"rssi":-48,"seq":12}
+2026-05-22T02:20:48.876Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=13 | topic=ambiente/estacao/estacao_01/telemetria | 180 bytes | QoS=1
+2026-05-22T02:20:48.877Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=13 | latência=2 ms
+2026-05-22T02:20:49.393Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Status publicado: online=false
+2026-05-22T02:20:49.395Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Desconectado graciosamente.
+2026-05-22T02:22:14.166Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station.properties
+2026-05-22T02:22:14.169Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station-local.properties
+2026-05-22T02:22:14.169Z [INFO ] [config.AppConfig    ] [Config] station-local.properties carregado — sobrescrevendo valores base.
+2026-05-22T02:22:14.170Z [INFO ] [config.AppConfig    ] ╔══════════════════════════════════════════╗
+2026-05-22T02:22:14.170Z [INFO ] [config.AppConfig    ] ║       Configuração Carregada             ║
+2026-05-22T02:22:14.170Z [INFO ] [config.AppConfig    ] ╠══════════════════════════════════════════╣
+2026-05-22T02:22:14.170Z [INFO ] [config.AppConfig    ] ║ Estação ID : estacao_01
+2026-05-22T02:22:14.171Z [INFO ] [config.AppConfig    ] ║ Broker     : localhost:1883
+2026-05-22T02:22:14.171Z [INFO ] [config.AppConfig    ] ║ Tópico     : ambiente/estacao/estacao_01/telemetria
+2026-05-22T02:22:14.171Z [INFO ] [config.AppConfig    ] ║ Status     : ambiente/estacao/estacao_01/status
+2026-05-22T02:22:14.171Z [INFO ] [config.AppConfig    ] ║ Intervalo  : 10000 ms
+2026-05-22T02:22:14.171Z [INFO ] [config.AppConfig    ] ║ QoS        : 1
+2026-05-22T02:22:14.171Z [INFO ] [config.AppConfig    ] ║ Lat/Lon    : -5.207645788981328, -37.32216460818565
+2026-05-22T02:22:14.172Z [INFO ] [config.AppConfig    ] ║ Seed       : 42
+2026-05-22T02:22:14.172Z [INFO ] [config.AppConfig    ] ╚══════════════════════════════════════════╝
+2026-05-22T02:22:14.172Z [INFO ] [sensor.SensorSim    ] [Sensor] Inicializado | seed=42 | temp_base=29.0°C | hum_base=71.0%
+2026-05-22T02:22:14.304Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] LWT configurado: ambiente/estacao/estacao_01/status
+2026-05-22T02:22:14.304Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Conectando ao broker: tcp://localhost:1883 | clientId: estacao_01_1779416534258
+2026-05-22T02:22:14.621Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Conectado com sucesso!
+2026-05-22T02:22:14.621Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] connectComplete (conexão inicial): tcp://localhost:1883
+2026-05-22T02:22:14.625Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Status publicado: online=true
+2026-05-22T02:22:14.955Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=1 | tmp=29.46 | hum=71.5 | pres=1012.36 | co2=412.2 | uv=0.0 | rssi=-50
+2026-05-22T02:22:14.979Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=1 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:22:14.954Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.46,"hum":71.5,"pres":1012.36,"co2":412.2,"uv":0.0,"rssi":-50,"seq":1}
+2026-05-22T02:22:14.979Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=2 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:22:14.980Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=2 | latência=1 ms
+2026-05-22T02:22:15.011Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Status publicado: online=false
+2026-05-22T02:22:15.011Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Desconectado graciosamente.
+2026-05-22T02:23:02.997Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station.properties
+2026-05-22T02:23:02.999Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station-local.properties
+2026-05-22T02:23:02.999Z [INFO ] [config.AppConfig    ] [Config] station-local.properties carregado — sobrescrevendo valores base.
+2026-05-22T02:23:03.000Z [INFO ] [config.AppConfig    ] ╔══════════════════════════════════════════╗
+2026-05-22T02:23:03.000Z [INFO ] [config.AppConfig    ] ║       Configuração Carregada             ║
+2026-05-22T02:23:03.000Z [INFO ] [config.AppConfig    ] ╠══════════════════════════════════════════╣
+2026-05-22T02:23:03.000Z [INFO ] [config.AppConfig    ] ║ Estação ID : estacao_01
+2026-05-22T02:23:03.000Z [INFO ] [config.AppConfig    ] ║ Broker     : localhost:1883
+2026-05-22T02:23:03.000Z [INFO ] [config.AppConfig    ] ║ Tópico     : ambiente/estacao/estacao_01/telemetria
+2026-05-22T02:23:03.000Z [INFO ] [config.AppConfig    ] ║ Status     : ambiente/estacao/estacao_01/status
+2026-05-22T02:23:03.000Z [INFO ] [config.AppConfig    ] ║ Intervalo  : 10000 ms
+2026-05-22T02:23:03.000Z [INFO ] [config.AppConfig    ] ║ QoS        : 1
+2026-05-22T02:23:03.000Z [INFO ] [config.AppConfig    ] ║ Lat/Lon    : -5.207645788981328, -37.32216460818565
+2026-05-22T02:23:03.001Z [INFO ] [config.AppConfig    ] ║ Seed       : 42
+2026-05-22T02:23:03.001Z [INFO ] [config.AppConfig    ] ╚══════════════════════════════════════════╝
+2026-05-22T02:23:03.001Z [INFO ] [sensor.SensorSim    ] [Sensor] Inicializado | seed=42 | temp_base=29.0°C | hum_base=71.0%
+2026-05-22T02:23:03.176Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] LWT configurado: ambiente/estacao/estacao_01/status
+2026-05-22T02:23:03.176Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Conectando ao broker: tcp://localhost:1883 | clientId: estacao_01_1779416583119
+2026-05-22T02:23:03.487Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Conectado com sucesso!
+2026-05-22T02:23:03.487Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] connectComplete (conexão inicial): tcp://localhost:1883
+2026-05-22T02:23:03.489Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Status publicado: online=true
+2026-05-22T02:23:03.805Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=1 | tmp=29.46 | hum=71.5 | pres=1012.37 | co2=412.2 | uv=0.0 | rssi=-50
+2026-05-22T02:23:03.822Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=1 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:23:03.805Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.46,"hum":71.5,"pres":1012.37,"co2":412.2,"uv":0.0,"rssi":-50,"seq":1}
+2026-05-22T02:23:03.823Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=2 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:23:03.823Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=2 | latência=0 ms
+2026-05-22T02:23:03.858Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Status publicado: online=false
+2026-05-22T02:23:03.858Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Desconectado graciosamente.
+2026-05-22T02:23:03.866Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station.properties
+2026-05-22T02:23:03.866Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station-local.properties
+2026-05-22T02:23:03.866Z [INFO ] [config.AppConfig    ] [Config] station-local.properties carregado — sobrescrevendo valores base.
+2026-05-22T02:23:03.866Z [INFO ] [config.AppConfig    ] ╔══════════════════════════════════════════╗
+2026-05-22T02:23:03.866Z [INFO ] [config.AppConfig    ] ║       Configuração Carregada             ║
+2026-05-22T02:23:03.866Z [INFO ] [config.AppConfig    ] ╠══════════════════════════════════════════╣
+2026-05-22T02:23:03.866Z [INFO ] [config.AppConfig    ] ║ Estação ID : estacao_01
+2026-05-22T02:23:03.867Z [INFO ] [config.AppConfig    ] ║ Broker     : localhost:1883
+2026-05-22T02:23:03.867Z [INFO ] [config.AppConfig    ] ║ Tópico     : ambiente/estacao/estacao_01/telemetria
+2026-05-22T02:23:03.867Z [INFO ] [config.AppConfig    ] ║ Status     : ambiente/estacao/estacao_01/status
+2026-05-22T02:23:03.867Z [INFO ] [config.AppConfig    ] ║ Intervalo  : 10000 ms
+2026-05-22T02:23:03.867Z [INFO ] [config.AppConfig    ] ║ QoS        : 1
+2026-05-22T02:23:03.867Z [INFO ] [config.AppConfig    ] ║ Lat/Lon    : -5.207645788981328, -37.32216460818565
+2026-05-22T02:23:03.867Z [INFO ] [config.AppConfig    ] ║ Seed       : 42
+2026-05-22T02:23:03.867Z [INFO ] [config.AppConfig    ] ╚══════════════════════════════════════════╝
+2026-05-22T02:23:03.867Z [INFO ] [sensor.SensorSim    ] [Sensor] Inicializado | seed=42 | temp_base=29.0°C | hum_base=71.0%
+2026-05-22T02:23:03.869Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] LWT configurado: ambiente/estacao/estacao_01/status
+2026-05-22T02:23:03.869Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Conectando ao broker: tcp://localhost:1883 | clientId: estacao_01_1779416583867
+2026-05-22T02:23:04.172Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] connectComplete (conexão inicial): tcp://localhost:1883
+2026-05-22T02:23:04.172Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Conectado com sucesso!
+2026-05-22T02:23:04.173Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Status publicado: online=true
+2026-05-22T02:23:04.478Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=1 | tmp=29.46 | hum=71.5 | pres=1012.37 | co2=412.2 | uv=0.0 | rssi=-50
+2026-05-22T02:23:04.480Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=1 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:23:04.478Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.46,"hum":71.5,"pres":1012.37,"co2":412.2,"uv":0.0,"rssi":-50,"seq":1}
+2026-05-22T02:23:04.481Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=2 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:23:04.481Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=2 | latência=0 ms
+2026-05-22T02:23:04.981Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=2 | tmp=29.27 | hum=70.2 | pres=1012.23 | co2=414.5 | uv=0.0 | rssi=-41
+2026-05-22T02:23:04.983Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=2 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:23:04.981Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.27,"hum":70.2,"pres":1012.23,"co2":414.5,"uv":0.0,"rssi":-41,"seq":2}
+2026-05-22T02:23:04.983Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=3 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:23:04.985Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=3 | latência=2 ms
+2026-05-22T02:23:05.484Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=3 | tmp=29.32 | hum=70.7 | pres=1013.07 | co2=413.4 | uv=0.0 | rssi=-61
+2026-05-22T02:23:05.485Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=3 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:23:05.484Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.32,"hum":70.7,"pres":1013.07,"co2":413.4,"uv":0.0,"rssi":-61,"seq":3}
+2026-05-22T02:23:05.486Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=4 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:23:05.487Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=4 | latência=2 ms
+2026-05-22T02:23:05.986Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=4 | tmp=29.14 | hum=70.5 | pres=1012.82 | co2=412.0 | uv=0.0 | rssi=-50
+2026-05-22T02:23:05.987Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=4 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:23:05.986Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.14,"hum":70.5,"pres":1012.82,"co2":412.0,"uv":0.0,"rssi":-50,"seq":4}
+2026-05-22T02:23:05.988Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=5 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:23:05.989Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=5 | latência=1 ms
+2026-05-22T02:23:06.489Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=5 | tmp=29.62 | hum=71.0 | pres=1012.8 | co2=418.8 | uv=0.0 | rssi=-54
+2026-05-22T02:23:06.490Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=5 | 178 bytes | {"id":"estacao_01","ts":"2026-05-22T02:23:06.488Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.62,"hum":71.0,"pres":1012.8,"co2":418.8,"uv":0.0,"rssi":-54,"seq":5}
+2026-05-22T02:23:06.491Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=6 | topic=ambiente/estacao/estacao_01/telemetria | 178 bytes | QoS=1
+2026-05-22T02:23:06.492Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=6 | latência=2 ms
+2026-05-22T02:23:06.992Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=6 | tmp=28.97 | hum=72.0 | pres=1012.55 | co2=414.6 | uv=0.0 | rssi=-66
+2026-05-22T02:23:06.993Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=6 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:23:06.991Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.97,"hum":72.0,"pres":1012.55,"co2":414.6,"uv":0.0,"rssi":-66,"seq":6}
+2026-05-22T02:23:06.993Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=7 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:23:06.995Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=7 | latência=2 ms
+2026-05-22T02:23:07.494Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=7 | tmp=29.57 | hum=69.6 | pres=1012.06 | co2=412.7 | uv=0.0 | rssi=-72
+2026-05-22T02:23:07.495Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=7 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:23:07.494Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.57,"hum":69.6,"pres":1012.06,"co2":412.7,"uv":0.0,"rssi":-72,"seq":7}
+2026-05-22T02:23:07.496Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=8 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:23:07.497Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=8 | latência=1 ms
+2026-05-22T02:23:07.997Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=8 | tmp=28.35 | hum=71.2 | pres=1013.04 | co2=414.3 | uv=0.0 | rssi=-50
+2026-05-22T02:23:07.998Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=8 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:23:07.997Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.35,"hum":71.2,"pres":1013.04,"co2":414.3,"uv":0.0,"rssi":-50,"seq":8}
+2026-05-22T02:23:07.998Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=9 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:23:08.000Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=9 | latência=2 ms
+2026-05-22T02:23:08.499Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=9 | tmp=28.87 | hum=69.6 | pres=1012.51 | co2=413.7 | uv=0.0 | rssi=-44
+2026-05-22T02:23:08.500Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=9 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:23:08.499Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.87,"hum":69.6,"pres":1012.51,"co2":413.7,"uv":0.0,"rssi":-44,"seq":9}
+2026-05-22T02:23:08.501Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=10 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:23:08.502Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=10 | latência=2 ms
+2026-05-22T02:23:09.001Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=10 | tmp=28.98 | hum=70.1 | pres=1013.21 | co2=417.9 | uv=0.0 | rssi=-60
+2026-05-22T02:23:09.002Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=10 | 180 bytes | {"id":"estacao_01","ts":"2026-05-22T02:23:09.001Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.98,"hum":70.1,"pres":1013.21,"co2":417.9,"uv":0.0,"rssi":-60,"seq":10}
+2026-05-22T02:23:09.003Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=11 | topic=ambiente/estacao/estacao_01/telemetria | 180 bytes | QoS=1
+2026-05-22T02:23:09.004Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=11 | latência=1 ms
+2026-05-22T02:23:09.503Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=11 | tmp=29.43 | hum=69.2 | pres=1012.74 | co2=415.6 | uv=0.0 | rssi=-41
+2026-05-22T02:23:09.504Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=11 | 180 bytes | {"id":"estacao_01","ts":"2026-05-22T02:23:09.503Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.43,"hum":69.2,"pres":1012.74,"co2":415.6,"uv":0.0,"rssi":-41,"seq":11}
+2026-05-22T02:23:09.505Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=12 | topic=ambiente/estacao/estacao_01/telemetria | 180 bytes | QoS=1
+2026-05-22T02:23:09.507Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=12 | latência=2 ms
+2026-05-22T02:23:10.006Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=12 | tmp=28.39 | hum=71.5 | pres=1012.82 | co2=413.7 | uv=0.0 | rssi=-48
+2026-05-22T02:23:10.007Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=12 | 180 bytes | {"id":"estacao_01","ts":"2026-05-22T02:23:10.005Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.39,"hum":71.5,"pres":1012.82,"co2":413.7,"uv":0.0,"rssi":-48,"seq":12}
+2026-05-22T02:23:10.007Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=13 | topic=ambiente/estacao/estacao_01/telemetria | 180 bytes | QoS=1
+2026-05-22T02:23:10.009Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=13 | latência=2 ms
+2026-05-22T02:23:10.517Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Status publicado: online=false
+2026-05-22T02:23:10.519Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Desconectado graciosamente.
+2026-05-22T02:24:25.557Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station.properties
+2026-05-22T02:24:25.559Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station-local.properties
+2026-05-22T02:24:25.559Z [INFO ] [config.AppConfig    ] [Config] station-local.properties carregado — sobrescrevendo valores base.
+2026-05-22T02:24:25.560Z [INFO ] [config.AppConfig    ] ╔══════════════════════════════════════════╗
+2026-05-22T02:24:25.561Z [INFO ] [config.AppConfig    ] ║       Configuração Carregada             ║
+2026-05-22T02:24:25.561Z [INFO ] [config.AppConfig    ] ╠══════════════════════════════════════════╣
+2026-05-22T02:24:25.561Z [INFO ] [config.AppConfig    ] ║ Estação ID : estacao_01
+2026-05-22T02:24:25.561Z [INFO ] [config.AppConfig    ] ║ Broker     : localhost:1883
+2026-05-22T02:24:25.561Z [INFO ] [config.AppConfig    ] ║ Tópico     : ambiente/estacao/estacao_01/telemetria
+2026-05-22T02:24:25.561Z [INFO ] [config.AppConfig    ] ║ Status     : ambiente/estacao/estacao_01/status
+2026-05-22T02:24:25.561Z [INFO ] [config.AppConfig    ] ║ Intervalo  : 10000 ms
+2026-05-22T02:24:25.561Z [INFO ] [config.AppConfig    ] ║ QoS        : 1
+2026-05-22T02:24:25.561Z [INFO ] [config.AppConfig    ] ║ Lat/Lon    : -5.207645788981328, -37.32216460818565
+2026-05-22T02:24:25.562Z [INFO ] [config.AppConfig    ] ║ Seed       : 42
+2026-05-22T02:24:25.562Z [INFO ] [config.AppConfig    ] ╚══════════════════════════════════════════╝
+2026-05-22T02:24:25.562Z [INFO ] [sensor.SensorSim    ] [Sensor] Inicializado | seed=42 | temp_base=29.0°C | hum_base=71.0%
+2026-05-22T02:24:25.741Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] LWT configurado: ambiente/estacao/estacao_01/status
+2026-05-22T02:24:25.742Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Conectando ao broker: tcp://localhost:1883 | clientId: estacao_01_1779416665677
+2026-05-22T02:24:26.058Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Conectado com sucesso!
+2026-05-22T02:24:26.058Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] connectComplete (conexão inicial): tcp://localhost:1883
+2026-05-22T02:24:26.062Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Status publicado: online=true
+2026-05-22T02:24:26.395Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=1 | tmp=29.46 | hum=71.5 | pres=1012.37 | co2=412.2 | uv=0.0 | rssi=-50
+2026-05-22T02:24:26.412Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=1 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:24:26.394Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.46,"hum":71.5,"pres":1012.37,"co2":412.2,"uv":0.0,"rssi":-50,"seq":1}
+2026-05-22T02:24:26.412Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=2 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:24:26.413Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=2 | latência=1 ms
+2026-05-22T02:24:26.454Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Status publicado: online=false
+2026-05-22T02:24:26.455Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Desconectado graciosamente.
+2026-05-22T02:24:26.466Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station.properties
+2026-05-22T02:24:26.467Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station-local.properties
+2026-05-22T02:24:26.467Z [INFO ] [config.AppConfig    ] [Config] station-local.properties carregado — sobrescrevendo valores base.
+2026-05-22T02:24:26.467Z [INFO ] [config.AppConfig    ] ╔══════════════════════════════════════════╗
+2026-05-22T02:24:26.467Z [INFO ] [config.AppConfig    ] ║       Configuração Carregada             ║
+2026-05-22T02:24:26.467Z [INFO ] [config.AppConfig    ] ╠══════════════════════════════════════════╣
+2026-05-22T02:24:26.467Z [INFO ] [config.AppConfig    ] ║ Estação ID : estacao_01
+2026-05-22T02:24:26.468Z [INFO ] [config.AppConfig    ] ║ Broker     : localhost:1883
+2026-05-22T02:24:26.468Z [INFO ] [config.AppConfig    ] ║ Tópico     : ambiente/estacao/estacao_01/telemetria
+2026-05-22T02:24:26.468Z [INFO ] [config.AppConfig    ] ║ Status     : ambiente/estacao/estacao_01/status
+2026-05-22T02:24:26.468Z [INFO ] [config.AppConfig    ] ║ Intervalo  : 10000 ms
+2026-05-22T02:24:26.468Z [INFO ] [config.AppConfig    ] ║ QoS        : 1
+2026-05-22T02:24:26.468Z [INFO ] [config.AppConfig    ] ║ Lat/Lon    : -5.207645788981328, -37.32216460818565
+2026-05-22T02:24:26.468Z [INFO ] [config.AppConfig    ] ║ Seed       : 42
+2026-05-22T02:24:26.468Z [INFO ] [config.AppConfig    ] ╚══════════════════════════════════════════╝
+2026-05-22T02:24:26.468Z [INFO ] [sensor.SensorSim    ] [Sensor] Inicializado | seed=42 | temp_base=29.0°C | hum_base=71.0%
+2026-05-22T02:24:26.470Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] LWT configurado: ambiente/estacao/estacao_01/status
+2026-05-22T02:24:26.470Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Conectando ao broker: tcp://localhost:1883 | clientId: estacao_01_1779416666468
+2026-05-22T02:24:26.774Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] connectComplete (conexão inicial): tcp://localhost:1883
+2026-05-22T02:24:26.775Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Conectado com sucesso!
+2026-05-22T02:24:26.776Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Status publicado: online=true
+2026-05-22T02:24:27.081Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=1 | tmp=29.46 | hum=71.5 | pres=1012.37 | co2=412.2 | uv=0.0 | rssi=-50
+2026-05-22T02:24:27.083Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=1 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:24:27.081Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.46,"hum":71.5,"pres":1012.37,"co2":412.2,"uv":0.0,"rssi":-50,"seq":1}
+2026-05-22T02:24:27.084Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=2 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:24:27.085Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=2 | latência=1 ms
+2026-05-22T02:24:27.584Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=2 | tmp=29.27 | hum=70.2 | pres=1012.24 | co2=414.5 | uv=0.0 | rssi=-41
+2026-05-22T02:24:27.585Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=2 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:24:27.584Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.27,"hum":70.2,"pres":1012.24,"co2":414.5,"uv":0.0,"rssi":-41,"seq":2}
+2026-05-22T02:24:27.585Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=3 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:24:27.586Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=3 | latência=1 ms
+2026-05-22T02:24:28.086Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=3 | tmp=29.32 | hum=70.7 | pres=1013.08 | co2=413.4 | uv=0.0 | rssi=-61
+2026-05-22T02:24:28.086Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=3 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:24:28.085Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.32,"hum":70.7,"pres":1013.08,"co2":413.4,"uv":0.0,"rssi":-61,"seq":3}
+2026-05-22T02:24:28.086Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=4 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:24:28.090Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=4 | latência=4 ms
+2026-05-22T02:24:28.587Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=4 | tmp=29.14 | hum=70.5 | pres=1012.82 | co2=412.0 | uv=0.0 | rssi=-50
+2026-05-22T02:24:28.588Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=4 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:24:28.587Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.14,"hum":70.5,"pres":1012.82,"co2":412.0,"uv":0.0,"rssi":-50,"seq":4}
+2026-05-22T02:24:28.588Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=5 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:24:28.590Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=5 | latência=2 ms
+2026-05-22T02:24:29.089Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=5 | tmp=29.62 | hum=71.0 | pres=1012.8 | co2=418.8 | uv=0.0 | rssi=-54
+2026-05-22T02:24:29.089Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=5 | 178 bytes | {"id":"estacao_01","ts":"2026-05-22T02:24:29.089Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.62,"hum":71.0,"pres":1012.8,"co2":418.8,"uv":0.0,"rssi":-54,"seq":5}
+2026-05-22T02:24:29.089Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=6 | topic=ambiente/estacao/estacao_01/telemetria | 178 bytes | QoS=1
+2026-05-22T02:24:29.090Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=6 | latência=1 ms
+2026-05-22T02:24:29.590Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=6 | tmp=28.97 | hum=72.0 | pres=1012.56 | co2=414.6 | uv=0.0 | rssi=-66
+2026-05-22T02:24:29.591Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=6 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:24:29.590Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.97,"hum":72.0,"pres":1012.56,"co2":414.6,"uv":0.0,"rssi":-66,"seq":6}
+2026-05-22T02:24:29.592Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=7 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:24:29.593Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=7 | latência=2 ms
+2026-05-22T02:24:30.092Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=7 | tmp=29.57 | hum=69.6 | pres=1012.07 | co2=412.7 | uv=0.0 | rssi=-72
+2026-05-22T02:24:30.093Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=7 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:24:30.092Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.57,"hum":69.6,"pres":1012.07,"co2":412.7,"uv":0.0,"rssi":-72,"seq":7}
+2026-05-22T02:24:30.094Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=8 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:24:30.095Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=8 | latência=1 ms
+2026-05-22T02:24:30.595Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=8 | tmp=28.35 | hum=71.2 | pres=1013.04 | co2=414.3 | uv=0.0 | rssi=-50
+2026-05-22T02:24:30.596Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=8 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:24:30.595Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.35,"hum":71.2,"pres":1013.04,"co2":414.3,"uv":0.0,"rssi":-50,"seq":8}
+2026-05-22T02:24:30.596Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=9 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:24:30.598Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=9 | latência=2 ms
+2026-05-22T02:24:31.097Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=9 | tmp=28.87 | hum=69.6 | pres=1012.51 | co2=413.7 | uv=0.0 | rssi=-44
+2026-05-22T02:24:31.098Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=9 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:24:31.097Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.87,"hum":69.6,"pres":1012.51,"co2":413.7,"uv":0.0,"rssi":-44,"seq":9}
+2026-05-22T02:24:31.099Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=10 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:24:31.100Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=10 | latência=2 ms
+2026-05-22T02:24:31.599Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=10 | tmp=28.98 | hum=70.1 | pres=1013.21 | co2=417.9 | uv=0.0 | rssi=-60
+2026-05-22T02:24:31.600Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=10 | 180 bytes | {"id":"estacao_01","ts":"2026-05-22T02:24:31.599Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.98,"hum":70.1,"pres":1013.21,"co2":417.9,"uv":0.0,"rssi":-60,"seq":10}
+2026-05-22T02:24:31.601Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=11 | topic=ambiente/estacao/estacao_01/telemetria | 180 bytes | QoS=1
+2026-05-22T02:24:31.602Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=11 | latência=1 ms
+2026-05-22T02:24:32.102Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=11 | tmp=29.43 | hum=69.2 | pres=1012.75 | co2=415.6 | uv=0.0 | rssi=-41
+2026-05-22T02:24:32.103Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=11 | 180 bytes | {"id":"estacao_01","ts":"2026-05-22T02:24:32.101Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.43,"hum":69.2,"pres":1012.75,"co2":415.6,"uv":0.0,"rssi":-41,"seq":11}
+2026-05-22T02:24:32.103Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=12 | topic=ambiente/estacao/estacao_01/telemetria | 180 bytes | QoS=1
+2026-05-22T02:24:32.104Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=12 | latência=1 ms
+2026-05-22T02:24:32.604Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=12 | tmp=28.39 | hum=71.5 | pres=1012.82 | co2=413.7 | uv=0.0 | rssi=-48
+2026-05-22T02:24:32.604Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=12 | 180 bytes | {"id":"estacao_01","ts":"2026-05-22T02:24:32.603Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.39,"hum":71.5,"pres":1012.82,"co2":413.7,"uv":0.0,"rssi":-48,"seq":12}
+2026-05-22T02:24:32.604Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=13 | topic=ambiente/estacao/estacao_01/telemetria | 180 bytes | QoS=1
+2026-05-22T02:24:32.605Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=13 | latência=1 ms
+2026-05-22T02:24:33.115Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Status publicado: online=false
+2026-05-22T02:24:33.116Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Desconectado graciosamente.
+2026-05-22T02:25:38.212Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station.properties
+2026-05-22T02:25:38.213Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station-local.properties
+2026-05-22T02:25:38.213Z [INFO ] [config.AppConfig    ] [Config] station-local.properties carregado — sobrescrevendo valores base.
+2026-05-22T02:25:38.214Z [INFO ] [config.AppConfig    ] ╔══════════════════════════════════════════╗
+2026-05-22T02:25:38.214Z [INFO ] [config.AppConfig    ] ║       Configuração Carregada             ║
+2026-05-22T02:25:38.214Z [INFO ] [config.AppConfig    ] ╠══════════════════════════════════════════╣
+2026-05-22T02:25:38.214Z [INFO ] [config.AppConfig    ] ║ Estação ID : estacao_01
+2026-05-22T02:25:38.214Z [INFO ] [config.AppConfig    ] ║ Broker     : localhost:1883
+2026-05-22T02:25:38.214Z [INFO ] [config.AppConfig    ] ║ Tópico     : ambiente/estacao/estacao_01/telemetria
+2026-05-22T02:25:38.214Z [INFO ] [config.AppConfig    ] ║ Status     : ambiente/estacao/estacao_01/status
+2026-05-22T02:25:38.214Z [INFO ] [config.AppConfig    ] ║ Intervalo  : 10000 ms
+2026-05-22T02:25:38.215Z [INFO ] [config.AppConfig    ] ║ QoS        : 1
+2026-05-22T02:25:38.215Z [INFO ] [config.AppConfig    ] ║ Lat/Lon    : -5.207645788981328, -37.32216460818565
+2026-05-22T02:25:38.215Z [INFO ] [config.AppConfig    ] ║ Seed       : 42
+2026-05-22T02:25:38.215Z [INFO ] [config.AppConfig    ] ╚══════════════════════════════════════════╝
+2026-05-22T02:25:38.215Z [INFO ] [sensor.SensorSim    ] [Sensor] Inicializado | seed=42 | temp_base=29.0°C | hum_base=71.0%
+2026-05-22T02:25:38.352Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] LWT configurado: ambiente/estacao/estacao_01/status
+2026-05-22T02:25:38.352Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Conectando ao broker: tcp://localhost:1883 | clientId: estacao_01_1779416738295
+2026-05-22T02:25:38.669Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] connectComplete (conexão inicial): tcp://localhost:1883
+2026-05-22T02:25:38.669Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Conectado com sucesso!
+2026-05-22T02:25:38.674Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Status publicado: online=true
+2026-05-22T02:25:38.999Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=1 | tmp=29.46 | hum=71.5 | pres=1012.38 | co2=412.2 | uv=0.0 | rssi=-50
+2026-05-22T02:25:39.018Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=1 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:25:38.999Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.46,"hum":71.5,"pres":1012.38,"co2":412.2,"uv":0.0,"rssi":-50,"seq":1}
+2026-05-22T02:25:39.018Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=2 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:25:39.019Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=2 | latência=1 ms
+2026-05-22T02:25:39.319Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=2 | tmp=29.27 | hum=70.2 | pres=1012.24 | co2=414.5 | uv=0.0 | rssi=-41
+2026-05-22T02:25:39.320Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=2 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:25:39.318Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.27,"hum":70.2,"pres":1012.24,"co2":414.5,"uv":0.0,"rssi":-41,"seq":2}
+2026-05-22T02:25:39.320Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=3 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:25:39.322Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=3 | latência=2 ms
+2026-05-22T02:25:39.621Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=3 | tmp=29.32 | hum=70.7 | pres=1013.08 | co2=413.4 | uv=0.0 | rssi=-61
+2026-05-22T02:25:39.622Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=3 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:25:39.621Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.32,"hum":70.7,"pres":1013.08,"co2":413.4,"uv":0.0,"rssi":-61,"seq":3}
+2026-05-22T02:25:39.623Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=4 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:25:39.624Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=4 | latência=1 ms
+2026-05-22T02:25:39.945Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Status publicado: online=false
+2026-05-22T02:25:39.945Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Desconectado graciosamente.
+2026-05-22T02:26:37.842Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station.properties
+2026-05-22T02:26:37.844Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station-local.properties
+2026-05-22T02:26:37.844Z [INFO ] [config.AppConfig    ] [Config] station-local.properties carregado — sobrescrevendo valores base.
+2026-05-22T02:26:37.845Z [INFO ] [config.AppConfig    ] ╔══════════════════════════════════════════╗
+2026-05-22T02:26:37.845Z [INFO ] [config.AppConfig    ] ║       Configuração Carregada             ║
+2026-05-22T02:26:37.845Z [INFO ] [config.AppConfig    ] ╠══════════════════════════════════════════╣
+2026-05-22T02:26:37.845Z [INFO ] [config.AppConfig    ] ║ Estação ID : estacao_01
+2026-05-22T02:26:37.845Z [INFO ] [config.AppConfig    ] ║ Broker     : localhost:1883
+2026-05-22T02:26:37.845Z [INFO ] [config.AppConfig    ] ║ Tópico     : ambiente/estacao/estacao_01/telemetria
+2026-05-22T02:26:37.845Z [INFO ] [config.AppConfig    ] ║ Status     : ambiente/estacao/estacao_01/status
+2026-05-22T02:26:37.845Z [INFO ] [config.AppConfig    ] ║ Intervalo  : 10000 ms
+2026-05-22T02:26:37.845Z [INFO ] [config.AppConfig    ] ║ QoS        : 1
+2026-05-22T02:26:37.845Z [INFO ] [config.AppConfig    ] ║ Lat/Lon    : -5.207645788981328, -37.32216460818565
+2026-05-22T02:26:37.846Z [INFO ] [config.AppConfig    ] ║ Seed       : 42
+2026-05-22T02:26:37.846Z [INFO ] [config.AppConfig    ] ╚══════════════════════════════════════════╝
+2026-05-22T02:26:37.846Z [INFO ] [sensor.SensorSim    ] [Sensor] Inicializado | seed=42 | temp_base=29.0°C | hum_base=71.0%
+2026-05-22T02:26:37.993Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] LWT configurado: ambiente/estacao/estacao_01/status
+2026-05-22T02:26:37.994Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Conectando ao broker: tcp://localhost:1883 | clientId: estacao_01_1779416797936
+2026-05-22T02:26:38.310Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Conectado com sucesso!
+2026-05-22T02:26:38.310Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] connectComplete (conexão inicial): tcp://localhost:1883
+2026-05-22T02:26:38.314Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Status publicado: online=true
+2026-05-22T02:26:38.330Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=1 | tmp=29.46 | hum=71.5 | pres=1012.38 | co2=412.2 | uv=0.0 | rssi=-50
+2026-05-22T02:26:38.347Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=1 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:26:38.329Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.46,"hum":71.5,"pres":1012.38,"co2":412.2,"uv":0.0,"rssi":-50,"seq":1}
+2026-05-22T02:26:38.347Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=2 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:26:38.348Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=2 | latência=1 ms
+2026-05-22T02:26:38.648Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=2 | tmp=29.27 | hum=70.2 | pres=1012.25 | co2=414.5 | uv=0.0 | rssi=-41
+2026-05-22T02:26:38.649Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=2 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:26:38.647Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.27,"hum":70.2,"pres":1012.25,"co2":414.5,"uv":0.0,"rssi":-41,"seq":2}
+2026-05-22T02:26:38.649Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=3 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:26:38.651Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=3 | latência=2 ms
+2026-05-22T02:26:38.950Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=3 | tmp=29.32 | hum=70.7 | pres=1013.09 | co2=413.4 | uv=0.0 | rssi=-61
+2026-05-22T02:26:38.951Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=3 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:26:38.950Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.32,"hum":70.7,"pres":1013.09,"co2":413.4,"uv":0.0,"rssi":-61,"seq":3}
+2026-05-22T02:26:38.952Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=4 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:26:38.953Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=4 | latência=1 ms
+2026-05-22T02:26:39.253Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=4 | tmp=29.14 | hum=70.5 | pres=1012.83 | co2=412.0 | uv=0.0 | rssi=-50
+2026-05-22T02:26:39.254Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=4 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:26:39.252Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.14,"hum":70.5,"pres":1012.83,"co2":412.0,"uv":0.0,"rssi":-50,"seq":4}
+2026-05-22T02:26:39.254Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=5 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:26:39.255Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=5 | latência=1 ms
+2026-05-22T02:26:39.555Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=5 | tmp=29.62 | hum=71.0 | pres=1012.81 | co2=418.8 | uv=0.0 | rssi=-54
+2026-05-22T02:26:39.556Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=5 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:26:39.555Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.62,"hum":71.0,"pres":1012.81,"co2":418.8,"uv":0.0,"rssi":-54,"seq":5}
+2026-05-22T02:26:39.557Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=6 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:26:39.558Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=6 | latência=2 ms
+2026-05-22T02:26:39.857Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=6 | tmp=28.97 | hum=72.0 | pres=1012.57 | co2=414.6 | uv=0.0 | rssi=-66
+2026-05-22T02:26:39.858Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=6 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:26:39.857Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.97,"hum":72.0,"pres":1012.57,"co2":414.6,"uv":0.0,"rssi":-66,"seq":6}
+2026-05-22T02:26:39.859Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=7 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:26:39.860Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=7 | latência=1 ms
+2026-05-22T02:26:40.160Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=7 | tmp=29.57 | hum=69.6 | pres=1012.08 | co2=412.7 | uv=0.0 | rssi=-72
+2026-05-22T02:26:40.161Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=7 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:26:40.159Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.57,"hum":69.6,"pres":1012.08,"co2":412.7,"uv":0.0,"rssi":-72,"seq":7}
+2026-05-22T02:26:40.161Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=8 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:26:40.162Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=8 | latência=1 ms
+2026-05-22T02:26:40.462Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=8 | tmp=28.35 | hum=71.2 | pres=1013.05 | co2=414.3 | uv=0.0 | rssi=-50
+2026-05-22T02:26:40.463Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=8 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:26:40.461Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.35,"hum":71.2,"pres":1013.05,"co2":414.3,"uv":0.0,"rssi":-50,"seq":8}
+2026-05-22T02:26:40.463Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=9 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:26:40.465Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=9 | latência=2 ms
+2026-05-22T02:26:40.764Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=9 | tmp=28.87 | hum=69.6 | pres=1012.52 | co2=413.7 | uv=0.0 | rssi=-44
+2026-05-22T02:26:40.765Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=9 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:26:40.764Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.87,"hum":69.6,"pres":1012.52,"co2":413.7,"uv":0.0,"rssi":-44,"seq":9}
+2026-05-22T02:26:40.766Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=10 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:26:40.768Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=10 | latência=2 ms
+2026-05-22T02:26:41.067Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=10 | tmp=28.98 | hum=70.1 | pres=1013.22 | co2=417.9 | uv=0.0 | rssi=-60
+2026-05-22T02:26:41.068Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=10 | 180 bytes | {"id":"estacao_01","ts":"2026-05-22T02:26:41.067Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.98,"hum":70.1,"pres":1013.22,"co2":417.9,"uv":0.0,"rssi":-60,"seq":10}
+2026-05-22T02:26:41.069Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=11 | topic=ambiente/estacao/estacao_01/telemetria | 180 bytes | QoS=1
+2026-05-22T02:26:41.070Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=11 | latência=2 ms
+2026-05-22T02:26:43.382Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Status publicado: online=false
+2026-05-22T02:26:43.385Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Desconectado graciosamente.
+2026-05-22T02:26:58.921Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station.properties
+2026-05-22T02:26:58.923Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station-local.properties
+2026-05-22T02:26:58.923Z [INFO ] [config.AppConfig    ] [Config] station-local.properties carregado — sobrescrevendo valores base.
+2026-05-22T02:26:58.924Z [INFO ] [config.AppConfig    ] ╔══════════════════════════════════════════╗
+2026-05-22T02:26:58.924Z [INFO ] [config.AppConfig    ] ║       Configuração Carregada             ║
+2026-05-22T02:26:58.924Z [INFO ] [config.AppConfig    ] ╠══════════════════════════════════════════╣
+2026-05-22T02:26:58.925Z [INFO ] [config.AppConfig    ] ║ Estação ID : estacao_01
+2026-05-22T02:26:58.925Z [INFO ] [config.AppConfig    ] ║ Broker     : localhost:1883
+2026-05-22T02:26:58.925Z [INFO ] [config.AppConfig    ] ║ Tópico     : ambiente/estacao/estacao_01/telemetria
+2026-05-22T02:26:58.925Z [INFO ] [config.AppConfig    ] ║ Status     : ambiente/estacao/estacao_01/status
+2026-05-22T02:26:58.925Z [INFO ] [config.AppConfig    ] ║ Intervalo  : 10000 ms
+2026-05-22T02:26:58.925Z [INFO ] [config.AppConfig    ] ║ QoS        : 1
+2026-05-22T02:26:58.925Z [INFO ] [config.AppConfig    ] ║ Lat/Lon    : -5.207645788981328, -37.32216460818565
+2026-05-22T02:26:58.926Z [INFO ] [config.AppConfig    ] ║ Seed       : 42
+2026-05-22T02:26:58.926Z [INFO ] [config.AppConfig    ] ╚══════════════════════════════════════════╝
+2026-05-22T02:26:58.926Z [INFO ] [sensor.SensorSim    ] [Sensor] Inicializado | seed=42 | temp_base=29.0°C | hum_base=71.0%
+2026-05-22T02:26:59.061Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] LWT configurado: ambiente/estacao/estacao_01/status
+2026-05-22T02:26:59.061Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Conectando ao broker: tcp://localhost:1883 | clientId: estacao_01_1779416819012
+2026-05-22T02:26:59.375Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Conectado com sucesso!
+2026-05-22T02:26:59.375Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] connectComplete (conexão inicial): tcp://localhost:1883
+2026-05-22T02:26:59.376Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Status publicado: online=true
+2026-05-22T02:26:59.695Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=1 | tmp=29.46 | hum=71.5 | pres=1012.38 | co2=412.2 | uv=0.0 | rssi=-50
+2026-05-22T02:26:59.717Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=1 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:26:59.694Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.46,"hum":71.5,"pres":1012.38,"co2":412.2,"uv":0.0,"rssi":-50,"seq":1}
+2026-05-22T02:26:59.717Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=2 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:26:59.718Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=2 | latência=1 ms
+2026-05-22T02:26:59.749Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Status publicado: online=false
+2026-05-22T02:26:59.749Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Desconectado graciosamente.
+2026-05-22T02:26:59.757Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station.properties
+2026-05-22T02:26:59.757Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station-local.properties
+2026-05-22T02:26:59.757Z [INFO ] [config.AppConfig    ] [Config] station-local.properties carregado — sobrescrevendo valores base.
+2026-05-22T02:26:59.757Z [INFO ] [config.AppConfig    ] ╔══════════════════════════════════════════╗
+2026-05-22T02:26:59.757Z [INFO ] [config.AppConfig    ] ║       Configuração Carregada             ║
+2026-05-22T02:26:59.757Z [INFO ] [config.AppConfig    ] ╠══════════════════════════════════════════╣
+2026-05-22T02:26:59.758Z [INFO ] [config.AppConfig    ] ║ Estação ID : estacao_01
+2026-05-22T02:26:59.758Z [INFO ] [config.AppConfig    ] ║ Broker     : localhost:1883
+2026-05-22T02:26:59.758Z [INFO ] [config.AppConfig    ] ║ Tópico     : ambiente/estacao/estacao_01/telemetria
+2026-05-22T02:26:59.758Z [INFO ] [config.AppConfig    ] ║ Status     : ambiente/estacao/estacao_01/status
+2026-05-22T02:26:59.758Z [INFO ] [config.AppConfig    ] ║ Intervalo  : 10000 ms
+2026-05-22T02:26:59.758Z [INFO ] [config.AppConfig    ] ║ QoS        : 1
+2026-05-22T02:26:59.758Z [INFO ] [config.AppConfig    ] ║ Lat/Lon    : -5.207645788981328, -37.32216460818565
+2026-05-22T02:26:59.758Z [INFO ] [config.AppConfig    ] ║ Seed       : 42
+2026-05-22T02:26:59.758Z [INFO ] [config.AppConfig    ] ╚══════════════════════════════════════════╝
+2026-05-22T02:26:59.758Z [INFO ] [sensor.SensorSim    ] [Sensor] Inicializado | seed=42 | temp_base=29.0°C | hum_base=71.0%
+2026-05-22T02:26:59.759Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] LWT configurado: ambiente/estacao/estacao_01/status
+2026-05-22T02:26:59.760Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Conectando ao broker: tcp://localhost:1883 | clientId: estacao_01_1779416819758
+2026-05-22T02:27:00.062Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Conectado com sucesso!
+2026-05-22T02:27:00.062Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] connectComplete (conexão inicial): tcp://localhost:1883
+2026-05-22T02:27:00.064Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Status publicado: online=true
+2026-05-22T02:27:00.371Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=1 | tmp=29.46 | hum=71.5 | pres=1012.38 | co2=412.2 | uv=0.0 | rssi=-50
+2026-05-22T02:27:00.378Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=1 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:27:00.371Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.46,"hum":71.5,"pres":1012.38,"co2":412.2,"uv":0.0,"rssi":-50,"seq":1}
+2026-05-22T02:27:00.379Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=2 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:27:00.381Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=2 | latência=2 ms
+2026-05-22T02:27:00.880Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=2 | tmp=29.27 | hum=70.2 | pres=1012.25 | co2=414.5 | uv=0.0 | rssi=-41
+2026-05-22T02:27:00.882Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=2 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:27:00.880Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.27,"hum":70.2,"pres":1012.25,"co2":414.5,"uv":0.0,"rssi":-41,"seq":2}
+2026-05-22T02:27:00.882Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=3 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:27:00.884Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=3 | latência=2 ms
+2026-05-22T02:27:01.383Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=3 | tmp=29.32 | hum=70.7 | pres=1013.09 | co2=413.4 | uv=0.0 | rssi=-61
+2026-05-22T02:27:01.384Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=3 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:27:01.383Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.32,"hum":70.7,"pres":1013.09,"co2":413.4,"uv":0.0,"rssi":-61,"seq":3}
+2026-05-22T02:27:01.385Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=4 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:27:01.386Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=4 | latência=2 ms
+2026-05-22T02:27:01.885Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=4 | tmp=29.14 | hum=70.5 | pres=1012.83 | co2=412.0 | uv=0.0 | rssi=-50
+2026-05-22T02:27:01.886Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=4 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:27:01.885Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.14,"hum":70.5,"pres":1012.83,"co2":412.0,"uv":0.0,"rssi":-50,"seq":4}
+2026-05-22T02:27:01.887Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=5 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:27:01.889Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=5 | latência=1 ms
+2026-05-22T02:27:02.388Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=5 | tmp=29.62 | hum=71.0 | pres=1012.81 | co2=418.8 | uv=0.0 | rssi=-54
+2026-05-22T02:27:02.389Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=5 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:27:02.388Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.62,"hum":71.0,"pres":1012.81,"co2":418.8,"uv":0.0,"rssi":-54,"seq":5}
+2026-05-22T02:27:02.390Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=6 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:27:02.391Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=6 | latência=1 ms
+2026-05-22T02:27:02.890Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=6 | tmp=28.97 | hum=72.0 | pres=1012.57 | co2=414.6 | uv=0.0 | rssi=-66
+2026-05-22T02:27:02.892Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=6 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:27:02.890Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.97,"hum":72.0,"pres":1012.57,"co2":414.6,"uv":0.0,"rssi":-66,"seq":6}
+2026-05-22T02:27:02.892Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=7 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:27:02.894Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=7 | latência=2 ms
+2026-05-22T02:27:03.393Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=7 | tmp=29.57 | hum=69.6 | pres=1012.08 | co2=412.7 | uv=0.0 | rssi=-72
+2026-05-22T02:27:03.394Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=7 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:27:03.393Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.57,"hum":69.6,"pres":1012.08,"co2":412.7,"uv":0.0,"rssi":-72,"seq":7}
+2026-05-22T02:27:03.394Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=8 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:27:03.396Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=8 | latência=2 ms
+2026-05-22T02:27:03.895Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=8 | tmp=28.35 | hum=71.2 | pres=1013.06 | co2=414.3 | uv=0.0 | rssi=-50
+2026-05-22T02:27:03.896Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=8 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:27:03.895Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.35,"hum":71.2,"pres":1013.06,"co2":414.3,"uv":0.0,"rssi":-50,"seq":8}
+2026-05-22T02:27:03.897Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=9 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:27:03.898Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=9 | latência=1 ms
+2026-05-22T02:27:04.398Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=9 | tmp=28.87 | hum=69.6 | pres=1012.52 | co2=413.7 | uv=0.0 | rssi=-44
+2026-05-22T02:27:04.398Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=9 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:27:04.397Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.87,"hum":69.6,"pres":1012.52,"co2":413.7,"uv":0.0,"rssi":-44,"seq":9}
+2026-05-22T02:27:04.398Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=10 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:27:04.399Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=10 | latência=1 ms
+2026-05-22T02:27:04.898Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=10 | tmp=28.98 | hum=70.1 | pres=1013.23 | co2=417.9 | uv=0.0 | rssi=-60
+2026-05-22T02:27:04.899Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=10 | 180 bytes | {"id":"estacao_01","ts":"2026-05-22T02:27:04.898Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.98,"hum":70.1,"pres":1013.23,"co2":417.9,"uv":0.0,"rssi":-60,"seq":10}
+2026-05-22T02:27:04.899Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=11 | topic=ambiente/estacao/estacao_01/telemetria | 180 bytes | QoS=1
+2026-05-22T02:27:04.899Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=11 | latência=0 ms
+2026-05-22T02:27:05.399Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=11 | tmp=29.43 | hum=69.2 | pres=1012.76 | co2=415.6 | uv=0.0 | rssi=-41
+2026-05-22T02:27:05.400Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=11 | 180 bytes | {"id":"estacao_01","ts":"2026-05-22T02:27:05.399Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.43,"hum":69.2,"pres":1012.76,"co2":415.6,"uv":0.0,"rssi":-41,"seq":11}
+2026-05-22T02:27:05.400Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=12 | topic=ambiente/estacao/estacao_01/telemetria | 180 bytes | QoS=1
+2026-05-22T02:27:05.401Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=12 | latência=1 ms
+2026-05-22T02:27:05.900Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=12 | tmp=28.39 | hum=71.5 | pres=1012.84 | co2=413.7 | uv=0.0 | rssi=-48
+2026-05-22T02:27:05.901Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=12 | 180 bytes | {"id":"estacao_01","ts":"2026-05-22T02:27:05.900Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.39,"hum":71.5,"pres":1012.84,"co2":413.7,"uv":0.0,"rssi":-48,"seq":12}
+2026-05-22T02:27:05.901Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=13 | topic=ambiente/estacao/estacao_01/telemetria | 180 bytes | QoS=1
+2026-05-22T02:27:05.902Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=13 | latência=1 ms
+2026-05-22T02:27:06.405Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Status publicado: online=false
+2026-05-22T02:27:06.405Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Desconectado graciosamente.
+2026-05-22T02:27:06.407Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station.properties
+2026-05-22T02:27:06.407Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station-local.properties
+2026-05-22T02:27:06.408Z [INFO ] [config.AppConfig    ] [Config] station-local.properties carregado — sobrescrevendo valores base.
+2026-05-22T02:27:06.408Z [INFO ] [config.AppConfig    ] ╔══════════════════════════════════════════╗
+2026-05-22T02:27:06.408Z [INFO ] [config.AppConfig    ] ║       Configuração Carregada             ║
+2026-05-22T02:27:06.408Z [INFO ] [config.AppConfig    ] ╠══════════════════════════════════════════╣
+2026-05-22T02:27:06.408Z [INFO ] [config.AppConfig    ] ║ Estação ID : estacao_01
+2026-05-22T02:27:06.408Z [INFO ] [config.AppConfig    ] ║ Broker     : localhost:1883
+2026-05-22T02:27:06.408Z [INFO ] [config.AppConfig    ] ║ Tópico     : ambiente/estacao/estacao_01/telemetria
+2026-05-22T02:27:06.408Z [INFO ] [config.AppConfig    ] ║ Status     : ambiente/estacao/estacao_01/status
+2026-05-22T02:27:06.408Z [INFO ] [config.AppConfig    ] ║ Intervalo  : 10000 ms
+2026-05-22T02:27:06.408Z [INFO ] [config.AppConfig    ] ║ QoS        : 1
+2026-05-22T02:27:06.408Z [INFO ] [config.AppConfig    ] ║ Lat/Lon    : -5.207645788981328, -37.32216460818565
+2026-05-22T02:27:06.408Z [INFO ] [config.AppConfig    ] ║ Seed       : 42
+2026-05-22T02:27:06.408Z [INFO ] [config.AppConfig    ] ╚══════════════════════════════════════════╝
+2026-05-22T02:27:06.408Z [INFO ] [sensor.SensorSim    ] [Sensor] Inicializado | seed=42 | temp_base=29.0°C | hum_base=71.0%
+2026-05-22T02:27:06.410Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] LWT configurado: ambiente/estacao/estacao_01/status
+2026-05-22T02:27:06.410Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Conectando ao broker: tcp://localhost:1883 | clientId: estacao_01_1779416826409
+2026-05-22T02:27:06.713Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] connectComplete (conexão inicial): tcp://localhost:1883
+2026-05-22T02:27:06.713Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Conectado com sucesso!
+2026-05-22T02:27:06.714Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Status publicado: online=true
+2026-05-22T02:27:06.716Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=1 | tmp=29.46 | hum=71.5 | pres=1012.38 | co2=412.2 | uv=0.0 | rssi=-50
+2026-05-22T02:27:06.718Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=1 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:27:06.716Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.46,"hum":71.5,"pres":1012.38,"co2":412.2,"uv":0.0,"rssi":-50,"seq":1}
+2026-05-22T02:27:06.718Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=2 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:27:06.719Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=2 | latência=1 ms
+2026-05-22T02:27:07.019Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=2 | tmp=29.27 | hum=70.2 | pres=1012.25 | co2=414.5 | uv=0.0 | rssi=-41
+2026-05-22T02:27:07.019Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=2 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:27:07.019Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.27,"hum":70.2,"pres":1012.25,"co2":414.5,"uv":0.0,"rssi":-41,"seq":2}
+2026-05-22T02:27:07.020Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=3 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:27:07.020Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=3 | latência=0 ms
+2026-05-22T02:27:07.320Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=3 | tmp=29.32 | hum=70.7 | pres=1013.09 | co2=413.4 | uv=0.0 | rssi=-61
+2026-05-22T02:27:07.321Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=3 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:27:07.320Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.32,"hum":70.7,"pres":1013.09,"co2":413.4,"uv":0.0,"rssi":-61,"seq":3}
+2026-05-22T02:27:07.322Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=4 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:27:07.323Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=4 | latência=1 ms
+2026-05-22T02:27:07.622Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=4 | tmp=29.14 | hum=70.5 | pres=1012.83 | co2=412.0 | uv=0.0 | rssi=-50
+2026-05-22T02:27:07.624Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=4 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:27:07.622Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.14,"hum":70.5,"pres":1012.83,"co2":412.0,"uv":0.0,"rssi":-50,"seq":4}
+2026-05-22T02:27:07.624Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=5 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:27:07.625Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=5 | latência=1 ms
+2026-05-22T02:27:07.924Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=5 | tmp=29.62 | hum=71.0 | pres=1012.81 | co2=418.8 | uv=0.0 | rssi=-54
+2026-05-22T02:27:07.925Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=5 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:27:07.924Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.62,"hum":71.0,"pres":1012.81,"co2":418.8,"uv":0.0,"rssi":-54,"seq":5}
+2026-05-22T02:27:07.926Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=6 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:27:07.927Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=6 | latência=2 ms
+2026-05-22T02:27:08.226Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=6 | tmp=28.97 | hum=72.0 | pres=1012.57 | co2=414.6 | uv=0.0 | rssi=-66
+2026-05-22T02:27:08.227Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=6 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:27:08.226Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.97,"hum":72.0,"pres":1012.57,"co2":414.6,"uv":0.0,"rssi":-66,"seq":6}
+2026-05-22T02:27:08.227Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=7 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:27:08.227Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=7 | latência=0 ms
+2026-05-22T02:27:08.527Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=7 | tmp=29.57 | hum=69.6 | pres=1012.08 | co2=412.7 | uv=0.0 | rssi=-72
+2026-05-22T02:27:08.528Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=7 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:27:08.527Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.57,"hum":69.6,"pres":1012.08,"co2":412.7,"uv":0.0,"rssi":-72,"seq":7}
+2026-05-22T02:27:08.529Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=8 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:27:08.530Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=8 | latência=1 ms
+2026-05-22T02:27:08.830Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=8 | tmp=28.35 | hum=71.2 | pres=1013.06 | co2=414.3 | uv=0.0 | rssi=-50
+2026-05-22T02:27:08.830Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=8 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:27:08.829Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.35,"hum":71.2,"pres":1013.06,"co2":414.3,"uv":0.0,"rssi":-50,"seq":8}
+2026-05-22T02:27:08.831Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=9 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:27:08.832Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=9 | latência=2 ms
+2026-05-22T02:27:09.131Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=9 | tmp=28.87 | hum=69.6 | pres=1012.52 | co2=413.7 | uv=0.0 | rssi=-44
+2026-05-22T02:27:09.132Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=9 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:27:09.131Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.87,"hum":69.6,"pres":1012.52,"co2":413.7,"uv":0.0,"rssi":-44,"seq":9}
+2026-05-22T02:27:09.132Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=10 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:27:09.134Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=10 | latência=2 ms
+2026-05-22T02:27:09.433Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=10 | tmp=28.98 | hum=70.1 | pres=1013.23 | co2=417.9 | uv=0.0 | rssi=-60
+2026-05-22T02:27:09.434Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=10 | 180 bytes | {"id":"estacao_01","ts":"2026-05-22T02:27:09.433Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.98,"hum":70.1,"pres":1013.23,"co2":417.9,"uv":0.0,"rssi":-60,"seq":10}
+2026-05-22T02:27:09.434Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=11 | topic=ambiente/estacao/estacao_01/telemetria | 180 bytes | QoS=1
+2026-05-22T02:27:09.436Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=11 | latência=2 ms
+2026-05-22T02:27:11.740Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Status publicado: online=false
+2026-05-22T02:27:11.742Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Desconectado graciosamente.
+2026-05-22T02:27:11.747Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station.properties
+2026-05-22T02:27:11.747Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station-local.properties
+2026-05-22T02:27:11.748Z [INFO ] [config.AppConfig    ] [Config] station-local.properties carregado — sobrescrevendo valores base.
+2026-05-22T02:27:11.748Z [INFO ] [config.AppConfig    ] ╔══════════════════════════════════════════╗
+2026-05-22T02:27:11.748Z [INFO ] [config.AppConfig    ] ║       Configuração Carregada             ║
+2026-05-22T02:27:11.748Z [INFO ] [config.AppConfig    ] ╠══════════════════════════════════════════╣
+2026-05-22T02:27:11.748Z [INFO ] [config.AppConfig    ] ║ Estação ID : estacao_01
+2026-05-22T02:27:11.749Z [INFO ] [config.AppConfig    ] ║ Broker     : localhost:1883
+2026-05-22T02:27:11.749Z [INFO ] [config.AppConfig    ] ║ Tópico     : ambiente/estacao/estacao_01/telemetria
+2026-05-22T02:27:11.749Z [INFO ] [config.AppConfig    ] ║ Status     : ambiente/estacao/estacao_01/status
+2026-05-22T02:27:11.749Z [INFO ] [config.AppConfig    ] ║ Intervalo  : 10000 ms
+2026-05-22T02:27:11.749Z [INFO ] [config.AppConfig    ] ║ QoS        : 1
+2026-05-22T02:27:11.749Z [INFO ] [config.AppConfig    ] ║ Lat/Lon    : -5.207645788981328, -37.32216460818565
+2026-05-22T02:27:11.749Z [INFO ] [config.AppConfig    ] ║ Seed       : 42
+2026-05-22T02:27:11.750Z [INFO ] [config.AppConfig    ] ╚══════════════════════════════════════════╝
+2026-05-22T02:27:11.750Z [INFO ] [sensor.SensorSim    ] [Sensor] Inicializado | seed=42 | temp_base=29.0°C | hum_base=71.0%
+2026-05-22T02:27:11.754Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] LWT configurado: ambiente/estacao/estacao_01/status
+2026-05-22T02:27:11.754Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Conectando ao broker: tcp://localhost:1883 | clientId: estacao_01_1779416831750
+2026-05-22T02:27:12.059Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Conectado com sucesso!
+2026-05-22T02:27:12.059Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] connectComplete (conexão inicial): tcp://localhost:1883
+2026-05-22T02:27:12.060Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Status publicado: online=true
+2026-05-22T02:27:12.366Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=1 | tmp=29.46 | hum=71.5 | pres=1012.38 | co2=412.2 | uv=0.0 | rssi=-50
+2026-05-22T02:27:12.372Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=1 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:27:12.366Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.46,"hum":71.5,"pres":1012.38,"co2":412.2,"uv":0.0,"rssi":-50,"seq":1}
+2026-05-22T02:27:12.372Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=2 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:27:12.373Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=2 | latência=1 ms
+2026-05-22T02:27:12.673Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=2 | tmp=29.27 | hum=70.2 | pres=1012.25 | co2=414.5 | uv=0.0 | rssi=-41
+2026-05-22T02:27:12.674Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=2 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:27:12.672Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.27,"hum":70.2,"pres":1012.25,"co2":414.5,"uv":0.0,"rssi":-41,"seq":2}
+2026-05-22T02:27:12.674Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=3 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:27:12.675Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=3 | latência=1 ms
+2026-05-22T02:27:12.975Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=3 | tmp=29.32 | hum=70.7 | pres=1013.09 | co2=413.4 | uv=0.0 | rssi=-61
+2026-05-22T02:27:12.975Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=3 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:27:12.974Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.32,"hum":70.7,"pres":1013.09,"co2":413.4,"uv":0.0,"rssi":-61,"seq":3}
+2026-05-22T02:27:12.976Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=4 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:27:12.977Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=4 | latência=2 ms
+2026-05-22T02:27:13.283Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Status publicado: online=false
+2026-05-22T02:27:13.284Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Desconectado graciosamente.
+2026-05-22T02:28:23.889Z [INFO ] [Main                ] ╔══════════════════════════════════════════╗
+2026-05-22T02:28:23.891Z [INFO ] [Main                ] ║    Estação IoT Estacionária — Iniciando  ║
+2026-05-22T02:28:23.892Z [INFO ] [Main                ] ╚══════════════════════════════════════════╝
+2026-05-22T02:28:23.893Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station.properties
+2026-05-22T02:28:23.894Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station-local.properties
+2026-05-22T02:28:23.894Z [INFO ] [config.AppConfig    ] [Config] station-local.properties carregado — sobrescrevendo valores base.
+2026-05-22T02:28:23.896Z [INFO ] [config.AppConfig    ] ╔══════════════════════════════════════════╗
+2026-05-22T02:28:23.896Z [INFO ] [config.AppConfig    ] ║       Configuração Carregada             ║
+2026-05-22T02:28:23.896Z [INFO ] [config.AppConfig    ] ╠══════════════════════════════════════════╣
+2026-05-22T02:28:23.896Z [INFO ] [config.AppConfig    ] ║ Estação ID : estacao_01
+2026-05-22T02:28:23.896Z [INFO ] [config.AppConfig    ] ║ Broker     : 192.168.1.100:1883
+2026-05-22T02:28:23.897Z [INFO ] [config.AppConfig    ] ║ Tópico     : ambiente/estacao/estacao_01/telemetria
+2026-05-22T02:28:23.897Z [INFO ] [config.AppConfig    ] ║ Status     : ambiente/estacao/estacao_01/status
+2026-05-22T02:28:23.897Z [INFO ] [config.AppConfig    ] ║ Intervalo  : 10000 ms
+2026-05-22T02:28:23.897Z [INFO ] [config.AppConfig    ] ║ QoS        : 1
+2026-05-22T02:28:23.897Z [INFO ] [config.AppConfig    ] ║ Lat/Lon    : -5.207645788981328, -37.32216460818565
+2026-05-22T02:28:23.897Z [INFO ] [config.AppConfig    ] ║ Seed       : 42
+2026-05-22T02:28:23.897Z [INFO ] [config.AppConfig    ] ╚══════════════════════════════════════════╝
+2026-05-22T02:28:23.898Z [INFO ] [sensor.SensorSim    ] [Sensor] Inicializado | seed=42 | temp_base=29.0°C | hum_base=71.0%
+2026-05-22T02:28:24.073Z [INFO ] [Main                ] [Main] Conectando ao broker MQTT...
+2026-05-22T02:28:24.133Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] LWT configurado: ambiente/estacao/estacao_01/status
+2026-05-22T02:28:24.134Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Conectando ao broker: tcp://192.168.1.100:1883 | clientId: estacao_01_1779416904073
+2026-05-22T02:29:13.480Z [INFO ] [Main                ] ╔══════════════════════════════════════════╗
+2026-05-22T02:29:13.482Z [INFO ] [Main                ] ║    Estação IoT Estacionária — Iniciando  ║
+2026-05-22T02:29:13.483Z [INFO ] [Main                ] ╚══════════════════════════════════════════╝
+2026-05-22T02:29:13.484Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station.properties
+2026-05-22T02:29:13.486Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station-local.properties
+2026-05-22T02:29:13.487Z [INFO ] [config.AppConfig    ] [Config] station-local.properties carregado — sobrescrevendo valores base.
+2026-05-22T02:29:13.488Z [INFO ] [config.AppConfig    ] ╔══════════════════════════════════════════╗
+2026-05-22T02:29:13.488Z [INFO ] [config.AppConfig    ] ║       Configuração Carregada             ║
+2026-05-22T02:29:13.488Z [INFO ] [config.AppConfig    ] ╠══════════════════════════════════════════╣
+2026-05-22T02:29:13.489Z [INFO ] [config.AppConfig    ] ║ Estação ID : estacao_01
+2026-05-22T02:29:13.490Z [INFO ] [config.AppConfig    ] ║ Broker     : localhost:1883
+2026-05-22T02:29:13.490Z [INFO ] [config.AppConfig    ] ║ Tópico     : ambiente/estacao/estacao_01/telemetria
+2026-05-22T02:29:13.490Z [INFO ] [config.AppConfig    ] ║ Status     : ambiente/estacao/estacao_01/status
+2026-05-22T02:29:13.490Z [INFO ] [config.AppConfig    ] ║ Intervalo  : 10000 ms
+2026-05-22T02:29:13.491Z [INFO ] [config.AppConfig    ] ║ QoS        : 1
+2026-05-22T02:29:13.491Z [INFO ] [config.AppConfig    ] ║ Lat/Lon    : -5.207645788981328, -37.32216460818565
+2026-05-22T02:29:13.491Z [INFO ] [config.AppConfig    ] ║ Seed       : 42
+2026-05-22T02:29:13.491Z [INFO ] [config.AppConfig    ] ╚══════════════════════════════════════════╝
+2026-05-22T02:29:13.492Z [INFO ] [sensor.SensorSim    ] [Sensor] Inicializado | seed=42 | temp_base=29.0°C | hum_base=71.0%
+2026-05-22T02:29:13.659Z [INFO ] [Main                ] [Main] Conectando ao broker MQTT...
+2026-05-22T02:29:13.708Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] LWT configurado: ambiente/estacao/estacao_01/status
+2026-05-22T02:29:13.708Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Conectando ao broker: tcp://localhost:1883 | clientId: estacao_01_1779416953659
+2026-05-22T02:29:14.018Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Conectado com sucesso!
+2026-05-22T02:29:14.018Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] connectComplete (conexão inicial): tcp://localhost:1883
+2026-05-22T02:29:14.019Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Status publicado: online=true
+2026-05-22T02:29:14.020Z [INFO ] [Main                ] [Main] Agendando publicações a cada 10000 ms...
+2026-05-22T02:29:14.021Z [INFO ] [Main                ] [Main] Sistema operacional. Ctrl+C para encerrar.
+2026-05-22T02:29:14.026Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=1 | tmp=29.46 | hum=71.5 | pres=1012.39 | co2=412.2 | uv=0.0 | rssi=-50
+2026-05-22T02:29:14.043Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=1 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:29:14.021Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.46,"hum":71.5,"pres":1012.39,"co2":412.2,"uv":0.0,"rssi":-50,"seq":1}
+2026-05-22T02:29:14.043Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=2 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:29:14.044Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=2 | latência=1 ms
+2026-05-22T02:29:24.021Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=2 | tmp=29.27 | hum=70.2 | pres=1012.26 | co2=414.5 | uv=0.0 | rssi=-41
+2026-05-22T02:29:24.022Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=2 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:29:24.021Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.27,"hum":70.2,"pres":1012.26,"co2":414.5,"uv":0.0,"rssi":-41,"seq":2}
+2026-05-22T02:29:24.023Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=3 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:29:24.025Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=3 | latência=2 ms
+2026-05-22T02:29:34.021Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=3 | tmp=29.32 | hum=70.7 | pres=1013.1 | co2=413.4 | uv=0.0 | rssi=-61
+2026-05-22T02:29:34.022Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=3 | 178 bytes | {"id":"estacao_01","ts":"2026-05-22T02:29:34.021Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.32,"hum":70.7,"pres":1013.1,"co2":413.4,"uv":0.0,"rssi":-61,"seq":3}
+2026-05-22T02:29:34.023Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=4 | topic=ambiente/estacao/estacao_01/telemetria | 178 bytes | QoS=1
+2026-05-22T02:29:34.024Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=4 | latência=1 ms
+2026-05-22T02:29:44.021Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=4 | tmp=29.14 | hum=70.5 | pres=1012.84 | co2=412.0 | uv=0.0 | rssi=-50
+2026-05-22T02:29:44.022Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=4 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:29:44.021Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.14,"hum":70.5,"pres":1012.84,"co2":412.0,"uv":0.0,"rssi":-50,"seq":4}
+2026-05-22T02:29:44.023Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=5 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:29:44.024Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=5 | latência=2 ms
+2026-05-22T02:29:54.021Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=5 | tmp=29.62 | hum=71.0 | pres=1012.82 | co2=418.8 | uv=0.0 | rssi=-54
+2026-05-22T02:29:54.021Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=5 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:29:54.021Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.62,"hum":71.0,"pres":1012.82,"co2":418.8,"uv":0.0,"rssi":-54,"seq":5}
+2026-05-22T02:29:54.022Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=6 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:29:54.023Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=6 | latência=1 ms
+2026-05-22T02:30:04.021Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=6 | tmp=28.97 | hum=72.0 | pres=1012.59 | co2=414.6 | uv=0.0 | rssi=-66
+2026-05-22T02:30:04.022Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=6 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:30:04.021Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.97,"hum":72.0,"pres":1012.59,"co2":414.6,"uv":0.0,"rssi":-66,"seq":6}
+2026-05-22T02:30:04.023Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=7 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:30:04.025Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=7 | latência=1 ms
+2026-05-22T02:30:14.021Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=7 | tmp=29.57 | hum=69.6 | pres=1012.09 | co2=412.7 | uv=0.0 | rssi=-72
+2026-05-22T02:30:14.022Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=7 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:30:14.021Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.57,"hum":69.6,"pres":1012.09,"co2":412.7,"uv":0.0,"rssi":-72,"seq":7}
+2026-05-22T02:30:14.023Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=8 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:30:14.024Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=8 | latência=2 ms
+2026-05-22T02:30:24.021Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=8 | tmp=28.35 | hum=71.2 | pres=1013.07 | co2=414.3 | uv=0.0 | rssi=-50
+2026-05-22T02:30:24.022Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=8 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:30:24.021Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.35,"hum":71.2,"pres":1013.07,"co2":414.3,"uv":0.0,"rssi":-50,"seq":8}
+2026-05-22T02:30:24.023Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=9 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:30:24.024Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=9 | latência=1 ms
+2026-05-22T02:30:34.021Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=9 | tmp=28.87 | hum=69.6 | pres=1012.54 | co2=413.7 | uv=0.0 | rssi=-44
+2026-05-22T02:30:34.021Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=9 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:30:34.021Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.87,"hum":69.6,"pres":1012.54,"co2":413.7,"uv":0.0,"rssi":-44,"seq":9}
+2026-05-22T02:30:34.021Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=10 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:30:34.022Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=10 | latência=1 ms
+2026-05-22T02:30:44.021Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=10 | tmp=28.98 | hum=70.1 | pres=1013.24 | co2=417.9 | uv=0.0 | rssi=-60
+2026-05-22T02:30:44.022Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=10 | 180 bytes | {"id":"estacao_01","ts":"2026-05-22T02:30:44.021Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.98,"hum":70.1,"pres":1013.24,"co2":417.9,"uv":0.0,"rssi":-60,"seq":10}
+2026-05-22T02:30:44.023Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=11 | topic=ambiente/estacao/estacao_01/telemetria | 180 bytes | QoS=1
+2026-05-22T02:30:44.023Z [INFO ] [Main                ] [Main] Ciclo 10 | publicadas=10 | entregues=9 | erros_valid=0 | erros_pub=0 | uptime=90s
+2026-05-22T02:30:44.024Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=11 | latência=2 ms
+2026-05-22T02:30:54.021Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=11 | tmp=29.43 | hum=69.2 | pres=1012.77 | co2=415.6 | uv=0.0 | rssi=-41
+2026-05-22T02:30:54.022Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=11 | 180 bytes | {"id":"estacao_01","ts":"2026-05-22T02:30:54.021Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.43,"hum":69.2,"pres":1012.77,"co2":415.6,"uv":0.0,"rssi":-41,"seq":11}
+2026-05-22T02:30:54.023Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=12 | topic=ambiente/estacao/estacao_01/telemetria | 180 bytes | QoS=1
+2026-05-22T02:30:54.024Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=12 | latência=2 ms
+2026-05-22T02:31:04.021Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=12 | tmp=28.39 | hum=71.5 | pres=1012.86 | co2=413.7 | uv=0.0 | rssi=-48
+2026-05-22T02:31:04.022Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=12 | 180 bytes | {"id":"estacao_01","ts":"2026-05-22T02:31:04.021Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.39,"hum":71.5,"pres":1012.86,"co2":413.7,"uv":0.0,"rssi":-48,"seq":12}
+2026-05-22T02:31:04.023Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=13 | topic=ambiente/estacao/estacao_01/telemetria | 180 bytes | QoS=1
+2026-05-22T02:31:04.024Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=13 | latência=2 ms
+2026-05-22T02:31:14.021Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=13 | tmp=29.88 | hum=70.1 | pres=1012.12 | co2=416.0 | uv=0.0 | rssi=-50
+2026-05-22T02:31:14.022Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=13 | 180 bytes | {"id":"estacao_01","ts":"2026-05-22T02:31:14.021Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.88,"hum":70.1,"pres":1012.12,"co2":416.0,"uv":0.0,"rssi":-50,"seq":13}
+2026-05-22T02:31:14.022Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=14 | topic=ambiente/estacao/estacao_01/telemetria | 180 bytes | QoS=1
+2026-05-22T02:31:14.024Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=14 | latência=2 ms
+2026-05-22T02:31:24.021Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=14 | tmp=28.64 | hum=71.2 | pres=1012.55 | co2=413.7 | uv=0.0 | rssi=-52
+2026-05-22T02:31:24.021Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=14 | 180 bytes | {"id":"estacao_01","ts":"2026-05-22T02:31:24.021Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.64,"hum":71.2,"pres":1012.55,"co2":413.7,"uv":0.0,"rssi":-52,"seq":14}
+2026-05-22T02:31:24.021Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=15 | topic=ambiente/estacao/estacao_01/telemetria | 180 bytes | QoS=1
+2026-05-22T02:31:24.022Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=15 | latência=1 ms
+2026-05-22T02:31:34.021Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=15 | tmp=29.66 | hum=69.8 | pres=1012.87 | co2=414.6 | uv=0.0 | rssi=-47
+2026-05-22T02:31:34.022Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=15 | 180 bytes | {"id":"estacao_01","ts":"2026-05-22T02:31:34.021Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.66,"hum":69.8,"pres":1012.87,"co2":414.6,"uv":0.0,"rssi":-47,"seq":15}
+2026-05-22T02:31:34.022Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=16 | topic=ambiente/estacao/estacao_01/telemetria | 180 bytes | QoS=1
+2026-05-22T02:31:34.024Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=16 | latência=2 ms
+2026-05-22T02:31:44.021Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=16 | tmp=29.49 | hum=71.5 | pres=1012.76 | co2=417.3 | uv=0.0 | rssi=-57
+2026-05-22T02:31:44.022Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=16 | 180 bytes | {"id":"estacao_01","ts":"2026-05-22T02:31:44.021Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.49,"hum":71.5,"pres":1012.76,"co2":417.3,"uv":0.0,"rssi":-57,"seq":16}
+2026-05-22T02:31:44.023Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=17 | topic=ambiente/estacao/estacao_01/telemetria | 180 bytes | QoS=1
+2026-05-22T02:31:44.024Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=17 | latência=2 ms
+2026-05-22T02:31:54.021Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=17 | tmp=29.32 | hum=70.6 | pres=1012.46 | co2=410.4 | uv=0.0 | rssi=-66
+2026-05-22T02:31:54.022Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=17 | 180 bytes | {"id":"estacao_01","ts":"2026-05-22T02:31:54.021Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.32,"hum":70.6,"pres":1012.46,"co2":410.4,"uv":0.0,"rssi":-66,"seq":17}
+2026-05-22T02:31:54.023Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=18 | topic=ambiente/estacao/estacao_01/telemetria | 180 bytes | QoS=1
+2026-05-22T02:31:54.024Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=18 | latência=2 ms
+2026-05-22T02:32:03.491Z [INFO ] [Main                ] [Main] Sinal de encerramento recebido. Desligando...
+2026-05-22T02:32:03.493Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Status publicado: online=false
+2026-05-22T02:32:03.495Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Desconectado graciosamente.
+2026-05-22T02:32:03.495Z [INFO ] [Main                ] ╔══════════════════════════════════════════╗
+2026-05-22T02:32:03.495Z [INFO ] [Main                ] ║         Relatório Final da Sessão        ║
+2026-05-22T02:32:03.495Z [INFO ] [Main                ] ╠══════════════════════════════════════════╣
+2026-05-22T02:32:03.495Z [INFO ] [Main                ] ║ Uptime          : 170 s
+2026-05-22T02:32:03.495Z [INFO ] [Main                ] ║ Ciclos totais   : 17
+2026-05-22T02:32:03.495Z [INFO ] [Main                ] ║ Erros validação : 0
+2026-05-22T02:32:03.495Z [INFO ] [Main                ] ║ Erros publicação: 0
+2026-05-22T02:32:03.495Z [INFO ] [Main                ] ╠══════════════════════════════════════════╣
+2026-05-22T02:32:03.495Z [INFO ] [Main                ] ║ MQTT Publicadas : 17
+2026-05-22T02:32:03.495Z [INFO ] [Main                ] ║ MQTT Entregues  : 17
+2026-05-22T02:32:03.496Z [INFO ] [Main                ] ║ Taxa entrega    : {:.1f}%
+2026-05-22T02:32:03.496Z [INFO ] [Main                ] ║ Latência avg    : {:.1f} ms
+2026-05-22T02:32:03.496Z [INFO ] [Main                ] ║ Desconexões     : 0
+2026-05-22T02:32:03.496Z [INFO ] [Main                ] ╚══════════════════════════════════════════╝
+2026-05-22T02:32:50.490Z [INFO ] [Main                ] ╔══════════════════════════════════════════╗
+2026-05-22T02:32:50.492Z [INFO ] [Main                ] ║    Estação IoT Estacionária — Iniciando  ║
+2026-05-22T02:32:50.492Z [INFO ] [Main                ] ╚══════════════════════════════════════════╝
+2026-05-22T02:32:50.493Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station.properties
+2026-05-22T02:32:50.495Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station-local.properties
+2026-05-22T02:32:50.496Z [INFO ] [config.AppConfig    ] [Config] station-local.properties carregado — sobrescrevendo valores base.
+2026-05-22T02:32:50.496Z [INFO ] [config.AppConfig    ] ╔══════════════════════════════════════════╗
+2026-05-22T02:32:50.496Z [INFO ] [config.AppConfig    ] ║       Configuração Carregada             ║
+2026-05-22T02:32:50.496Z [INFO ] [config.AppConfig    ] ╠══════════════════════════════════════════╣
+2026-05-22T02:32:50.497Z [INFO ] [config.AppConfig    ] ║ Estação ID : estacao_01
+2026-05-22T02:32:50.497Z [INFO ] [config.AppConfig    ] ║ Broker     : localhost:1883
+2026-05-22T02:32:50.497Z [INFO ] [config.AppConfig    ] ║ Tópico     : ambiente/estacao/estacao_01/telemetria
+2026-05-22T02:32:50.497Z [INFO ] [config.AppConfig    ] ║ Status     : ambiente/estacao/estacao_01/status
+2026-05-22T02:32:50.497Z [INFO ] [config.AppConfig    ] ║ Intervalo  : 10000 ms
+2026-05-22T02:32:50.497Z [INFO ] [config.AppConfig    ] ║ QoS        : 1
+2026-05-22T02:32:50.497Z [INFO ] [config.AppConfig    ] ║ Lat/Lon    : -5.207645788981328, -37.32216460818565
+2026-05-22T02:32:50.497Z [INFO ] [config.AppConfig    ] ║ Seed       : 42
+2026-05-22T02:32:50.498Z [INFO ] [config.AppConfig    ] ╚══════════════════════════════════════════╝
+2026-05-22T02:32:50.498Z [INFO ] [sensor.SensorSim    ] [Sensor] Inicializado | seed=42 | temp_base=29.0°C | hum_base=71.0%
+2026-05-22T02:32:50.660Z [INFO ] [Main                ] [Main] Conectando ao broker MQTT...
+2026-05-22T02:32:50.716Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] LWT configurado: ambiente/estacao/estacao_01/status
+2026-05-22T02:32:50.716Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Conectando ao broker: tcp://localhost:1883 | clientId: estacao_01_1779417170661
+2026-05-22T02:32:51.027Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Conectado com sucesso!
+2026-05-22T02:32:51.027Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] connectComplete (conexão inicial): tcp://localhost:1883
+2026-05-22T02:32:51.031Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Status publicado: online=true
+2026-05-22T02:32:51.034Z [INFO ] [Main                ] [Main] Agendando publicações a cada 10000 ms...
+2026-05-22T02:32:51.035Z [INFO ] [Main                ] [Main] Sistema operacional. Ctrl+C para encerrar.
+2026-05-22T02:32:51.037Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=1 | tmp=29.46 | hum=71.5 | pres=1012.41 | co2=412.2 | uv=0.0 | rssi=-50
+2026-05-22T02:32:51.058Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=1 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:32:51.036Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.46,"hum":71.5,"pres":1012.41,"co2":412.2,"uv":0.0,"rssi":-50,"seq":1}
+2026-05-22T02:32:51.059Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=2 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:32:51.059Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=2 | latência=0 ms
+2026-05-22T02:33:01.036Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=2 | tmp=29.27 | hum=70.2 | pres=1012.28 | co2=414.5 | uv=0.0 | rssi=-41
+2026-05-22T02:33:01.037Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=2 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:33:01.035Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.27,"hum":70.2,"pres":1012.28,"co2":414.5,"uv":0.0,"rssi":-41,"seq":2}
+2026-05-22T02:33:01.037Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=3 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:33:01.039Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=3 | latência=2 ms
+2026-05-22T02:33:11.035Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=3 | tmp=29.32 | hum=70.7 | pres=1013.12 | co2=413.4 | uv=0.0 | rssi=-61
+2026-05-22T02:33:11.036Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=3 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:33:11.035Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.32,"hum":70.7,"pres":1013.12,"co2":413.4,"uv":0.0,"rssi":-61,"seq":3}
+2026-05-22T02:33:11.036Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=4 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:33:11.036Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=4 | latência=0 ms
+2026-05-22T02:33:21.035Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=4 | tmp=29.14 | hum=70.5 | pres=1012.86 | co2=412.0 | uv=0.0 | rssi=-50
+2026-05-22T02:33:21.036Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=4 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:33:21.035Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.14,"hum":70.5,"pres":1012.86,"co2":412.0,"uv":0.0,"rssi":-50,"seq":4}
+2026-05-22T02:33:21.037Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=5 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:33:21.039Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=5 | latência=2 ms
+2026-05-22T02:33:31.035Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=5 | tmp=29.62 | hum=71.0 | pres=1012.84 | co2=418.8 | uv=0.0 | rssi=-54
+2026-05-22T02:33:31.036Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=5 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:33:31.035Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.62,"hum":71.0,"pres":1012.84,"co2":418.8,"uv":0.0,"rssi":-54,"seq":5}
+2026-05-22T02:33:31.037Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=6 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:33:31.038Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=6 | latência=1 ms
+2026-05-22T02:33:41.035Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=6 | tmp=28.97 | hum=72.0 | pres=1012.6 | co2=414.6 | uv=0.0 | rssi=-66
+2026-05-22T02:33:41.036Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=6 | 178 bytes | {"id":"estacao_01","ts":"2026-05-22T02:33:41.035Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.97,"hum":72.0,"pres":1012.6,"co2":414.6,"uv":0.0,"rssi":-66,"seq":6}
+2026-05-22T02:33:41.037Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=7 | topic=ambiente/estacao/estacao_01/telemetria | 178 bytes | QoS=1
+2026-05-22T02:33:41.038Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=7 | latência=1 ms
+2026-05-22T02:33:51.035Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=7 | tmp=29.57 | hum=69.6 | pres=1012.11 | co2=412.7 | uv=0.0 | rssi=-72
+2026-05-22T02:33:51.036Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=7 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:33:51.035Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":29.57,"hum":69.6,"pres":1012.11,"co2":412.7,"uv":0.0,"rssi":-72,"seq":7}
+2026-05-22T02:33:51.037Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=8 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:33:51.039Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=8 | latência=2 ms
+2026-05-22T02:34:01.035Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=8 | tmp=28.35 | hum=71.2 | pres=1013.09 | co2=414.3 | uv=0.0 | rssi=-50
+2026-05-22T02:34:01.036Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=8 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:34:01.035Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.35,"hum":71.2,"pres":1013.09,"co2":414.3,"uv":0.0,"rssi":-50,"seq":8}
+2026-05-22T02:34:01.037Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=9 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:34:01.039Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=9 | latência=2 ms
+2026-05-22T02:34:11.035Z [DEBUG] [sensor.SensorSim    ] [Sensor] seq=9 | tmp=28.87 | hum=69.6 | pres=1012.56 | co2=413.7 | uv=0.0 | rssi=-44
+2026-05-22T02:34:11.036Z [DEBUG] [p.PayloadBuilder    ] [Payload] seq=9 | 179 bytes | {"id":"estacao_01","ts":"2026-05-22T02:34:11.035Z","lat":-5.207645788981328,"lon":-37.32216460818565,"tmp":28.87,"hum":69.6,"pres":1012.56,"co2":413.7,"uv":0.0,"rssi":-44,"seq":9}
+2026-05-22T02:34:11.036Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] Publicado | msgId=10 | topic=ambiente/estacao/estacao_01/telemetria | 179 bytes | QoS=1
+2026-05-22T02:34:11.037Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] PUBACK | msgId=10 | latência=0 ms
+2026-05-22T02:34:20.763Z [INFO ] [Main                ] [Main] Sinal de encerramento recebido. Desligando...
+2026-05-22T02:34:20.764Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Status publicado: online=false
+2026-05-22T02:34:20.766Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Desconectado graciosamente.
+2026-05-22T02:34:20.766Z [INFO ] [Main                ] ╔══════════════════════════════════════════╗
+2026-05-22T02:34:20.766Z [INFO ] [Main                ] ║         Relatório Final da Sessão        ║
+2026-05-22T02:34:20.766Z [INFO ] [Main                ] ╠══════════════════════════════════════════╣
+2026-05-22T02:34:20.766Z [INFO ] [Main                ] ║ Uptime          : 90 s
+2026-05-22T02:34:20.766Z [INFO ] [Main                ] ║ Ciclos totais   : 9
+2026-05-22T02:34:20.766Z [INFO ] [Main                ] ║ Erros validação : 0
+2026-05-22T02:34:20.766Z [INFO ] [Main                ] ║ Erros publicação: 0
+2026-05-22T02:34:20.766Z [INFO ] [Main                ] ╠══════════════════════════════════════════╣
+2026-05-22T02:34:20.766Z [INFO ] [Main                ] ║ MQTT Publicadas : 9
+2026-05-22T02:34:20.766Z [INFO ] [Main                ] ║ MQTT Entregues  : 9
+2026-05-22T02:34:20.766Z [INFO ] [Main                ] ║ Taxa entrega    : 100.0
+2026-05-22T02:34:20.766Z [INFO ] [Main                ] ║ Latência avg    : 1.1111111111111112 ms
+2026-05-22T02:34:20.766Z [INFO ] [Main                ] ║ Desconexões     : 0
+2026-05-22T02:34:20.766Z [INFO ] [Main                ] ╚══════════════════════════════════════════╝
+2026-05-22T02:34:47.288Z [INFO ] [Main                ] ╔══════════════════════════════════════════╗
+2026-05-22T02:34:47.290Z [INFO ] [Main                ] ║    Estação IoT Estacionária — Iniciando  ║
+2026-05-22T02:34:47.290Z [INFO ] [Main                ] ╚══════════════════════════════════════════╝
+2026-05-22T02:34:47.292Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station.properties
+2026-05-22T02:34:47.294Z [DEBUG] [config.AppConfig    ] [Config] Carregado: station-local.properties
+2026-05-22T02:34:47.294Z [INFO ] [config.AppConfig    ] [Config] station-local.properties carregado — sobrescrevendo valores base.
+2026-05-22T02:34:47.296Z [INFO ] [config.AppConfig    ] ╔══════════════════════════════════════════╗
+2026-05-22T02:34:47.296Z [INFO ] [config.AppConfig    ] ║       Configuração Carregada             ║
+2026-05-22T02:34:47.297Z [INFO ] [config.AppConfig    ] ╠══════════════════════════════════════════╣
+2026-05-22T02:34:47.297Z [INFO ] [config.AppConfig    ] ║ Estação ID : estacao_01
+2026-05-22T02:34:47.297Z [INFO ] [config.AppConfig    ] ║ Broker     : localhost:1883
+2026-05-22T02:34:47.297Z [INFO ] [config.AppConfig    ] ║ Tópico     : ambiente/estacao/estacao_01/telemetria
+2026-05-22T02:34:47.297Z [INFO ] [config.AppConfig    ] ║ Status     : ambiente/estacao/estacao_01/status
+2026-05-22T02:34:47.298Z [INFO ] [config.AppConfig    ] ║ Intervalo  : 10000 ms
+2026-05-22T02:34:47.298Z [INFO ] [config.AppConfig    ] ║ QoS        : 1
+2026-05-22T02:34:47.298Z [INFO ] [config.AppConfig    ] ║ Lat/Lon    : -5.207645788981328, -37.32216460818565
+2026-05-22T02:34:47.298Z [INFO ] [config.AppConfig    ] ║ Seed       : 42
+2026-05-22T02:34:47.298Z [INFO ] [config.AppConfig    ] ╚══════════════════════════════════════════╝
+2026-05-22T02:34:47.299Z [INFO ] [sensor.SensorSim    ] [Sensor] Inicializado | seed=42 | temp_base=29.0°C | hum_base=71.0%
+2026-05-22T02:34:47.477Z [INFO ] [Main                ] [Main] Conectando ao broker MQTT...
+2026-05-22T02:34:47.533Z [DEBUG] [mqtt.MqttPublisher  ] [MQTT] LWT configurado: ambiente/estacao/estacao_01/status
+2026-05-22T02:34:47.534Z [INFO ] [mqtt.MqttPublisher  ] [MQTT] Conectando ao broker: tcp://localhost:1883 | clientId: estacao_01_1779417287478
+2026-05-22T02:34:47.540Z [ERROR] [Main                ] [Main] Erro fatal na inicialização: Unable to connect to server
+Unable to connect to server (32103) - java.net.ConnectException: Connection refused
+	at org.eclipse.paho.client.mqttv3.internal.TCPNetworkModule.start(TCPNetworkModule.java:80)
+	at org.eclipse.paho.client.mqttv3.internal.ClientComms$ConnectBG.run(ClientComms.java:724)
+	at java.base/java.lang.Thread.run(Thread.java:1474)
+Caused by: java.net.ConnectException: Connection refused
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:639)
+	at java.base/sun.nio.ch.NioSocketImpl.timedFinishConnect(NioSocketImpl.java:543)
+	at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:594)
+	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:284)
+	at java.base/java.net.Socket.connect(Socket.java:659)
+	at org.eclipse.paho.client.mqttv3.internal.TCPNetworkModule.start(TCPNetworkModule.java:74)
+	... 2 common frames omitted
