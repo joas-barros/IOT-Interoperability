@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <!-- ── Padrão de formatação das mensagens de log ── -->
+    <property name="LOG_PATTERN"
+              value="%d{yyyy-MM-dd'T'HH:mm:ss.SSS'Z', UTC} [%-5level] [%-20logger{20}] %msg%n"/>
+
+    <!-- ── Console (stdout → journald no systemd) ── -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!-- ── Arquivo de log rotativo ── -->
+    <!-- Útil durante experimentos para registrar sem o terminal aberto -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/estacao-iot.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- Um arquivo por dia, mantém os últimos 7 dias -->
+            <fileNamePattern>logs/estacao-iot.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>7</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!-- ── Níveis por pacote ── -->
+    <!-- Reduz verbosidade de bibliotecas externas -->
+    <logger name="org.eclipse.paho" level="WARN"/>
+    <logger name="com.fasterxml.jackson" level="WARN"/>
+
+    <!-- Nosso código em DEBUG durante desenvolvimento -->
+    <logger name="config" level="DEBUG"/>
+    <logger name="mqtt" level="DEBUG"/>
+    <logger name="payload" level="DEBUG"/>
+    <logger name="sensor" level="DEBUG"/>
+
+    <!-- ── Root logger ── -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE"/>
+    </root>
+
+</configuration>
