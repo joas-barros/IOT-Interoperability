@@ -39,3 +39,6 @@ build/
 .DS_Store
 
 main/resources/station-local.properties
+
+# conteuco dentro do log
+logs/**/*.log
