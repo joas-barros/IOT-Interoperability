@@ -39,7 +39,7 @@
 #include "led_manager.h"
 
 // Buffer de serialização do payload JSON
-static char jsonBuffer[JSON_BUFFER_SIZE];
+static uint8_t payloadBuf[JSON_BUFFER_SIZE];
 
 // Número de sequência global — incrementado a cada envio tentado
 static uint32_t seqNumber = 0;
@@ -66,7 +66,8 @@ static uint32_t currentInterval() {
 static void printBanner() {
     Serial.println();
     Serial.println("############################################");
-    Serial.println("#  DRONE SIMULADO — ESP32 + CoAP          #");
+    Serial.printf( "#  DRONE SIMULADO — ESP32 + CoAP + %s    \n",
+                   payloadBuilder.modeName());
     Serial.println("#  Projeto: Interoperabilidade IoT         #");
     Serial.println("############################################");
     Serial.printf( "#  ID:      %s\n", DRONE_ID);
@@ -75,6 +76,9 @@ static void printBanner() {
     Serial.printf( "#  Base:    %.6f, %.6f\n", BASE_LAT, BASE_LON);
     Serial.printf( "#  Alt alvo: %.0fm\n", MISSION_ALT_M);
     Serial.printf( "#  Waypoints: %d\n", NUM_WAYPOINTS);
+    Serial.printf( "#  Formato:  %s (Content-Format=%d)\n",
+                   payloadBuilder.modeName(),
+                   payloadBuilder.contentFormat());
     Serial.println("############################################");
     Serial.println();
 }
@@ -228,17 +232,19 @@ void loop() {
         );
 
         // 4b. Monta e valida payload
-        bool payloadOk = payloadBuilder.build(
-            jsonBuffer, sizeof(jsonBuffer),
+        bool ok = payloadBuilder.build(
+            payloadBuf, sizeof(payloadBuf),
             flightState, sd, seqNumber
         );
 
-        if (payloadOk) {
+        if (ok) {
             
             ledManager.flash(flightState.getPhase());
 
             // 4c. Envia via CoAP
-            uint16_t msgId = coapClient.send(jsonBuffer);
+            uint16_t msgId = coapClient.send(payloadBuf,
+                payloadBuilder.lastSize(),
+                payloadBuilder.contentFormat());
 
             if (msgId == 0) {
                 Serial.printf("[MAIN] AVISO: Falha ao enviar seq=%lu\n", seqNumber);

@@ -22,19 +22,25 @@ void CoapClient::begin() {
 }
 
 // ------------------------------------------------------------
-uint16_t CoapClient::send(const char* payload) {
+uint16_t CoapClient::send(const uint8_t* payload,
+                           size_t         payloadLen,
+                           uint16_t       contentFormat) {
     if (!isReady()) {
-        Serial.println("[CoAP] AVISO: Tentativa de envio com mensagem pendente. Ignorado.");
+        Serial.println("[CoAP] AVISO: Mensagem pendente. Ignorado.");
         return 0;
     }
-
-    // Copia payload para buffer interno (para retransmissões)
-    strncpy(_payloadBuf, payload, sizeof(_payloadBuf) - 1);
-    _payloadBuf[sizeof(_payloadBuf) - 1] = '\0';
-
-    _retryCount = 0;
-    _state      = COAP_STATE_WAITING_ACK;
-
+    if (payloadLen == 0 || payloadLen > sizeof(_payloadBuf)) {
+        Serial.printf("[CoAP] ERRO: payloadLen=%d inválido.\n", payloadLen);
+        return 0;
+    }
+ 
+    // Copia payload para buffer interno (necessário para retransmissões)
+    memcpy(_payloadBuf, payload, payloadLen);
+    _payloadLen    = payloadLen;
+    _contentFormat = contentFormat;
+    _retryCount    = 0;
+    _state         = COAP_STATE_WAITING_ACK;
+ 
     return _doSend();
 }
 
@@ -55,13 +61,13 @@ uint16_t CoapClient::_doSend() {
         NULL,                         // Token (não precisamos gerenciar token manual aqui)
         0,                            // Tamanho do token
         (const uint8_t*)_payloadBuf,  // Cast obrigatório do payload para ponteiro de bytes
-        strlen(_payloadBuf)           // Tamanho do payload
+        _payloadLen           // Tamanho do payload
     );
 
     _pendingMsgId = msgId;
 
     Serial.printf("[CoAP] Enviado | msgId=%d | seq=%lu | retry=%d | payload=%d bytes\n",
-                  msgId, _metrics.totalSent, _retryCount, strlen(_payloadBuf));
+                  msgId, _metrics.totalSent, _retryCount, _payloadLen);
 
     return msgId;
 }

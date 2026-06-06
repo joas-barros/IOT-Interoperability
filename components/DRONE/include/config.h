@@ -16,7 +16,7 @@
 // ------------------------------------------------------------
 //  GATEWAY CoAP 
 // ------------------------------------------------------------
-#define GATEWAY_IP        "10.26.45.164"   
+#define GATEWAY_IP        "10.211.243.164"   
 #define GATEWAY_PORT      5683              // porta padrão CoAP
 #define COAP_ENDPOINT     "dados/drone"     // URI do recurso no servidor CoAP
 
@@ -28,6 +28,12 @@
 
 // Backoff multiplicador entre retransmissões (ms base)
 #define COAP_RETRY_BASE_MS     1000
+
+// ── CoAP Content-Format ───────────────────────────────────────
+// Informado no cabeçalho Option do pacote CoAP.
+// O gateway usa este valor para saber como decodificar o payload.
+#define COAP_CONTENT_FORMAT_JSON  50   // application/json
+#define COAP_CONTENT_FORMAT_CBOR  60   // application/cbor (RFC 7049)
 
 // ------------------------------------------------------------
 //  NTP
@@ -162,8 +168,17 @@ static const uint8_t NUM_WAYPOINTS = sizeof(WAYPOINTS) / sizeof(Waypoint);
 #define PRE_MISSION_DELAY_MS  5000
 
 // ------------------------------------------------------------
-//  JSON PAYLOAD
+//  PAYLOAD
 // ------------------------------------------------------------
+
+// Número de campos no map CBOR (pares chave/valor de topo)
+// id, ts, f, wp, lat, lon, alt, hdg, vel, tmp, hum, bat, bat_ok, rssi, seq
+#define CBOR_MAP_FIELDS        15
+
+// Tamanho do buffer CBOR (bytes)
+// Payload real ~90 bytes; buffer com folga para depuração
+#define CBOR_BUFFER_SIZE       192
+
 // Tamanho do documento JSON estático (bytes)
 // Calculado: campos + margem de segurança
 #define JSON_DOC_SIZE   512
