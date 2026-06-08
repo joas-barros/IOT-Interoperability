@@ -81,8 +81,13 @@ private:
 
     CoapMetrics _metrics;
 
-    // Buffer interno para retransmissões
-    uint8_t  _payloadBuf[CBOR_BUFFER_SIZE] = {};
+    // Buffer interno para retransmissões adapta o tamanho automaticamente
+    #if USE_CBOR
+        uint8_t  _payloadBuf[CBOR_BUFFER_SIZE] = {};
+    #else
+        uint8_t  _payloadBuf[JSON_BUFFER_SIZE] = {};
+    #endif
+    
     size_t   _payloadLen    = 0;
     uint16_t _contentFormat = COAP_CONTENT_FORMAT_CBOR;
 
