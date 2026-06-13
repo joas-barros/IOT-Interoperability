@@ -16,46 +16,6 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.concurrent.atomic.AtomicLong;
 
-/**
- * GatewayCoapServer — Servidor CoAP baseado em Californium.
- *
- * <p>Registra o recurso {@code /dados/drone} e processa requisições
- * POST enviadas pelo ESP32. Suporta payload em CBOR (Content-Format 60)
- * e JSON (Content-Format 50) — detectado automaticamente pelo cabeçalho
- * da requisição.</p>
- *
- * <h3>Por que Californium?</h3>
- * <p>É a implementação de referência do protocolo CoAP (RFC 7252) para
- * Java, mantida pela Eclipse Foundation — a mesma organização do Paho MQTT.
- * Suporta CON/NON/ACK, múltiplos recursos URI, Content-Format options,
- * observação de recursos e DTLS. Para este projeto usamos apenas POST CON.</p>
- *
- * <h3>Fluxo de uma requisição</h3>
- * <pre>
- *   ESP32 envia CoAP POST (CON, Content-Format=60, payload CBOR)
- *       │
- *       ▼
- *   handlePOST() detecta Content-Format
- *       │
- *       ▼
- *   Deserializa payload (CBOR ou JSON) → DroneData
- *       │
- *       ▼
- *   Adiciona gatewayTs (timestamp de chegada)
- *       │
- *       ▼
- *   Enfileira no DataPipeline (retorna imediatamente)
- *       │
- *       ▼
- *   Responde ESP32 com 2.04 CHANGED (ACK)
- *   ← ESP32 registra RTT aqui
- * </pre>
- *
- * <p>A resposta ao ESP32 é enviada ANTES do dado ser normalizado e
- * encaminhado ao datacenter. Isso garante que o RTT medido no ESP32
- * reflete apenas a latência de rede + desserialização, não o HTTP
- * para o datacenter.</p>
- */
 public class GatewayCoapServer {
 
     private static final Logger log = LoggerFactory.getLogger(GatewayCoapServer.class);
