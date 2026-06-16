@@ -37,3 +37,8 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+Californium3.properties
+
+# conteuco dentro do log
+logs/**/*.log

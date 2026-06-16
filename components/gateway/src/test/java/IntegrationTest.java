@@ -15,6 +15,8 @@ import org.eclipse.californium.core.CoapResponse;
 import org.eclipse.californium.core.coap.CoAP;
 import org.eclipse.californium.core.coap.MediaTypeRegistry;
 import org.eclipse.californium.core.coap.Request;
+import org.eclipse.californium.core.config.CoapConfig;
+import org.eclipse.californium.elements.config.UdpConfig;
 import org.eclipse.californium.elements.exception.ConnectorException;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
@@ -69,6 +71,12 @@ class IntegrationTest {
 
     // ─────────────────────────────────────────────────────────────────────
 
+    @BeforeAll
+    static void initCalifornium() {
+        CoapConfig.register();
+        UdpConfig.register();
+    }
+
     @BeforeEach
     void setUp() throws Exception {
         receivedBodies.clear();
@@ -77,6 +85,7 @@ class IntegrationTest {
         // ── 1. Servidor HTTP mock (datacenter) ──
         mockDatacenter = HttpServer.create(
                 new InetSocketAddress(HTTP_MOCK_PORT), 0);
+
         mockDatacenter.createContext("/ingestao", exchange -> {
             byte[] body = exchange.getRequestBody().readAllBytes();
             synchronized (receivedBodies) {
@@ -118,9 +127,9 @@ class IntegrationTest {
     @AfterEach
     void tearDown() {
         if (mqttSubscriber != null) mqttSubscriber.disconnect();
-        coapServer.stop();
-        pipeline.shutdown();
-        mockDatacenter.stop(0);
+        if (coapServer != null) coapServer.stop();
+        if (pipeline != null) pipeline.shutdown();
+        if (mockDatacenter != null) mockDatacenter.stop(0);
     }
 
     // ── Teste 1: CoAP com CBOR ────────────────────────────────────────────
@@ -158,7 +167,7 @@ class IntegrationTest {
                 () -> assertNotNull(json.get("sensorTs"),  "sensorTs ausente"),
                 () -> assertNotNull(json.get("tempC"),     "tempC ausente"),
                 () -> assertNotNull(json.get("lat"),       "lat ausente"),
-                () -> assertNull(json.get("pressureHpa"), "pressureHpa deve ser null para drone")
+                () -> assertFalse(json.hasNonNull("pressureHpa"), "pressureHpa deve ser null ou ausente para drone")
         );
 
         System.out.printf("%n  [CBOR→Datacenter] Payload recebido: %s%n", body);
@@ -223,7 +232,7 @@ class IntegrationTest {
                 () -> assertEquals(3L,           json.get("seq").asLong()),
                 () -> assertNotNull(json.get("pressureHpa"), "pressureHpa ausente"),
                 () -> assertNotNull(json.get("co2Ppm"),      "co2Ppm ausente"),
-                () -> assertNull(json.get("altM"),           "altM deve ser null para estação")
+                () -> assertFalse(json.hasNonNull("altM"), "altM deve ser null ou ausente para estação")
         );
 
         System.out.printf("%n  [MQTT→Datacenter] Payload recebido: %s%n",
