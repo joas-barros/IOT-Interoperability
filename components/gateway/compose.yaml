@@ -1,0 +1,42 @@
+services:
+
+  # ── Broker MQTT ───────────────────────────────────────────────
+  mosquitto:
+    image: eclipse-mosquitto:latest
+    container_name: mosquitto
+    restart: unless-stopped
+    ports:
+      - "1883:1883"
+    volumes:
+      - ./mosquitto/config/mosquitto.conf:/mosquitto/config/mosquitto.conf
+      - mosquitto_data:/mosquitto/data
+      - mosquitto_log:/mosquitto/log
+    healthcheck:
+      test: ["CMD", "mosquitto_pub", "-h", "localhost", "-t", "health", "-m", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  # ── Gateway Java ──────────────────────────────────────────────
+  gateway:
+    build: .
+    container_name: gateway-iot
+    restart: unless-stopped
+    depends_on:
+      mosquitto:
+        condition: service_healthy
+    ports:
+      - "5683:5683/udp"     # CoAP — recebe do drone (ESP32)
+    environment:
+      # Nome do serviço Compose — resolvido pela rede Docker interna
+      MQTT_BROKER_HOST: mosquitto
+      MQTT_BROKER_PORT: "1883"
+      # IP do datacenter na rede local (ajuste para o IP real do PC)
+      DATACENTER_URL: http://10.211.243.164:8000
+    volumes:
+      - gateway_logs:/app/logs
+
+volumes:
+  mosquitto_data:
+  mosquitto_log:
+  gateway_logs:
