@@ -17,7 +17,7 @@
 set -e
 
 BRANCH=${1:-""}
-PROJECT_DIR="$HOME/gateway_iot"
+PROJECT_DIR="$HOME/projects/IOT-Interoperability/components/gateway"
 SERVICE="gateway"
 
 GREEN='\033[0;32m'
