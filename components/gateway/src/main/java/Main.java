@@ -4,6 +4,8 @@ import forwarder.HttpForwarder;
 import mqtt.MqttSubscriber;
 import normalizer.DroneNormalizer;
 import normalizer.StationNormalizer;
+import org.eclipse.californium.core.config.CoapConfig;
+import org.eclipse.californium.elements.config.UdpConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pipeline.DataPipeline;
@@ -133,6 +135,9 @@ public class Main {
 
     public static void main(String[] args) {
         try {
+            CoapConfig.register();
+            UdpConfig.register();
+
             new Main().start();
         } catch (Exception e) {
             LoggerFactory.getLogger(Main.class)
