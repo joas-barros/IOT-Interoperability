@@ -32,7 +32,7 @@ services:
       MQTT_BROKER_HOST: mosquitto
       MQTT_BROKER_PORT: "1883"
       # IP do datacenter na rede local (ajuste para o IP real do PC)
-      DATACENTER_URL: http://192.168.1.200:8000
+      DATACENTER_URL: http://10.211.243.164:8000
     volumes:
       - gateway_logs:/app/logs
 
