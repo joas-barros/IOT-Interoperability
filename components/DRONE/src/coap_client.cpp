@@ -24,7 +24,7 @@ void CoapClient::begin() {
 // ------------------------------------------------------------
 uint16_t CoapClient::send(const uint8_t* payload,
                            size_t         payloadLen,
-                           uint16_t       contentFormat) {
+                           COAP_CONTENT_TYPE       contentFormat) {
     if (!isReady()) {
         Serial.println("[CoAP] AVISO: Mensagem pendente. Ignorado.");
         return 0;
@@ -61,7 +61,8 @@ uint16_t CoapClient::_doSend() {
         NULL,                         // Token (não precisamos gerenciar token manual aqui)
         0,                            // Tamanho do token
         (const uint8_t*)_payloadBuf,  // Cast obrigatório do payload para ponteiro de bytes
-        _payloadLen           // Tamanho do payload
+        _payloadLen,           // Tamanho do payload
+        _contentFormat
     );
 
     _pendingMsgId = msgId;

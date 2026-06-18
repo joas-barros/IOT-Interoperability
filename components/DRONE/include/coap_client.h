@@ -46,7 +46,7 @@ public:
     // Retorna o messageId da mensagem enviada (0 em caso de erro).
     uint16_t send(const uint8_t *payload,
                   size_t payloadLen,
-                  uint16_t contentFormat);
+                  COAP_CONTENT_TYPE contentFormat);
 
     // Processa pacotes CoAP recebidos e gerencia timeout/retry.
     // DEVE ser chamado em todo loop() — é a engine do cliente.
@@ -89,7 +89,7 @@ private:
     #endif
     
     size_t   _payloadLen    = 0;
-    uint16_t _contentFormat = COAP_CONTENT_FORMAT_CBOR;
+    COAP_CONTENT_TYPE _contentFormat = COAP_APPLICATION_JSON;
 
     // Callback estático para a biblioteca CoAP
     // (bibliotecas C++ geralmente exigem função estática para callbacks)

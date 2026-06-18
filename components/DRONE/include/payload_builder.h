@@ -9,6 +9,7 @@
 #include "flight_state.h"
 #include "sensor_sim.h"
 #include "ntp_sync.h"
+#include "coap_client.h"
 
 #if USE_CBOR
   #include "../lib/tinycbor/tinycbor_arduino.h"
@@ -33,11 +34,11 @@ public:
     size_t lastSize() const { return _lastSize; }
  
     /** Content-Format CoAP correto para o modo atual. */
-    uint16_t contentFormat() const {
+    COAP_CONTENT_TYPE contentFormat() const {
         #if USE_CBOR
-                return COAP_CONTENT_FORMAT_CBOR;
+                return COAP_APPLICATION_CBOR;
         #else
-                return COAP_CONTENT_FORMAT_JSON;
+                return COAP_APPLICATION_JSON;
         #endif
     }
 
