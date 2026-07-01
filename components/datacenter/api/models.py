@@ -1,3 +1,12 @@
+"""
+models.py — Modelos Pydantic do Datacenter IoT
+
+Três categorias de modelos:
+  1. NormalizedData   — payload recebido do gateway via HTTP POST
+  2. DroneTwin        — estado atual do drone (calculado pelo TwinStore)
+  3. StationTwin      — estado atual da estação (calculado pelo TwinStore)
+"""
+
 from __future__ import annotations
 from datetime import datetime, timezone
 from typing import Optional, Literal
@@ -16,7 +25,7 @@ class NormalizedData(BaseModel):
     # ── Metadados do gateway ──────────────────────────────────────────────
     gateway_id: str
     source_id: str
-    source_type: Literal["sensor", "camera", "microphone"]
+    source_type:      Literal["DRONE", "STATION"]
     source_protocol: Literal["CoAP", "MQTT"]
     payload_format: Optional[Literal["CBOR", "JSON"]] = None
 
