@@ -99,3 +99,32 @@ def api_online() -> bool:
     except Exception:
         return False
 
+
+# ── Sidebar ───────────────────────────────────────────────────────────────────
+
+with st.sidebar:
+    st.title("📡 IoT Interoperável")
+    st.caption("Arquitetura de Comunicação entre Plataformas IoT")
+    st.divider()
+
+    painel = st.radio(
+        "Painel",
+        ["🔵 Estado Atual", "🌡️ Sensores", "⏱️ Latência", "📦 Confiabilidade"],
+        index=0,
+    )
+
+    st.divider()
+    janela = st.slider("Janela de tempo (min)", 5, 120, 60, 5)
+    st.caption(f"Refresh: {REFRESH_S}s")
+
+    st.divider()
+    status_api = "🟢 Online" if api_online() else "🔴 Offline"
+    st.caption(f"API FastAPI: {status_api}")
+
+    status_data = fetch_status()
+    session     = status_data.get("session", {})
+    if session:
+        st.metric("Total recebido", session.get("total_received", 0))
+        st.metric("Drones",   session.get("total_drones",   0))
+        st.metric("Estações", session.get("total_stations", 0))
+        st.metric("Erros",    session.get("total_errors",   0))
