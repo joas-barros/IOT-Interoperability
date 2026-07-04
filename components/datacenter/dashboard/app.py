@@ -251,3 +251,133 @@ if painel == "🔵 Estado Atual":
     # Auto-refresh
     time.sleep(REFRESH_S)
     st.rerun()
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+#  PAINEL 2 — SENSORES (dados históricos)
+# ═════════════════════════════════════════════════════════════════════════════
+
+elif painel == "🌡️ Sensores":
+    st.title("🌡️ Dados dos Sensores")
+    st.caption(f"Últimos {janela} minutos")
+
+    fonte = st.segmented_control(
+        "Fonte",
+        ["Todos", "Drone", "Estação"],
+        default="Todos",
+    )
+
+    source_map = {"Drone": "DRONE", "Estação": "STATION", "Todos": None}
+    raw = fetch_sensor_data(source_map[fonte], janela)
+
+    if not raw:
+        st.info("Sem dados no período selecionado.")
+        st.stop()
+
+    df = pd.DataFrame(raw)
+    df["time"] = pd.to_datetime(df["time"])
+    df = df.sort_values("time")
+
+    # ── Temperatura ───────────────────────────────────────────────────────
+    st.subheader("🌡️ Temperatura (°C)")
+    df_temp = df[df["temp_c"].notna()]
+    if not df_temp.empty:
+        fig = px.line(
+            df_temp, x="time", y="temp_c",
+            color="source_id",
+            color_discrete_map={"drone_01": "#3B82F6", "estacao_01": "#10B981"},
+            labels={"temp_c": "Temperatura (°C)", "time": "", "source_id": "Fonte"},
+            markers=True,
+        )
+        fig.update_layout(height=280, margin=dict(t=10, b=10))
+        st.plotly_chart(fig, use_container_width=True)
+        st.caption(
+            "📌 A diferença de temperatura entre drone e estação é explicada "
+            "pelo gradiente adiabático (-0.65°C/100m de altitude)."
+        )
+
+    col1, col2 = st.columns(2)
+
+    # ── Umidade ───────────────────────────────────────────────────────────
+    with col1:
+        st.subheader("💧 Umidade (%)")
+        df_hum = df[df["hum_pct"].notna()]
+        if not df_hum.empty:
+            fig = px.line(df_hum, x="time", y="hum_pct", color="source_id",
+                          color_discrete_map={
+                              "drone_01": "#3B82F6", "estacao_01": "#10B981"},
+                          markers=True)
+            fig.update_layout(height=250, margin=dict(t=10, b=10),
+                              showlegend=False)
+            st.plotly_chart(fig, use_container_width=True)
+
+    # ── Altitude (drone) ──────────────────────────────────────────────────
+    with col2:
+        st.subheader("✈️ Altitude do Drone (m)")
+        df_alt = df[(df["alt_m"].notna()) & (df["source_id"] == "drone_01")]
+        if not df_alt.empty:
+            fig = px.area(df_alt, x="time", y="alt_m",
+                          color_discrete_sequence=["#3B82F6"])
+            fig.update_layout(height=250, margin=dict(t=10, b=10))
+            st.plotly_chart(fig, use_container_width=True)
+
+    # ── CO₂ e Pressão (estação) ───────────────────────────────────────────
+    st.subheader("🏭 CO₂ e Pressão Atmosférica (Estação)")
+    df_sta = df[df["source_id"] == "estacao_01"]
+
+    col3, col4 = st.columns(2)
+    with col3:
+        df_co2 = df_sta[df_sta["co2_ppm"].notna()]
+        if not df_co2.empty:
+            fig = px.line(df_co2, x="time", y="co2_ppm",
+                          color_discrete_sequence=["#F59E0B"],
+                          labels={"co2_ppm": "CO₂ (ppm)"}, markers=True)
+            fig.update_layout(height=250, margin=dict(t=10, b=10))
+            st.plotly_chart(fig, use_container_width=True)
+
+    with col4:
+        df_pres = df_sta[df_sta["pressure_hpa"].notna()]
+        if not df_pres.empty:
+            fig = px.line(df_pres, x="time", y="pressure_hpa",
+                          color_discrete_sequence=["#8B5CF6"],
+                          labels={"pressure_hpa": "Pressão (hPa)"}, markers=True)
+            fig.update_layout(height=250, margin=dict(t=10, b=10))
+            st.plotly_chart(fig, use_container_width=True)
+
+    # ── UV Index e Bateria ────────────────────────────────────────────────
+    col5, col6 = st.columns(2)
+    with col5:
+        st.subheader("☀️ Índice UV (Estação)")
+        df_uv = df_sta[df_sta["uv_index"].notna()]
+        if not df_uv.empty:
+            fig = px.area(df_uv, x="time", y="uv_index",
+                          color_discrete_sequence=["#F97316"],
+                          labels={"uv_index": "UV Index"})
+            fig.update_layout(height=230, margin=dict(t=10, b=10))
+            st.plotly_chart(fig, use_container_width=True)
+
+    with col6:
+        st.subheader("🔋 Bateria do Drone (%)")
+        df_bat = df[(df["battery_pct"].notna()) &
+                    (df["source_id"] == "drone_01")]
+        if not df_bat.empty:
+            fig = px.line(df_bat, x="time", y="battery_pct",
+                          color_discrete_sequence=["#EF4444"])
+            fig.add_hline(y=20, line_dash="dash", line_color="red",
+                          annotation_text="Limiar de retorno (20%)")
+            fig.update_layout(height=230, margin=dict(t=10, b=10))
+            st.plotly_chart(fig, use_container_width=True)
+
+    # ── RSSI ──────────────────────────────────────────────────────────────
+    st.subheader("📶 RSSI Wi-Fi (dBm)")
+    df_rssi = df[df["rssi_dbm"].notna()]
+    if not df_rssi.empty:
+        fig = px.line(df_rssi, x="time", y="rssi_dbm", color="source_id",
+                      color_discrete_map={
+                          "drone_01": "#3B82F6", "estacao_01": "#10B981"},
+                      markers=True,
+                      labels={"rssi_dbm": "RSSI (dBm)"})
+        fig.update_layout(height=250, margin=dict(t=10, b=10))
+        st.plotly_chart(fig, use_container_width=True)
+        st.caption("Valores mais próximos de 0 indicam sinal mais forte. "
+                   "Abaixo de -80 dBm: sinal fraco.")
