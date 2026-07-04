@@ -548,3 +548,137 @@ elif painel == "⏱️ Latência":
             "Gráfico de barras empilhadas — decompõe a latência total "
             "em transporte e processamento gateway→datacenter."
         )
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+#  PAINEL 4 — CONFIABILIDADE
+# ═════════════════════════════════════════════════════════════════════════════
+
+elif painel == "📦 Confiabilidade":
+    st.title("📦 Confiabilidade da Entrega")
+    st.caption(
+        "Taxa de entrega calculada via gaps no número de sequência (seq). "
+        "Gaps indicam mensagens perdidas entre o sensor e o datacenter."
+    )
+
+    delivery = fetch_delivery(janela)
+    twins    = fetch_twins()
+    drones   = twins.get("drones",   {})
+    stations = twins.get("stations", {})
+
+    if not delivery:
+        st.info("Sem dados de confiabilidade no período selecionado.")
+        st.stop()
+
+    # ── Gauges de taxa de entrega ─────────────────────────────────────────
+    st.subheader("📊 Taxa de Entrega por Dispositivo")
+    cols = st.columns(len(delivery))
+
+    for i, (device_id, stats) in enumerate(delivery.items()):
+        rate     = stats.get("delivery_rate", 0)
+        received = stats.get("received", 0)
+        lost     = stats.get("lost",     0)
+        expected = stats.get("expected", 0)
+
+        with cols[i]:
+            fig = go.Figure(go.Indicator(
+                mode="gauge+number",
+                value=rate,
+                title={"text": device_id, "font": {"size": 14}},
+                number={"suffix": "%", "font": {"size": 28}},
+                gauge={
+                    "axis":  {"range": [0, 100]},
+                    "bar":   {"color": "#10B981" if rate >= 95 else
+                                       "#F59E0B" if rate >= 80 else "#EF4444"},
+                    "steps": [
+                        {"range": [0,  80], "color": "#FEE2E2"},
+                        {"range": [80, 95], "color": "#FEF3C7"},
+                        {"range": [95, 100],"color": "#D1FAE5"},
+                    ],
+                    "threshold": {
+                        "line":  {"color": "red", "width": 2},
+                        "thickness": 0.75,
+                        "value": 95,
+                    },
+                },
+            ))
+            fig.update_layout(height=220, margin=dict(t=30, b=10, l=20, r=20))
+            st.plotly_chart(fig, use_container_width=True)
+
+            c1, c2, c3 = st.columns(3)
+            c1.metric("Recebidas", received)
+            c2.metric("Perdidas",  lost,
+                      delta=f"-{lost}" if lost > 0 else None,
+                      delta_color="inverse")
+            c3.metric("Esperadas", expected)
+
+    st.divider()
+
+    # ── Timeline de mensagens perdidas ────────────────────────────────────
+    st.subheader("📉 Mensagens Perdidas por Dispositivo (Twin)")
+    rows = []
+    for did, d in drones.items():
+        rows.append({
+            "Dispositivo": did,
+            "Tipo":        "Drone",
+            "Recebidas":   d.get("messages_received", 0),
+            "Perdidas":    d.get("messages_lost", 0),
+            "Seq atual":   d.get("seq", 0),
+        })
+    for sid, s in stations.items():
+        rows.append({
+            "Dispositivo": sid,
+            "Tipo":        "Estação",
+            "Recebidas":   s.get("messages_received", 0),
+            "Perdidas":    s.get("messages_lost", 0),
+            "Seq atual":   s.get("seq", 0),
+        })
+
+    if rows:
+        df_summary = pd.DataFrame(rows)
+        df_summary["Taxa (%)"] = (
+            df_summary["Recebidas"] /
+            (df_summary["Recebidas"] + df_summary["Perdidas"]) * 100
+        ).round(2)
+        st.dataframe(df_summary, use_container_width=True, hide_index=True)
+
+    st.divider()
+
+    # ── Status online/offline ─────────────────────────────────────────────
+    st.subheader("🟢 Status Online/Offline dos Dispositivos")
+    status_data = fetch_status()
+    devices_status = status_data.get("devices", {})
+
+    all_devices = {}
+    for did, d in devices_status.get("drones", {}).items():
+        all_devices[did] = {**d, "tipo": "Drone"}
+    for sid, s in devices_status.get("stations", {}).items():
+        all_devices[sid] = {**s, "tipo": "Estação"}
+
+    if all_devices:
+        col_a, col_b = st.columns(2)
+        for i, (dev_id, info) in enumerate(all_devices.items()):
+            col = col_a if i % 2 == 0 else col_b
+            with col:
+                with st.container(border=True):
+                    online = info.get("online", False)
+                    ago    = info.get("last_update_s_ago", 0)
+                    tipo   = info.get("tipo", "?")
+
+                    st.markdown(
+                        f"{'🟢' if online else '🔴'} **{dev_id}** ({tipo})")
+                    st.caption(f"Última mensagem: {ago:.1f}s atrás")
+
+                    if tipo == "Drone":
+                        st.markdown(
+                            f"Fase: `{info.get('flight_phase','?')}` | "
+                            f"Bat: `{info.get('battery_pct','?')}%`"
+                        )
+                    else:
+                        st.markdown(
+                            f"CO₂ trend: `{info.get('co2_trend','?')}`"
+                        )
+
+                    lost = info.get("messages_lost", 0)
+                    if lost > 0:
+                        st.warning(f"⚠️ {lost} mensagens perdidas nesta sessão")
