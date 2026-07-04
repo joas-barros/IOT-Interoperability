@@ -381,3 +381,170 @@ elif painel == "🌡️ Sensores":
         st.plotly_chart(fig, use_container_width=True)
         st.caption("Valores mais próximos de 0 indicam sinal mais forte. "
                    "Abaixo de -80 dBm: sinal fraco.")
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+#  PAINEL 3 — LATÊNCIA (resultados dos experimentos)
+# ═════════════════════════════════════════════════════════════════════════════
+
+elif painel == "⏱️ Latência":
+    st.title("⏱️ Métricas de Latência")
+    st.caption(
+        "Resultados dos experimentos de latência. "
+        "latência_transporte = gateway_ts − sensor_ts | "
+        "latência_total = datacenter_ts − sensor_ts"
+    )
+
+    col_f1, col_f2 = st.columns(2)
+    with col_f1:
+        filtro_tipo = st.selectbox(
+            "Filtrar por fonte", ["Todos", "DRONE", "STATION"])
+    with col_f2:
+        st.write(f"Janela: últimos **{janela} min** (ajuste na sidebar)")
+
+    src = None if filtro_tipo == "Todos" else filtro_tipo
+    resp = fetch_latency(src, janela)
+    data = resp.get("data", [])
+    summ = resp.get("summary", {})
+
+    if not data:
+        st.info("Sem dados de latência no período selecionado.")
+        st.stop()
+
+    df = pd.DataFrame(data)
+    df["time"] = pd.to_datetime(df["time"])
+    df = df.sort_values("time")
+
+    # ── Cards de estatísticas ─────────────────────────────────────────────
+    st.subheader("📊 Estatísticas — Latência de Transporte")
+    t_stats = summ.get("transport_ms", {})
+    if t_stats:
+        c1, c2, c3, c4, c5 = st.columns(5)
+        c1.metric("Mínimo",  f"{t_stats.get('min',  0):.1f} ms")
+        c2.metric("Média",   f"{t_stats.get('mean', 0):.1f} ms")
+        c3.metric("Mediana", f"{t_stats.get('median',0):.1f} ms")
+        c4.metric("P95",     f"{t_stats.get('p95',  0):.1f} ms")
+        c5.metric("Máximo",  f"{t_stats.get('max',  0):.1f} ms")
+
+    # ── Série temporal de latência ────────────────────────────────────────
+    st.subheader("📈 Latência de Transporte ao Longo do Tempo")
+    df_t = df[df["latency_transport_ms"].notna()]
+    if not df_t.empty:
+        fig = px.scatter(
+            df_t, x="time", y="latency_transport_ms",
+            color="source_protocol",
+            color_discrete_map={"CoAP": "#3B82F6", "MQTT": "#10B981"},
+            symbol="payload_format",
+            labels={
+                "latency_transport_ms": "Latência Transporte (ms)",
+                "time": "",
+                "source_protocol": "Protocolo",
+                "payload_format": "Formato",
+            },
+            opacity=0.7,
+        )
+        # Linha de média móvel
+        df_t_sorted = df_t.sort_values("time")
+        df_t_sorted["rolling_mean"] = (
+            df_t_sorted["latency_transport_ms"].rolling(10, min_periods=1).mean()
+        )
+        fig.add_scatter(
+            x=df_t_sorted["time"],
+            y=df_t_sorted["rolling_mean"],
+            mode="lines",
+            name="Média móvel (10)",
+            line=dict(color="orange", width=2),
+        )
+        fig.update_layout(height=320, margin=dict(t=10, b=10))
+        st.plotly_chart(fig, use_container_width=True)
+
+    # ── Boxplot comparativo CoAP vs MQTT ──────────────────────────────────
+    st.subheader("📦 Boxplot: CoAP vs MQTT")
+    st.caption(
+        "Este gráfico é o resultado central do Experimento 1.1 — "
+        "comparativo de latência de transporte entre os dois protocolos."
+    )
+    df_box = df[df["latency_transport_ms"].notna()]
+    if not df_box.empty:
+        fig = px.box(
+            df_box,
+            x="source_protocol",
+            y="latency_transport_ms",
+            color="source_protocol",
+            color_discrete_map={"CoAP": "#3B82F6", "MQTT": "#10B981"},
+            points="all",
+            labels={
+                "latency_transport_ms": "Latência Transporte (ms)",
+                "source_protocol": "Protocolo",
+            },
+        )
+        fig.update_layout(height=350, margin=dict(t=10, b=10),
+                          showlegend=False)
+        st.plotly_chart(fig, use_container_width=True)
+
+    # ── Boxplot CBOR vs JSON ──────────────────────────────────────────────
+    df_fmt = df[
+        df["latency_transport_ms"].notna() &
+        df["payload_format"].notna() &
+        (df["source_protocol"] == "CoAP")
+    ]
+    if not df_fmt.empty and df_fmt["payload_format"].nunique() > 1:
+        st.subheader("📦 Boxplot: CBOR vs JSON (CoAP)")
+        st.caption(
+            "Resultado do Experimento 3.2 — impacto do formato de payload "
+            "na latência de transporte CoAP."
+        )
+        fig = px.box(
+            df_fmt,
+            x="payload_format",
+            y="latency_transport_ms",
+            color="payload_format",
+            color_discrete_map={"CBOR": "#8B5CF6", "JSON": "#F59E0B"},
+            points="all",
+            labels={
+                "latency_transport_ms": "Latência Transporte (ms)",
+                "payload_format": "Formato",
+            },
+        )
+        fig.update_layout(height=320, margin=dict(t=10, b=10),
+                          showlegend=False)
+        st.plotly_chart(fig, use_container_width=True)
+
+    # ── Latência total vs transporte ──────────────────────────────────────
+    st.subheader("📊 Latência Total vs Transporte")
+    df_both = df[
+        df["latency_transport_ms"].notna() &
+        df["latency_total_ms"].notna()
+    ].copy()
+    if not df_both.empty:
+        df_both["latency_gateway_http_ms"] = (
+            df_both["latency_total_ms"] - df_both["latency_transport_ms"]
+        )
+        df_melt = df_both[
+            ["time", "source_protocol",
+             "latency_transport_ms", "latency_gateway_http_ms"]
+        ].melt(
+            id_vars=["time", "source_protocol"],
+            var_name="componente",
+            value_name="ms",
+        )
+        label_map = {
+            "latency_transport_ms":    "Transporte (sensor→gateway)",
+            "latency_gateway_http_ms": "Gateway→Datacenter (HTTP)",
+        }
+        df_melt["componente"] = df_melt["componente"].map(label_map)
+
+        fig = px.bar(
+            df_melt,
+            x="time", y="ms",
+            color="componente",
+            color_discrete_sequence=["#3B82F6", "#F59E0B"],
+            barmode="stack",
+            labels={"ms": "Latência (ms)", "time": "", "componente": ""},
+        )
+        fig.update_layout(height=300, margin=dict(t=10, b=10))
+        st.plotly_chart(fig, use_container_width=True)
+        st.caption(
+            "Gráfico de barras empilhadas — decompõe a latência total "
+            "em transporte e processamento gateway→datacenter."
+        )
