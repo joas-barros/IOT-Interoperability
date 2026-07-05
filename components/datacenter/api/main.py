@@ -91,7 +91,7 @@ async def ingest(data: NormalizedData):
 
     try:
         # 1. Atualiza o Digital Twin (em memória — rápido)
-        await twin_store.update(data, datacenter_ts)
+        await twin_store.update(data)
 
         # 2. Persiste no InfluxDB (com latências calculadas)
         influx.write(data, datacenter_ts)
@@ -150,6 +150,19 @@ def get_twin(device_id: str):
             detail=f"Dispositivo '{device_id}' não encontrado."
         )
     return twin.model_dump(mode="json")
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+#  GET /status — resumo do sistema
+# ─────────────────────────────────────────────────────────────────────────────
+
+@app.get("/status")
+def get_status():
+    """Resumo rápido do estado do sistema — health check."""
+    return {
+        "session":  session_stats,
+        "devices":  twin_store.get_summary(),
+    }
 
 
 # ─────────────────────────────────────────────────────────────────────────────

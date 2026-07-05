@@ -137,7 +137,7 @@ async def test_drone_twin_inferencia_estimated_return():
     store = TwinStore()
     # Bateria em 80%, fase MISSION (drain=0.05%/s), limiar=20%
     # usable = 60%, tempo = 60/0.05 = 1200s = 20 min
-    await store.update(make_drone(seq=1, battery_pct=80, flight_phase="MISSION"))
+    await store.update(make_drone(seq=1, battery_pct=75, flight_phase="MISSION"))
 
     twin = store.get_drone("drone_01")
     assert twin.estimated_return_min > 0
