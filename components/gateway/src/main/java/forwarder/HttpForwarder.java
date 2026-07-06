@@ -1,6 +1,7 @@
 package forwarder;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import config.AppConfig;
 import model.NormalizedData;
 import org.slf4j.Logger;
@@ -49,6 +50,9 @@ public class HttpForwarder {
     public HttpForwarder(AppConfig config) {
         this.config   = config;
         this.mapper   = new ObjectMapper();
+        // ADICIONE ESTA LINHA: Traduz camelCase para snake_case no JSON
+        this.mapper.setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE);
+
         this.sendQueue  = new LinkedBlockingQueue<>(config.getRetryQueueSize());
         this.retryQueue = new LinkedBlockingQueue<>(config.getRetryQueueSize());
 
