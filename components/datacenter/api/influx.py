@@ -97,7 +97,7 @@ class InfluxWriter:
         # ── Timestamp: usa o sensor_ts para posicionamento correto ─────────
         # Isso garante que o ponto aparece no gráfico no momento em que
         # o sensor coletou o dado, não quando chegou no datacenter
-        point = point.time(data.sensor_datetime(), WritePrecision.MILLISECONDS)
+        point = point.time(data.sensor_datetime(), WritePrecision.MS)
 
         self._write_api.write(bucket=self._bucket, record=point)
     
