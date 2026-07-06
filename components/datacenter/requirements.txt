@@ -1,0 +1,22 @@
+# API REST
+fastapi
+uvicorn[standard]
+pydantic
+
+# InfluxDB
+influxdb-client
+
+# Dashboard
+streamlit
+plotly
+pandas
+# HTTP client (Streamlit → FastAPI)
+requests
+
+# Utilitários
+python-dotenv
+
+# Testes
+pytest
+pytest-asyncio
+httpx
