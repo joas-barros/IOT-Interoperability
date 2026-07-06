@@ -57,6 +57,7 @@ public class HttpForwarder {
         this.retryQueue = new LinkedBlockingQueue<>(config.getRetryQueueSize());
 
         this.httpClient = HttpClient.newBuilder()
+                .version(HttpClient.Version.HTTP_1_1)
                 .connectTimeout(Duration.ofMillis(config.getConnectTimeoutMs()))
                 .build();
     }
