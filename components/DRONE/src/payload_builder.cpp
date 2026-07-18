@@ -41,11 +41,11 @@ bool PayloadBuilder::build(uint8_t* buffer, size_t bufferSize,
         return false;
     }
 
-    #if USE_CBOR
-        return _buildCbor(buffer, bufferSize, fs, sd, seq);
-    #else
-        return _buildJson(buffer, bufferSize, fs, sd, seq);
-    #endif
+    if (_useCbor) {
+    return _buildCbor(buffer, bufferSize, fs, sd, seq);
+} else {
+    return _buildJson(buffer, bufferSize, fs, sd, seq);
+}
 }
 
 // ------------------------------------------------------------
@@ -95,8 +95,6 @@ bool PayloadBuilder::_validate(const FlightState& fs, const SensorData& sd) {
 }
 
 // ── Serialização CBOR ─────────────────────────────────────────
-
-#if USE_CBOR
 
 bool PayloadBuilder::_buildCbor(uint8_t* buffer, size_t bufferSize,
                                   const FlightState& fs,
@@ -152,8 +150,6 @@ bool PayloadBuilder::_buildCbor(uint8_t* buffer, size_t bufferSize,
 
 // ── Serialização JSON (modo debug) ───────────────────────────
 
-#else
-
 bool PayloadBuilder::_buildJson(uint8_t* buffer, size_t bufferSize,
                                  const FlightState& fs,
                                  const SensorData& sd,
@@ -192,5 +188,3 @@ bool PayloadBuilder::_buildJson(uint8_t* buffer, size_t bufferSize,
 
     return true;
 }
-
-#endif

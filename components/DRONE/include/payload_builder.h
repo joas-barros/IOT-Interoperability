@@ -10,15 +10,14 @@
 #include "sensor_sim.h"
 #include "ntp_sync.h"
 #include "coap_client.h"
-
-#if USE_CBOR
-  #include "../lib/tinycbor/tinycbor_arduino.h"
-#else
-  #include <ArduinoJson.h>
-#endif
+#include "../lib/tinycbor/tinycbor_arduino.h"
+#include <ArduinoJson.h>
 
 class PayloadBuilder {
 public:
+    // Função para inverter o formato (JSON -> CBOR -> JSON)
+    void toggleFormat() { _useCbor = !_useCbor; }
+
     // Constrói o payload JSON a partir do estado atual.
     // Preenche 'buffer' com o JSON serializado.
     // Retorna true se todas as validações passaram.
@@ -35,23 +34,16 @@ public:
  
     /** Content-Format CoAP correto para o modo atual. */
     COAP_CONTENT_TYPE contentFormat() const {
-        #if USE_CBOR
-                return COAP_APPLICATION_CBOR;
-        #else
-                return COAP_APPLICATION_JSON;
-        #endif
+        return _useCbor ? COAP_APPLICATION_CBOR : COAP_APPLICATION_JSON;
     }
 
     /** Descrição do modo ativo — para log. */
     const char* modeName() const {
-        #if USE_CBOR
-            return "CBOR";
-        #else
-            return "JSON";
-        #endif
-    }
+            return _useCbor ? "CBOR" : "JSON";
+        }
 
 private:
+    bool   _useCbor     = true;
     size_t _lastSize    = 0;
 
     char _lastError[64] = "";
@@ -59,17 +51,8 @@ private:
     // Retorna false e preenche _lastError se alguma validação falhar
     bool _validate(const FlightState& fs, const SensorData& sd);
 
-    #if USE_CBOR
-        bool _buildCbor(uint8_t* buffer, size_t bufferSize,
-                        const FlightState& fs,
-                        const SensorData& sd,
-                        uint32_t seq);
-    #else
-        bool _buildJson(uint8_t* buffer, size_t bufferSize,
-                        const FlightState& fs,
-                        const SensorData& sd,
-                        uint32_t seq);
-    #endif
+    bool _buildCbor(uint8_t* buffer, size_t bufferSize, const FlightState& fs, const SensorData& sd, uint32_t seq);
+    bool _buildJson(uint8_t* buffer, size_t bufferSize, const FlightState& fs, const SensorData& sd, uint32_t seq);
 };
 
 extern PayloadBuilder payloadBuilder;

@@ -69,6 +69,12 @@ public:
                                   _state == COAP_STATE_SUCCESS ||
                                   _state == COAP_STATE_FAILED; }
 
+    void resetMetrics()
+    {
+        _metrics = CoapMetrics(); // Zera os contadores
+        _state = COAP_STATE_IDLE;
+    }
+
 private:
     WiFiUDP _udp;
     Coap _coap{_udp};
@@ -82,13 +88,9 @@ private:
     CoapMetrics _metrics;
 
     // Buffer interno para retransmissões adapta o tamanho automaticamente
-    #if USE_CBOR
-        uint8_t  _payloadBuf[CBOR_BUFFER_SIZE] = {};
-    #else
-        uint8_t  _payloadBuf[JSON_BUFFER_SIZE] = {};
-    #endif
-    
-    size_t   _payloadLen    = 0;
+    uint8_t _payloadBuf[JSON_BUFFER_SIZE] = {};
+
+    size_t _payloadLen = 0;
     COAP_CONTENT_TYPE _contentFormat = COAP_APPLICATION_JSON;
 
     // Callback estático para a biblioteca CoAP

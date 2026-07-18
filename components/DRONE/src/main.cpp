@@ -203,7 +203,23 @@ void loop() {
 
     // ---- 2. Missão já concluída ----
     if (missionReported) {
-        delay(5000);
+        delay(10000); // Pausa 10 segundos no solo para você ver os logs
+
+        Serial.println("\n[MAIN] =========================================");
+        Serial.println("[MAIN] INICIANDO NOVO EXPERIMENTO...");
+        
+        // Inverte o formato (JSON <-> CBOR)
+        payloadBuilder.toggleFormat();
+        Serial.printf("[MAIN] Novo formato selecionado: %s\n", payloadBuilder.modeName());
+
+        // Reseta as métricas do CoAP e a Máquina de Estados (Bateria, Posição, etc)
+        coapClient.resetMetrics();
+        flightState.begin();
+        
+        // Rearma as flags para o loop continuar rodando
+        missionReported = false;
+        lastPublishMs = millis();
+        Serial.println("[MAIN] =========================================\n");
         return;
     }
 
