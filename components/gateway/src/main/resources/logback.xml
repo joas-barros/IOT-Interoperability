@@ -49,16 +49,19 @@
     <!-- Nosso código em DEBUG -->
     <logger name="coap" level="INFO" additivity="false">
         <appender-ref ref="STDOUT_COAP" />
+        <appender-ref ref="FILE" />
     </logger>
 
     <!-- Todo log gerado pelas classes no pacote 'mqtt' vai para o appender Magenta -->
     <logger name="mqtt" level="INFO" additivity="false">
         <appender-ref ref="STDOUT_MQTT" />
+        <appender-ref ref="FILE" />
     </logger>
 
     <!-- Logger exclusivo nomeado manualmente para métricas -->
     <logger name="SystemMetrics" level="INFO" additivity="false">
         <appender-ref ref="STDOUT_METRICS" />
+        <appender-ref ref="FILE" />
     </logger>
 
     <logger name="forwarder" level="DEBUG"/>
