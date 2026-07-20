@@ -275,7 +275,7 @@ elif painel == "🌡️ Sensores":
         st.stop()
 
     df = pd.DataFrame(raw)
-    df["time"] = pd.to_datetime(df["time"])
+    df["time"] = pd.to_datetime(df["time"], format='mixed', utc=True)
     df = df.sort_values("time")
 
     # ── Temperatura ───────────────────────────────────────────────────────
@@ -412,7 +412,7 @@ elif painel == "⏱️ Latência":
         st.stop()
 
     df = pd.DataFrame(data)
-    df["time"] = pd.to_datetime(df["time"])
+    df["time"] = pd.to_datetime(df["time"], format='mixed', utc=True)
     df = df.sort_values("time")
 
     # ── Cards de estatísticas ─────────────────────────────────────────────
