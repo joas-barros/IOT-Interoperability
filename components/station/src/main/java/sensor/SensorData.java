@@ -6,28 +6,28 @@ public record SensorData(
         @JsonProperty("id")
         String  stationId,
 
-        @JsonProperty("ts")
+        @JsonProperty("timestamp")
         String  timestamp,
 
-        @JsonProperty("lat")
+        @JsonProperty("latitude")
         double  lat,
 
-        @JsonProperty("lon")
+        @JsonProperty("longitude")
         double  lon,
 
-        @JsonProperty("tmp")
+        @JsonProperty("temperature_celcius")
         double  tempC,
 
-        @JsonProperty("hum")
+        @JsonProperty("humidity_percent")
         double  humPct,
 
-        @JsonProperty("pres")
+        @JsonProperty("pressure_hpa")
         double  pressureHpa,
 
-        @JsonProperty("co2")
+        @JsonProperty("co2_ppm")
         double  co2Ppm,
 
-        @JsonProperty("uv")
+        @JsonProperty("uv_index")
         double  uvIndex,
 
         @JsonProperty("rssi")

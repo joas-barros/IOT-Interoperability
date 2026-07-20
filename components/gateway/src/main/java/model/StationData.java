@@ -8,18 +8,18 @@ public class StationData {
 
     // ── Identificação ──────────────────────────────────────────────────────
     @JsonProperty("id")    public String  id;
-    @JsonProperty("ts")    public String  sensorTs;
+    @JsonProperty("timestamp")    public String  sensorTs;
 
     // ── Posição (fixa) ─────────────────────────────────────────────────────
-    @JsonProperty("lat")   public Double  lat;
-    @JsonProperty("lon")   public Double  lon;
+    @JsonProperty("latitude")   public Double  lat;
+    @JsonProperty("longitude")   public Double  lon;
 
     // ── Ambiente ───────────────────────────────────────────────────────────
-    @JsonProperty("tmp")   public Double  tempC;
-    @JsonProperty("hum")   public Double  humPct;
-    @JsonProperty("pres")  public Double  pressureHpa;  // exclusivo da estação
-    @JsonProperty("co2")   public Double  co2Ppm;       // exclusivo da estação
-    @JsonProperty("uv")    public Double  uvIndex;      // exclusivo da estação
+    @JsonProperty("temperature_celcius")   public Double  tempC;
+    @JsonProperty("humidity_percent")   public Double  humPct;
+    @JsonProperty("pressure_hpa")  public Double  pressureHpa;  // exclusivo da estação
+    @JsonProperty("co2_ppm")   public Double  co2Ppm;       // exclusivo da estação
+    @JsonProperty("uv_index")    public Double  uvIndex;      // exclusivo da estação
 
     // ── Sistema ────────────────────────────────────────────────────────────
     @JsonProperty("rssi")  public Integer rssiDbm;
