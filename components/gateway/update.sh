@@ -60,8 +60,18 @@ log "Reconstruindo imagem do gateway..."
 docker compose build $SERVICE
 
 # ── Reinicia só o gateway (Mosquitto continua rodando) ──────
-log "Reiniciando container do gateway..."
-docker compose up -d --no-deps $SERVICE
+
+# ── Verifica o Mosquitto e sobe os serviços ─────────────────
+log "Verificando o status do broker MQTT (Mosquitto)..."
+
+# Inspeciona os containers e procura se o mosquitto está "Up" ou "running"
+if docker compose ps mosquitto | grep -qi "Up\|running"; then
+    log "Mosquitto já está rodando. Atualizando apenas o Gateway (Hot Reload)..."
+    docker compose up -d --no-deps $SERVICE
+else
+    warn "Mosquitto inativo (Cold Start). Subindo toda a infraestrutura..."
+    docker compose up -d
+fi
 
 # ── Aguarda estabilização ───────────────────────────────────
 log "Aguardando estabilização (5s)..."
@@ -72,7 +82,7 @@ GATEWAY_STATUS=$(docker compose ps $SERVICE --format json 2>/dev/null \
     | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('State','?'))" \
     2>/dev/null || echo "unknown")
 
-if docker compose ps $SERVICE | grep -q "Up"; then
+if docker compose ps $SERVICE | grep -qi "Up\|running"; then
     log "Gateway rodando!"
     echo ""
     docker compose ps
