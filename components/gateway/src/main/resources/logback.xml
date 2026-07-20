@@ -23,13 +23,44 @@
         </encoder>
     </appender>
 
+    <appender name="STDOUT_COAP" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <!-- Tudo que estiver dentro de %cyan(...) ficará colorido -->
+            <pattern>%cyan(%d{HH:mm:ss.SSS} [CoAP] %-5level %logger{20} - %msg)%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="STDOUT_MQTT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%magenta(%d{HH:mm:ss.SSS} [MQTT] %-5level %logger{20} - %msg)%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="STDOUT_METRICS" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%boldGreen(=== %d{HH:mm:ss} [METRICS] %msg ===)%n</pattern>
+        </encoder>
+    </appender>
+
     <!-- Reduz verbosidade do Californium -->
     <logger name="org.eclipse.californium" level="WARN"/>
     <logger name="org.eclipse.paho"         level="WARN"/>
 
     <!-- Nosso código em DEBUG -->
-    <logger name="coap" level="DEBUG"/>
-    <logger name="mqtt" level="DEBUG"/>
+    <logger name="coap" level="INFO" additivity="false">
+        <appender-ref ref="STDOUT_COAP" />
+    </logger>
+
+    <!-- Todo log gerado pelas classes no pacote 'mqtt' vai para o appender Magenta -->
+    <logger name="mqtt" level="INFO" additivity="false">
+        <appender-ref ref="STDOUT_MQTT" />
+    </logger>
+
+    <!-- Logger exclusivo nomeado manualmente para métricas -->
+    <logger name="SystemMetrics" level="INFO" additivity="false">
+        <appender-ref ref="STDOUT_METRICS" />
+    </logger>
+
     <logger name="forwarder" level="DEBUG"/>
     <logger name="pipeline" level="DEBUG"/>
 

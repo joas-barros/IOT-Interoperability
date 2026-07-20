@@ -17,6 +17,7 @@ import java.util.concurrent.TimeUnit;
 public class Main {
 
     private static final Logger log = LoggerFactory.getLogger(Main.class);
+    private static final Logger metricsLog = LoggerFactory.getLogger("SystemMetrics");
 
     private final AppConfig config;
     private final HttpForwarder forwarder;
@@ -115,20 +116,20 @@ public class Main {
     }
 
     private void logMetrics() {
-        log.info("── Métricas periódicas ─────────────────────");
-        log.info("[Main] CoAP recebidos : {} (CBOR={} JSON={})",
+        metricsLog.info("── Métricas periódicas ─────────────────────");
+        metricsLog.info("[Main] CoAP recebidos : {} (CBOR={} JSON={})",
                 coapServer.getTotalReceived(),
                 coapServer.getReceivedCbor(),
                 coapServer.getReceivedJson());
-        log.info("[Main] MQTT recebidos : {} | offlines={}",
+        metricsLog.info("[Main] MQTT recebidos : {} | offlines={}",
                 mqttSubscriber.getTotalReceived(),
                 mqttSubscriber.getStationOfflines());
-        log.info("[Main] Pipeline fila  : {} itens",
+        metricsLog.info("[Main] Pipeline fila  : {} itens",
                 pipeline.getQueueSize());
-        log.info("[Main] HTTP sucesso   : {} | erros={}",
+        metricsLog.info("[Main] HTTP sucesso   : {} | erros={}",
                 forwarder.getTotalSuccess(),
                 forwarder.getTotalError());
-        log.info("────────────────────────────────────────────");
+        metricsLog.info("────────────────────────────────────────────");
     }
 
     // ── Entry point ───────────────────────────────────────────────────────
