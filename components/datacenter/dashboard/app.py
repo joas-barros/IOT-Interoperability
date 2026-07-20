@@ -203,8 +203,37 @@ if painel == "🔵 Estado Atual":
                 lat = d.get("lat")
                 lon = d.get("lon")
                 if lat and lon and lat != 0 and lon != 0:
-                    st.map(pd.DataFrame({"lat": [lat], "lon": [lon]}),
-                           zoom=14, use_container_width=True)
+                    # 1. Mapeamento de cores por fase de voo
+                    color_map = {
+                        "IDLE": "#FFFFFF",    # Branco
+                        "TAKEOFF": "#00FFFF", # Ciano
+                        "MISSION": "#00FF00", # Verde
+                        "HOVER": "#FF00FF",   # Magenta
+                        "RETURN": "#FF8000",  # Laranja
+                        "LANDING": "#FF0000"  # Vermelho
+                    }
+                    
+                    # 2. Define a cor baseada na fase atual, usa cinza se a fase não for reconhecida
+                    marker_color = color_map.get(phase, "#808080")
+
+                    # 3. Cria o DataFrame com as novas colunas
+                    map_df = pd.DataFrame({
+                        "lat": [lat], 
+                        "lon": [lon],
+                        "color": [marker_color],
+                        "radius": [15] # Um tamanho muito menor para o círculo
+                    })
+
+                    # 4. Renderiza o mapa apontando as propriedades visuais para as colunas do DataFrame
+                    st.map(
+                        map_df,
+                        latitude="lat", 
+                        longitude="lon", 
+                        color="color", 
+                        size="radius",
+                        zoom=14, 
+                        use_container_width=True
+                    )
 
     # ── Estação ───────────────────────────────────────────────────────────
     if stations:
