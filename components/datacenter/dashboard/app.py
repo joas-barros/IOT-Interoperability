@@ -83,7 +83,7 @@ def fetch_sensor_data(source_type: str | None, minutes: int) -> list:
 def fetch_delivery(minutes: int) -> dict:
     try:
         r = requests.get(
-            f"{API_BASE}/metricas/entrega",
+            f"{API_BASE}/metrics/delivery",
             params={"minutes": minutes},
             timeout=5,
         )
