@@ -130,18 +130,18 @@ async def ingest(data: NormalizedData):
 # ─────────────────────────────────────────────────────────────────────────────
 
 @app.get("/twins")
-def get_twins():
+async def get_twins():
     """
     Retorna o estado atual de todos os Digital Twins.
     Consumido pelo Streamlit para o painel de estado atual.
     """
-    return twin_store.get_all()
+    return await twin_store.get_all()
 
 @app.get("/twins/{device_id}")
-def get_twin(device_id: str):
+async def get_twin(device_id: str):
     """Retorna o twin de um dispositivo específico."""
-    drone   = twin_store.get_drone(device_id)
-    station = twin_store.get_station(device_id)
+    drone   = await twin_store.get_drone(device_id)
+    station = await twin_store.get_station(device_id)
     twin    = drone or station
 
     if not twin:
@@ -157,11 +157,11 @@ def get_twin(device_id: str):
 # ─────────────────────────────────────────────────────────────────────────────
 
 @app.get("/status")
-def get_status():
+async def get_status():
     """Resumo rápido do estado do sistema — health check."""
     return {
         "session":  session_stats,
-        "devices":  twin_store.get_summary(),
+        "devices":  await twin_store.get_summary(),
     }
 
 
