@@ -20,3 +20,6 @@ python-dotenv
 pytest
 pytest-asyncio
 httpx
+
+# Redis
+redis
