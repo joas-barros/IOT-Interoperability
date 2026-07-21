@@ -19,12 +19,61 @@ import requests
 import streamlit as st
 from dotenv import load_dotenv
 
+import json
+import threading
+import redis
+from streamlit.runtime.scriptrunner import add_script_run_ctx, get_script_run_ctx
+
 load_dotenv()
 
 API_BASE = os.getenv("API_BASE_URL", "http://localhost:8000")
 
 REFRESH_S = int(os.getenv("DASHBOARD_REFRESH_S", "2"))
 
+# ── Motor Redis Pub/Sub (Event-Driven) ───────────────────────────────────────
+
+REDIS_URL = os.getenv("REDIS_URL", "redis://localhost:6379/0")
+
+# Prepara a gaveta de memória vazia na primeira vez que a página carrega
+if "twins_data" not in st.session_state:
+    st.session_state["twins_data"] = {"drones": {}, "stations": {}}
+
+def redis_listener():
+    """Ouve o canal Pub/Sub do Redis e atualiza a interface instantaneamente."""
+    try:
+        r = redis.from_url(REDIS_URL, decode_responses=True)
+        pubsub = r.pubsub()
+        pubsub.subscribe("twins_updates")
+
+        for message in pubsub.listen():
+            if message["type"] == "message":
+                # Recebe o JSON completo (Full State) que a API publicou
+                novo_estado = json.loads(message["data"])
+                
+                # Atualiza a memória da sessão
+                st.session_state["twins_data"] = novo_estado
+                
+                # O Truque Ninja: Força o Streamlit a redesenhar a tela
+                st.rerun()
+
+    except Exception as e:
+        print(f"[Redis Listener] Erro: {e}")
+        st.error(f"Falha no listener Redis: {e}")
+
+def start_redis_listener():
+    """Garante que a thread seja criada apenas uma vez por sessão."""
+    if "redis_thread_active" not in st.session_state:
+        listener_thread = threading.Thread(target=redis_listener, daemon=True)
+
+        ctx = get_script_run_ctx()
+        if ctx:
+            add_script_run_ctx(listener_thread, ctx)
+        
+        listener_thread.start()
+        st.session_state["redis_thread_active"] = True
+
+# Dispara a verificação da thread assim que o app inicia
+start_redis_listener()
 
 # ── Configuração da página ────────────────────────────────────────────────────
 
@@ -37,14 +86,12 @@ st.set_page_config(
 
 # ── Helpers de API ────────────────────────────────────────────────────────────
 
-@st.cache_data(ttl=REFRESH_S)
 def fetch_twins() -> dict:
-    try:
-        r = requests.get(f"{API_BASE}/twins", timeout=3)
-        return r.json() if r.ok else {"drones": {}, "stations": {}}
-    except Exception as e:
-        st.error(f"Falha ao buscar Digital Twins: {e}")
-        return {"drones": {}, "stations": {}}
+    """
+    Agora lê os dados diretamente da memória instantânea do Streamlit,
+    alimentada pela Thread do Redis, em vez de fazer uma requisição HTTP.
+    """
+    return st.session_state.get("twins_data", {"drones": {}, "stations": {}})
 
 @st.cache_data(ttl=REFRESH_S)
 def fetch_status() -> dict:
@@ -277,9 +324,9 @@ if painel == "🔵 Estado Atual":
                     st.metric("Taxa entrega",
                               f"{rate:.1f}%" if rate else "—")
 
-    # Auto-refresh
-    time.sleep(REFRESH_S)
-    st.rerun()
+    # Auto-refresh (REMOVER - O st.rerun agora é comandado pela Thread!)
+    # time.sleep(REFRESH_S)
+    # st.rerun()
 
 
 # ═════════════════════════════════════════════════════════════════════════════
