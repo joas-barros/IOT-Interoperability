@@ -17,63 +17,16 @@ import plotly.express as px
 import plotly.graph_objects as go
 import requests
 import streamlit as st
+from streamlit_autorefresh import st_autorefresh
 from dotenv import load_dotenv
 
 import json
-import threading
-import redis
-from streamlit.runtime.scriptrunner import add_script_run_ctx, get_script_run_ctx
 
 load_dotenv()
 
 API_BASE = os.getenv("API_BASE_URL", "http://localhost:8000")
 
 REFRESH_S = int(os.getenv("DASHBOARD_REFRESH_S", "2"))
-
-# ── Motor Redis Pub/Sub (Event-Driven) ───────────────────────────────────────
-
-REDIS_URL = os.getenv("REDIS_URL", "redis://localhost:6379/0")
-
-# Prepara a gaveta de memória vazia na primeira vez que a página carrega
-if "twins_data" not in st.session_state:
-    st.session_state["twins_data"] = {"drones": {}, "stations": {}}
-
-def redis_listener():
-    """Ouve o canal Pub/Sub do Redis e atualiza a interface instantaneamente."""
-    try:
-        r = redis.from_url(REDIS_URL, decode_responses=True)
-        pubsub = r.pubsub()
-        pubsub.subscribe("twins_updates")
-
-        for message in pubsub.listen():
-            if message["type"] == "message":
-                # Recebe o JSON completo (Full State) que a API publicou
-                novo_estado = json.loads(message["data"])
-                
-                # Atualiza a memória da sessão
-                st.session_state["twins_data"] = novo_estado
-                
-                # O Truque Ninja: Força o Streamlit a redesenhar a tela
-                st.rerun()
-
-    except Exception as e:
-        print(f"[Redis Listener] Erro: {e}")
-        st.error(f"Falha no listener Redis: {e}")
-
-def start_redis_listener():
-    """Garante que a thread seja criada apenas uma vez por sessão."""
-    if "redis_thread_active" not in st.session_state:
-        listener_thread = threading.Thread(target=redis_listener, daemon=True)
-
-        ctx = get_script_run_ctx()
-        if ctx:
-            add_script_run_ctx(listener_thread, ctx)
-        
-        listener_thread.start()
-        st.session_state["redis_thread_active"] = True
-
-# Dispara a verificação da thread assim que o app inicia
-start_redis_listener()
 
 # ── Configuração da página ────────────────────────────────────────────────────
 
@@ -84,14 +37,20 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
+# ── Motor de Atualização (JavaScript Frontend) ────────────────────────────────
+# Executa no navegador, mantendo a tela nítida e sem fantasmas
+st_autorefresh(interval=REFRESH_S * 1000, key="data_refresh")
+
 # ── Helpers de API ────────────────────────────────────────────────────────────
 
+@st.cache_data(ttl=REFRESH_S)
 def fetch_twins() -> dict:
-    """
-    Agora lê os dados diretamente da memória instantânea do Streamlit,
-    alimentada pela Thread do Redis, em vez de fazer uma requisição HTTP.
-    """
-    return st.session_state.get("twins_data", {"drones": {}, "stations": {}})
+    try:
+        r = requests.get(f"{API_BASE}/twins", timeout=3)
+        return r.json() if r.ok else {"drones": {}, "stations": {}}
+    except Exception as e:
+        st.error(f"Falha ao buscar twins: {e}")
+        return {"drones": {}, "stations": {}}
 
 @st.cache_data(ttl=REFRESH_S)
 def fetch_status() -> dict:
@@ -268,7 +227,7 @@ if painel == "🔵 Estado Atual":
                         "lat": [lat], 
                         "lon": [lon],
                         "color": [marker_color],
-                        "radius": [15] # Um tamanho muito menor para o círculo
+                        "radius": [8] # Um tamanho muito menor para o círculo
                     })
 
                     # 4. Renderiza o mapa apontando as propriedades visuais para as colunas do DataFrame
@@ -278,8 +237,8 @@ if painel == "🔵 Estado Atual":
                         longitude="lon", 
                         color="color", 
                         size="radius",
-                        zoom=14, 
-                        use_container_width=True
+                        zoom=17, 
+                        width="stretch"
                     )
 
     # ── Estação ───────────────────────────────────────────────────────────
@@ -324,10 +283,6 @@ if painel == "🔵 Estado Atual":
                     st.metric("Taxa entrega",
                               f"{rate:.1f}%" if rate else "—")
 
-    # Auto-refresh (REMOVER - O st.rerun agora é comandado pela Thread!)
-    # time.sleep(REFRESH_S)
-    # st.rerun()
-
 
 # ═════════════════════════════════════════════════════════════════════════════
 #  PAINEL 2 — SENSORES (dados históricos)
@@ -366,7 +321,7 @@ elif painel == "🌡️ Sensores":
             markers=True,
         )
         fig.update_layout(height=280, margin=dict(t=10, b=10))
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width="stretch")
         st.caption(
             "📌 A diferença de temperatura entre drone e estação é explicada "
             "pelo gradiente adiabático (-0.65°C/100m de altitude)."
@@ -385,7 +340,7 @@ elif painel == "🌡️ Sensores":
                           markers=True)
             fig.update_layout(height=250, margin=dict(t=10, b=10),
                               showlegend=False)
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width="stretch")
 
     # ── Altitude (drone) ──────────────────────────────────────────────────
     with col2:
@@ -395,7 +350,7 @@ elif painel == "🌡️ Sensores":
             fig = px.area(df_alt, x="time", y="alt_m",
                           color_discrete_sequence=["#3B82F6"])
             fig.update_layout(height=250, margin=dict(t=10, b=10))
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width="stretch")
 
     # ── CO₂ e Pressão (estação) ───────────────────────────────────────────
     st.subheader("🏭 CO₂ e Pressão Atmosférica (Estação)")
@@ -409,7 +364,7 @@ elif painel == "🌡️ Sensores":
                           color_discrete_sequence=["#F59E0B"],
                           labels={"co2_ppm": "CO₂ (ppm)"}, markers=True)
             fig.update_layout(height=250, margin=dict(t=10, b=10))
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width="stretch")
 
     with col4:
         df_pres = df_sta[df_sta["pressure_hpa"].notna()]
@@ -418,7 +373,7 @@ elif painel == "🌡️ Sensores":
                           color_discrete_sequence=["#8B5CF6"],
                           labels={"pressure_hpa": "Pressão (hPa)"}, markers=True)
             fig.update_layout(height=250, margin=dict(t=10, b=10))
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width="stretch")
 
     # ── UV Index e Bateria ────────────────────────────────────────────────
     col5, col6 = st.columns(2)
@@ -430,7 +385,7 @@ elif painel == "🌡️ Sensores":
                           color_discrete_sequence=["#F97316"],
                           labels={"uv_index": "UV Index"})
             fig.update_layout(height=230, margin=dict(t=10, b=10))
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width="stretch")
 
     with col6:
         st.subheader("🔋 Bateria do Drone (%)")
@@ -442,7 +397,7 @@ elif painel == "🌡️ Sensores":
             fig.add_hline(y=20, line_dash="dash", line_color="red",
                           annotation_text="Limiar de retorno (20%)")
             fig.update_layout(height=230, margin=dict(t=10, b=10))
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width="stretch")
 
     # ── RSSI ──────────────────────────────────────────────────────────────
     st.subheader("📶 RSSI Wi-Fi (dBm)")
@@ -454,7 +409,7 @@ elif painel == "🌡️ Sensores":
                       markers=True,
                       labels={"rssi_dbm": "RSSI (dBm)"})
         fig.update_layout(height=250, margin=dict(t=10, b=10))
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width="stretch")
         st.caption("Valores mais próximos de 0 indicam sinal mais forte. "
                    "Abaixo de -80 dBm: sinal fraco.")
 
@@ -532,7 +487,7 @@ elif painel == "⏱️ Latência":
             line=dict(color="orange", width=2),
         )
         fig.update_layout(height=320, margin=dict(t=10, b=10))
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width="stretch")
 
     # ── Boxplot comparativo CoAP vs MQTT ──────────────────────────────────
     st.subheader("📦 Boxplot: CoAP vs MQTT")
@@ -556,7 +511,7 @@ elif painel == "⏱️ Latência":
         )
         fig.update_layout(height=350, margin=dict(t=10, b=10),
                           showlegend=False)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width="stretch")
 
     # ── Boxplot CBOR vs JSON ──────────────────────────────────────────────
     df_fmt = df[
@@ -584,7 +539,7 @@ elif painel == "⏱️ Latência":
         )
         fig.update_layout(height=320, margin=dict(t=10, b=10),
                           showlegend=False)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width="stretch")
 
     # ── Latência total vs transporte ──────────────────────────────────────
     st.subheader("📊 Latência Total vs Transporte")
@@ -619,7 +574,7 @@ elif painel == "⏱️ Latência":
             labels={"ms": "Latência (ms)", "time": "", "componente": ""},
         )
         fig.update_layout(height=300, margin=dict(t=10, b=10))
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width="stretch")
         st.caption(
             "Gráfico de barras empilhadas — decompõe a latência total "
             "em transporte e processamento gateway→datacenter."
@@ -679,7 +634,7 @@ elif painel == "📦 Confiabilidade":
                 },
             ))
             fig.update_layout(height=220, margin=dict(t=30, b=10, l=20, r=20))
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width="stretch")
 
             c1, c2, c3 = st.columns(3)
             c1.metric("Recebidas", received)
@@ -716,7 +671,7 @@ elif painel == "📦 Confiabilidade":
             df_summary["Recebidas"] /
             (df_summary["Recebidas"] + df_summary["Perdidas"]) * 100
         ).round(2)
-        st.dataframe(df_summary, use_container_width=True, hide_index=True)
+        st.dataframe(df_summary, width="stretch", hide_index=True)
 
     st.divider()
 

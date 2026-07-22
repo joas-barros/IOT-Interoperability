@@ -8,6 +8,7 @@ influxdb-client
 
 # Dashboard
 streamlit
+streamlit-autorefresh
 plotly
 pandas
 # HTTP client (Streamlit → FastAPI)
