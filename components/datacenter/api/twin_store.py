@@ -88,10 +88,6 @@ class TwinStore:
             else:
                 raise ValueError(f"Tipo de dispositivo desconhecido: {data.source_type}")
             
-            # --- PUBLICADOR PUB/SUB ---
-            # Após atualizar o banco, recupera o estado completo e publica
-            estado_atual = await self.get_all()
-            await redis_client.publish("twins_updates", json.dumps(estado_atual))
     
     async def get_drone(self, device_id: str) -> Optional[DroneTwin]:
         redis_client = await self._get_redis()
@@ -212,7 +208,11 @@ class TwinStore:
         )
 
         # Salva o Pydantic model como JSON no Redis Hash
-        await redis_client.hset("twins:drones", did, twin.model_dump_json())
+        twin_json = twin.model_dump_json()
+        await redis_client.hset("twins:drones", did, twin_json)
+
+        # Publica apenas o twin atualizado
+        await redis_client.publish(f"twin:drone:{did}", twin_json)
 
     # ── Atualização de Estação ────────────────────────────────────────────
     async def _update_station_twin(self, data: NormalizedData) -> None:
@@ -264,7 +264,9 @@ class TwinStore:
             uv_period  = self._uv_period(data.uv_index or 0.0),
         )
 
-        await redis_client.hset("twins:stations", sid, twin.model_dump_json())
+        twin_json = twin.model_dump_json()
+        await redis_client.hset("twins:stations", sid, twin_json)
+        await redis_client.publish(f"twin:station:{sid}", twin_json)
 
 
     # ── Inferências ───────────────────────────────────────────────────────
