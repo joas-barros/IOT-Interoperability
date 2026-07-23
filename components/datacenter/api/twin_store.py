@@ -298,7 +298,7 @@ class TwinStore:
 
         usable = max(0, battery - BATTERY_RESERVE_PCT)  # Assume 15% de reserva
         if drain == 0:
-            return math.inf  # Sem consumo, tempo infinito
+            return 999.0  # Sem consumo, tempo infinito
         
         remaining_s = usable / drain
         return round(remaining_s / 60, 1)  # Retorna em minutos
