@@ -56,16 +56,31 @@ class TwinStore:
     """
 
     def __init__(self):
-        self._lock = asyncio.Lock()
+        self._redis: Optional[redis.Redis] = None
+        self._lock:  Optional[asyncio.Lock] = None
 
-        # Inicializa o cliente Redis assíncrono. decode_responses=True converte bytes para string.
-        self.redis = redis.from_url(REDIS_URL, decode_responses=True)
+    async def _get_lock(self) -> asyncio.Lock:
+        """Garante que a trava de concorrência seja criada no event loop ativo."""
+        if self._lock is None:
+            self._lock = asyncio.Lock()
+        return self._lock
+
+    async def _get_redis(self) -> redis.Redis:
+        """Garante que a conexão Redis seja criada de forma lazy."""
+        if self._redis is None:
+            self._redis = redis.from_url(REDIS_URL, decode_responses=True)
+        return self._redis
 
     
     # ── Interface pública ─────────────────────────────────────────────────
     async def update(self, data: NormalizedData) -> None:
         """Atualiza o twin correspondente ao NormalizedData recebido."""
-        async with self._lock:
+
+        # 1. Pega os recursos instanciados de forma segura
+        lock = await self._get_lock()
+        redis_client = await self._get_redis()
+
+        async with lock:
             if data.source_type == "DRONE":
                 await self._update_drone_twin(data)
             elif data.source_type == "STATION":
@@ -76,22 +91,25 @@ class TwinStore:
             # --- PUBLICADOR PUB/SUB ---
             # Após atualizar o banco, recupera o estado completo e publica
             estado_atual = await self.get_all()
-            await self.redis.publish("twins_updates", json.dumps(estado_atual))
+            await redis_client.publish("twins_updates", json.dumps(estado_atual))
     
     async def get_drone(self, device_id: str) -> Optional[DroneTwin]:
-        raw = await self.redis.hget("twins:drones", device_id)
+        redis_client = await self._get_redis()
+        raw = await redis_client.hget("twins:drones", device_id)
         return DroneTwin.model_validate_json(raw) if raw else None
     
     async def get_station(self, device_id: str) -> Optional[StationTwin]:
-        raw = await self.redis.hget("twins:stations", device_id)
+        redis_client = await self._get_redis()
+        raw = await redis_client.hget("twins:stations", device_id)
         return StationTwin.model_validate_json(raw) if raw else None
     
     async def get_all(self) -> dict:
         """Busca todos os twins no Redis e formata para o endpoint GET /twins e Pub/Sub."""
+        redis_client = await self._get_redis()
         now = datetime.now(timezone.utc)
 
-        drones_raw = await self.redis.hgetall("twins:drones")
-        stations_raw = await self.redis.hgetall("twins:stations")
+        drones_raw = await redis_client.hgetall("twins:drones")
+        stations_raw = await redis_client.hgetall("twins:stations")
 
         drones = {}
         for did, raw in drones_raw.items():
@@ -148,6 +166,7 @@ class TwinStore:
         did = data.source_id
         now = datetime.now(timezone.utc)
 
+        redis_client = await self._get_redis()
         # Recupera o twin existente do Redis
         existing = await self.get_drone(did)
 
@@ -193,7 +212,7 @@ class TwinStore:
         )
 
         # Salva o Pydantic model como JSON no Redis Hash
-        await self.redis.hset("twins:drones", did, twin.model_dump_json())
+        await redis_client.hset("twins:drones", did, twin.model_dump_json())
 
     # ── Atualização de Estação ────────────────────────────────────────────
     async def _update_station_twin(self, data: NormalizedData) -> None:
@@ -206,11 +225,13 @@ class TwinStore:
         # Atualiza histórico de CO2
         co2 = data.co2_ppm or 0.0
         co2_key = f"twins:co2_history:{sid}"
-        await self.redis.rpush(co2_key, co2)
-        await self.redis.ltrim(co2_key, -CO2_HISTORY_SIZE, -1)  # Mantém apenas os últimos N
+
+        redis_client = await self._get_redis()
+        await redis_client.rpush(co2_key, co2)
+        await redis_client.ltrim(co2_key, -CO2_HISTORY_SIZE, -1)  # Mantém apenas os últimos N
 
         # Recupera a lista atualizada para calcular a tendência
-        raw_history = await self.redis.lrange(co2_key, 0, -1)
+        raw_history = await redis_client.lrange(co2_key, 0, -1)
         history = [float(x) for x in raw_history]
 
         twin = StationTwin(
@@ -243,7 +264,7 @@ class TwinStore:
             uv_period  = self._uv_period(data.uv_index or 0.0),
         )
 
-        await self.redis.hset("twins:stations", sid, twin.model_dump_json())
+        await redis_client.hset("twins:stations", sid, twin.model_dump_json())
 
 
     # ── Inferências ───────────────────────────────────────────────────────
@@ -251,10 +272,11 @@ class TwinStore:
     async def _detect_gaps(self, device_id: str, current_seq: int) -> int:
         """Lê o último seq do Redis, atualiza e calcula a diferença."""
 
-        last_str = await self.redis.hget("twins:last_seq", device_id)
+        redis_client = await self._get_redis()
+        last_str = await redis_client.hget("twins:last_seq", device_id)
         last = int(last_str) if last_str else None
 
-        await self.redis.hset("twins:last_seq", device_id, current_seq)
+        await redis_client.hset("twins:last_seq", device_id, current_seq)
 
         if last is None or current_seq <= last:
             return 0  # Primeira mensagem ou seq resetado
