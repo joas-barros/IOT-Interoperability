@@ -12,6 +12,7 @@ Endpoints:
   POST /gateway/metrics       ← recebe métricas periódicas do gateway
 """
 
+import asyncio
 import os
 from contextlib import asynccontextmanager
 from datetime import datetime, timezone
@@ -30,6 +31,7 @@ load_dotenv()
 # ── Singleton: TwinStore e InfluxWriter ───────────────────────────────────────
 twin_store = TwinStore()
 influx:    Optional[InfluxWriter] = None
+stats_lock: Optional[asyncio.Lock] = None
 
 # Contadores de sessão
 session_stats = {
@@ -44,7 +46,10 @@ session_stats = {
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Inicializa e encerra recursos ao subir/descer o servidor."""
-    global influx
+    global influx, stats_lock
+
+    stats_lock = asyncio.Lock()
+
     print("=" * 50)
     print("  Datacenter IoT — Iniciando")
     print(f"  Porta: {os.getenv('API_PORT', '8000')}")
@@ -96,12 +101,13 @@ async def ingest(data: NormalizedData):
         # 2. Persiste no InfluxDB (com latências calculadas)
         influx.write(data, datacenter_ts)
 
-        # 3. Atualiza contadores de sessão
-        session_stats["total_received"] += 1
-        if data.source_type == "DRONE":
-            session_stats["total_drones"] += 1
-        else:
-            session_stats["total_stations"] += 1
+        # 3. Atualiza contadores de sessão com proteção contra race conditions
+        async with stats_lock:
+            session_stats["total_received"] += 1
+            if data.source_type == "DRONE":
+                session_stats["total_drones"] += 1
+            else:
+                session_stats["total_stations"] += 1
         
         transport_ms = data.transport_latency_ms()
         total_ms     = (datacenter_ts - data.sensor_datetime()).total_seconds() * 1000
@@ -120,7 +126,9 @@ async def ingest(data: NormalizedData):
             "total_ms": round(total_ms, 2),
         }
     except Exception as e:
-        session_stats["total_errors"] += 1
+        # Protege também o contador de erros
+        async with stats_lock:
+            session_stats["total_errors"] += 1
         print(f"[ERROR] {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
