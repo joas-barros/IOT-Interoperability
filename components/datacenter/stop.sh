@@ -26,8 +26,8 @@ fi
 
 # ── 2. Para a API ───────────────────────────────────────────
 log "Encerrando a API..."
-if pgrep -f "uvicorn\|flask\|fastapi\|run_api.sh" > /dev/null; then
-    pkill -f "uvicorn\|flask\|fastapi\|run_api.sh"
+if pgrep -f "uvicorn|flask|fastapi|run_api.sh" > /dev/null; then
+    pkill -f "uvicorn|flask|fastapi|run_api.sh"
     log "API finalizada."
 else
     warn "API não estava rodando."

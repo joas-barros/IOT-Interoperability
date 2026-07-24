@@ -34,7 +34,7 @@ fi
 # ── 2. Verifica e Sobe a API ────────────────────────────────
 log "Verificando API..."
 # pgrep busca na lista de processos do Linux se o script ou o servidor Python já estão rodando
-if pgrep -f "run_api.sh" > /dev/null || pgrep -f "uvicorn\|flask\|fastapi" > /dev/null; then
+if pgrep -f "run_api.sh" > /dev/null || pgrep -f "uvicorn|flask|fastapi" > /dev/null; then
     warn "A API já parece estar em execução."
 else
     log "Iniciando API em background..."
