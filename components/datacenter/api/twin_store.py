@@ -44,7 +44,7 @@ OFFLINE_THRESHOLD_S = int(os.getenv("TWIN_OFFLINE_THRESHOLD_S", "30"))
 
 TEMP_BASE  = 28.0   # SENSOR_TEMP_BASE do config.h do ESP32
 
-REDIS_URL = os.getenv("REDIS_URL", "redis://localhost:6379/0")
+REDIS_URL = os.getenv("REDIS_URL", "redis://127.0.0.1:6379/0")
 
 class TwinStore:
     """
