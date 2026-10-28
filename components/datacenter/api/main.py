@@ -19,7 +19,7 @@ from datetime import datetime, timezone
 from typing import Optional
 
 from dotenv import load_dotenv
-from fastapi import FastAPI, HTTPException, Query
+from fastapi import APIRouter, FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 
 from api.influx import InfluxWriter
@@ -80,12 +80,13 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+router = APIRouter(prefix="/api/v1")
 
 # ─────────────────────────────────────────────────────────────────────────────
 #  POST /ingest — recebe dados do gateway
 # ─────────────────────────────────────────────────────────────────────────────
 
-@app.post("/ingest", status_code=200)
+@router.post("/ingest", status_code=200)
 async def ingest(data: NormalizedData):
     """
     Recebe NormalizedData do gateway, persiste no InfluxDB
@@ -137,7 +138,7 @@ async def ingest(data: NormalizedData):
 #  GET /twins — retorna todos os Digital Twins
 # ─────────────────────────────────────────────────────────────────────────────
 
-@app.get("/twins")
+@router.get("/twins")
 async def get_twins():
     """
     Retorna o estado atual de todos os Digital Twins.
@@ -145,7 +146,7 @@ async def get_twins():
     """
     return await twin_store.get_all()
 
-@app.get("/twins/{device_id}")
+@router.get("/twins/{device_id}")
 async def get_twin(device_id: str):
     """Retorna o twin de um dispositivo específico."""
     drone   = await twin_store.get_drone(device_id)
@@ -164,7 +165,7 @@ async def get_twin(device_id: str):
 #  GET /status — resumo do sistema
 # ─────────────────────────────────────────────────────────────────────────────
 
-@app.get("/status")
+@router.get("/status")
 async def get_status():
     """Resumo rápido do estado do sistema — health check."""
     return {
@@ -177,7 +178,7 @@ async def get_status():
 #  GET /metrics/latency
 # ─────────────────────────────────────────────────────────────────────────────
 
-@app.get("/metrics/latency")
+@router.get("/metrics/latency")
 def get_latency_metrics(
     source_type: Optional[str] = Query(None, description="DRONE ou STATION"),
     minutes:     int           = Query(60,   description="Janela de tempo em minutos"),
@@ -226,7 +227,7 @@ def get_latency_metrics(
 #  GET /metrics/delivery
 # ─────────────────────────────────────────────────────────────────────────────
 
-@app.get("/metrics/delivery")
+@router.get("/metrics/delivery")
 def get_delivery_metrics(
     minutes: int = Query(60, description="Janela de tempo em minutos"),
 ):
@@ -241,7 +242,7 @@ def get_delivery_metrics(
 #  GET /data — dados históricos de sensores
 # ─────────────────────────────────────────────────────────────────────────────
 
-@app.get("/data")
+@router.get("/data")
 def get_sensor_data(
     source_type: Optional[str] = Query(None, description="DRONE ou STATION"),
     minutes:     int           = Query(60,   description="Janela de tempo em minutos"),
@@ -257,7 +258,7 @@ def get_sensor_data(
 #  POST /gateway/metrics — recebe métricas periódicas do gateway
 # ─────────────────────────────────────────────────────────────────────────────
 
-@app.post("/gateway/metrics", status_code=200)
+@router.post("/gateway/metrics", status_code=200)
 async def receive_gateway_metrics(metrics: dict):
     """
     Recebe métricas internas do gateway (CoAP, MQTT, pipeline, HTTP forwarder).
