@@ -40,6 +40,10 @@ public class AppConfig {
     // ── Pipeline ──────────────────────────────────────────────────────────────
     private final long metricsIntervalMs;
 
+    // ── Autenticação ──────────────────────────────────────────────────────────
+    private final String authUsername;
+    private final String authPassword;
+
     // ─────────────────────────────────────────────────────────────────────────
 
     public AppConfig() {
@@ -78,6 +82,9 @@ public class AppConfig {
         retryQueueSize     = requireInt(props, "datacenter.retry.queue.size",   1,  10000);
 
         metricsIntervalMs  = requireLong(props, "pipeline.metrics.interval.ms", 5000, 3_600_000);
+
+        authPassword = requireString(props, "auth.password");
+        authUsername = requireString(props, "auth.username");
 
         logSummary();
     }
@@ -189,5 +196,15 @@ public class AppConfig {
     }
     public String getMetricsUrl() {
         return datacenterUrl + endpointMetrics;
+    }
+
+
+    public String getDatacenterUsername() {
+        return authUsername;
+    }
+
+
+    public String getDatacenterPassword() {
+        return authPassword;
     }
 }
