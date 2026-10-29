@@ -1,15 +1,25 @@
 """
-main.py — FastAPI: servidor HTTP do Datacenter IoT.
+main.py — FastAPI: datacenter IoT com camada de serviço versionada.
 
-Endpoints:
-  POST /ingest              ← recebe NormalizedData do gateway
-  GET  /twins                 ← retorna todos os Digital Twins (para o Streamlit)
-  GET  /twins/{device_id}     ← retorna um twin específico
-  GET  /status                ← resumo do sistema
-  GET  /metrics/latency       ← latências do período
-  GET  /metrics/delivery      ← taxa de entrega por dispositivo
-  GET  /data                  ← dados históricos de sensores
-  POST /gateway/metrics       ← recebe métricas periódicas do gateway
+  - Rotas versionadas sob /api/v1/
+  - Autenticação JWT (perfis admin e viewer)
+  - Rate limiting via slowapi
+  - CORS para o Streamlit dashboard
+
+Endpoints públicos:
+  POST /api/v1/auth/token     ← obtém Bearer token
+
+Endpoints autenticados (viewer ou admin):
+  GET  /api/v1/twins
+  GET  /api/v1/twins/{device_id}
+  GET  /api/v1/metrics/latency
+  GET  /api/v1/metrics/delivery
+  GET  /api/v1/status
+  GET  /api/v1/data
+
+Endpoints admin:
+  POST /api/v1/ingest
+  POST /api/v1/gateway/metrics
 """
 
 import asyncio
@@ -21,10 +31,17 @@ from typing import Optional
 from dotenv import load_dotenv
 from fastapi import APIRouter, FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
+from slowapi import _rate_limit_exceeded_handler
+from slowapi.errors import RateLimitExceeded
 
 from api.influx import InfluxWriter
-from api.models import NormalizedData
 from api.twin_store import TwinStore
+from api.middleware.rate_limiter import limiter
+
+from api.routers.auth_router    import router as auth_router
+from api.routers.twins_router   import router as twins_router
+from api.routers.data_router    import router as data_router
+from api.routers.metrics_router import router as metrics_router
 
 load_dotenv()
 
@@ -50,11 +67,13 @@ async def lifespan(app: FastAPI):
 
     stats_lock = asyncio.Lock()
 
-    print("=" * 50)
-    print("  Datacenter IoT — Iniciando")
-    print(f"  Porta: {os.getenv('API_PORT', '8000')}")
-    print(f"  InfluxDB: {os.getenv('INFLUX_URL', 'http://localhost:8086')}")
-    print("=" * 50)
+    print("=" * 55)
+    print("  Datacenter IoT v2 — Camada de Serviço")
+    print(f"  Porta      : {os.getenv('API_PORT', '8000')}")
+    print(f"  InfluxDB   : {os.getenv('INFLUX_URL', 'http://localhost:8086')}")
+    print(f"  Redis      : {os.getenv('REDIS_URL', 'redis://localhost:6379')}")
+    print(f"  JWT expire : {os.getenv('JWT_EXPIRE_MINUTES', '60')} min")
+    print("=" * 55)
 
     influx = InfluxWriter()
     yield
@@ -66,10 +85,21 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(
     title="Datacenter IoT Interoperável",
-    description="Ingestão, persistência e análise de dados do gateway IoT",
-    version="1.0.0",
-    lifespan=lifespan
+    description = (
+        "API versionada para ingestão, persistência e consulta de dados "
+        "do gateway IoT heterogêneo (TCC — UFERSA).\n\n"
+        "**Autenticação**: Bearer JWT. Obtenha um token em `POST /api/v1/auth/token`.\n\n"
+        "**Perfis**: `admin` (leitura + escrita) · `viewer` (somente leitura)."
+    ),
+    version="2.0.0",
+    lifespan=lifespan,
+    docs_url    = "/docs",
+    redoc_url   = "/redoc",
 )
+
+# Rate limiter — registra o handler de 429 Too Many Requests
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 # CORS — permite o Streamlit (localhost:8501) acessar a API (localhost:8000)
 app.add_middleware(
@@ -80,201 +110,25 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-router = APIRouter(prefix="/api/v1")
+# ── Routers ────────────────────────────────────────────────────────────────────
+app.include_router(auth_router)     # POST /api/v1/auth/token      (público)
+app.include_router(twins_router)    # GET  /api/v1/twins/**         (viewer+)
+app.include_router(data_router)     # GET  /api/v1/data             (viewer+)
+                                    # POST /api/v1/ingest            (admin)
+app.include_router(metrics_router)  # GET  /api/v1/metrics/**       (viewer+)
+                                    # GET  /api/v1/status            (viewer+)
+                                    # POST /api/v1/gateway/metrics   (admin)
 
-# ─────────────────────────────────────────────────────────────────────────────
-#  POST /ingest — recebe dados do gateway
-# ─────────────────────────────────────────────────────────────────────────────
-
-@router.post("/ingest", status_code=200)
-async def ingest(data: NormalizedData):
-    """
-    Recebe NormalizedData do gateway, persiste no InfluxDB
-    e atualiza o Digital Twin do dispositivo.
-    """
-
-    datacenter_ts = datetime.now(timezone.utc)
-
-    try:
-        # 1. Atualiza o Digital Twin (em memória — rápido)
-        await twin_store.update(data)
-
-        # 2. Persiste no InfluxDB (com latências calculadas)
-        influx.write(data, datacenter_ts)
-
-        # 3. Atualiza contadores de sessão com proteção contra race conditions
-        async with stats_lock:
-            session_stats["total_received"] += 1
-            if data.source_type == "DRONE":
-                session_stats["total_drones"] += 1
-            else:
-                session_stats["total_stations"] += 1
-        
-        transport_ms = data.transport_latency_ms()
-        total_ms     = (datacenter_ts - data.sensor_datetime()).total_seconds() * 1000
-
-        print(
-            f"[INGEST] {data.source_type:<8} | {data.source_id:<12} | "
-            f"seq={data.seq:<5} | "
-            f"fmt={data.payload_format or 'JSON':<4} | "
-            f"transport={transport_ms:.0f}ms | total={total_ms:.0f}ms"
-        )
-
-        return {
-            "status": "ok",
-            "datacenter_ts": datacenter_ts.isoformat(),
-            "transport_ms": round(transport_ms, 2),
-            "total_ms": round(total_ms, 2),
-        }
-    except Exception as e:
-        # Protege também o contador de erros
-        async with stats_lock:
-            session_stats["total_errors"] += 1
-        print(f"[ERROR] {e}")
-        raise HTTPException(status_code=500, detail=str(e))
-
-
-# ─────────────────────────────────────────────────────────────────────────────
-#  GET /twins — retorna todos os Digital Twins
-# ─────────────────────────────────────────────────────────────────────────────
-
-@router.get("/twins")
-async def get_twins():
-    """
-    Retorna o estado atual de todos os Digital Twins.
-    Consumido pelo Streamlit para o painel de estado atual.
-    """
-    return await twin_store.get_all()
-
-@router.get("/twins/{device_id}")
-async def get_twin(device_id: str):
-    """Retorna o twin de um dispositivo específico."""
-    drone   = await twin_store.get_drone(device_id)
-    station = await twin_store.get_station(device_id)
-    twin    = drone or station
-
-    if not twin:
-        raise HTTPException(
-            status_code=404,
-            detail=f"Dispositivo '{device_id}' não encontrado."
-        )
-    return twin.model_dump(mode="json")
-
-
-# ─────────────────────────────────────────────────────────────────────────────
-#  GET /status — resumo do sistema
-# ─────────────────────────────────────────────────────────────────────────────
-
-@router.get("/status")
-async def get_status():
-    """Resumo rápido do estado do sistema — health check."""
-    return {
-        "session":  session_stats,
-        "devices":  await twin_store.get_summary(),
-    }
-
-
-# ─────────────────────────────────────────────────────────────────────────────
-#  GET /metrics/latency
-# ─────────────────────────────────────────────────────────────────────────────
-
-@router.get("/metrics/latency")
-def get_latency_metrics(
-    source_type: Optional[str] = Query(None, description="DRONE ou STATION"),
-    minutes:     int           = Query(60,   description="Janela de tempo em minutos"),
-):
-    """
-    Latências do período — dados para os gráficos do artigo.
-    Retorna séries temporais de latency_transport_ms e latency_total_ms.
-    """
-    data = influx.query_latency(source_type=source_type, minutes=minutes)
-
-    if not data:
-        return {"data": [], "summary": {}}
-
-    transport_values = [d["latency_transport_ms"] for d in data
-                        if d["latency_transport_ms"] is not None]
-    total_values     = [d["latency_total_ms"] for d in data
-                        if d["latency_total_ms"] is not None]
-
-    def stats(values: list[float]) -> dict:
-        if not values:
-            return {}
-        import statistics
-        sorted_v = sorted(values)
-        n        = len(sorted_v)
-        return {
-            "count":  n,
-            "min":    round(min(sorted_v), 2),
-            "max":    round(max(sorted_v), 2),
-            "mean":   round(statistics.mean(sorted_v), 2),
-            "median": round(statistics.median(sorted_v), 2),
-            "p95":    round(sorted_v[int(n * 0.95)], 2),
-            "p99":    round(sorted_v[int(n * 0.99)], 2),
-            "stdev":  round(statistics.stdev(sorted_v), 2) if n > 1 else 0,
-        }
-
-    return {
-        "data":    data,
-        "summary": {
-            "transport_ms": stats(transport_values),
-            "total_ms":     stats(total_values),
-        },
-    }
-
-
-# ─────────────────────────────────────────────────────────────────────────────
-#  GET /metrics/delivery
-# ─────────────────────────────────────────────────────────────────────────────
-
-@router.get("/metrics/delivery")
-def get_delivery_metrics(
-    minutes: int = Query(60, description="Janela de tempo em minutos"),
-):
-    """
-    Taxa de entrega calculada via gaps no número de sequência.
-    Dados para o Experimento 2.1.
-    """
-    return influx.query_delivery_rate(minutes=minutes)
-
-
-# ─────────────────────────────────────────────────────────────────────────────
-#  GET /data — dados históricos de sensores
-# ─────────────────────────────────────────────────────────────────────────────
-
-@router.get("/data")
-def get_sensor_data(
-    source_type: Optional[str] = Query(None, description="DRONE ou STATION"),
-    minutes:     int           = Query(60,   description="Janela de tempo em minutos"),
-):
-    """
-    Dados históricos de sensores do período recente.
-    Retorna dados de temperatura, umidade, etc. para os gráficos.
-    """
-    return influx.query_sensor_data(source_type=source_type, minutes=minutes)
-
-
-# ─────────────────────────────────────────────────────────────────────────────
-#  POST /gateway/metrics — recebe métricas periódicas do gateway
-# ─────────────────────────────────────────────────────────────────────────────
-
-@router.post("/gateway/metrics", status_code=200)
-async def receive_gateway_metrics(metrics: dict):
-    """
-    Recebe métricas internas do gateway (CoAP, MQTT, pipeline, HTTP forwarder).
-    Armazenadas em memória para exibição no dashboard.
-    """
-    session_stats["gateway_metrics"] = {
-        **metrics,
-        "received_at": datetime.now(timezone.utc).isoformat(),
-    }
-    return {"status": "ok"}
+# ── Health check público (sem autenticação) ────────────────────────────────────
+@app.get("/health", tags=["Sistema"], include_in_schema=False)
+def health():
+    """Verifica se o servidor está no ar (sem autenticação)."""
+    return {"status": "ok", "version": "2.0.0"}
 
 
 # ─────────────────────────────────────────────────────────────────────────────
 #  Execução direta
 # ─────────────────────────────────────────────────────────────────────────────
-
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(
