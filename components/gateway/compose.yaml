@@ -7,8 +7,10 @@ services:
     restart: unless-stopped
     ports:
       - "1883:1883"
+      - "8883:8883"   # TLS — clientes externos
     volumes:
       - ./mosquitto/config/mosquitto.conf:/mosquitto/config/mosquitto.conf
+      - ./mqtt-certs:/mosquitto/certs:ro   # monta a pasta de certificados (read-only)
       - mosquitto_data:/mosquitto/data
       - mosquitto_log:/mosquitto/log
     healthcheck:
@@ -27,12 +29,14 @@ services:
         condition: service_healthy
     ports:
       - "5683:5683/udp"     # CoAP — recebe do drone (ESP32)
+      - "5684:5684/udp"
     environment:
       # Nome do serviço Compose — resolvido pela rede Docker interna
       MQTT_BROKER_HOST: mosquitto
       MQTT_BROKER_PORT: "1883"
       # IP do datacenter na rede local (ajuste para o IP real do PC)
       DATACENTER_URL: http://10.211.243.164:8000
+      DTLS_PSK_KEY: "5b97c00c4ab533401172ddc214346935"
     volumes:
       - gateway_logs:/app/logs
 

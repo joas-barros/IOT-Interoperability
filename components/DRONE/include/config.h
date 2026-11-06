@@ -16,8 +16,9 @@
 // ------------------------------------------------------------
 //  GATEWAY CoAP 
 // ------------------------------------------------------------
-#define GATEWAY_IP        "10.211.243.164"   
+#define GATEWAY_IP        "10.211.243.112"   
 #define GATEWAY_PORT      5683              // porta padrão CoAP
+#define GATEWAY_DTLS_PORT  5684
 #define COAP_ENDPOINT     "dados/drone"     // URI do recurso no servidor CoAP
 
 // Timeout aguardando ACK (ms)
@@ -52,16 +53,16 @@
 #define BASE_LON          -37.32216460818565
 
 // Altitude alvo de missão (metros)
-#define MISSION_ALT_M     10.0f
+#define MISSION_ALT_M     100.0f
 
 // Raio máximo de deslocamento horizontal em missão (metros)
 #define MISSION_RADIUS_M  200.0f
 
 // Bateria inicial (%)
-#define BATTERY_INITIAL   100
+#define BATTERY_INITIAL   68
 
 // Limiar de bateria para alerta (%) — ativa flag alerta_bat no payload
-#define BATTERY_ALERT_PCT  15
+#define BATTERY_ALERT_PCT  25
 
 // ------------------------------------------------------------
 //  FASES DE VOO — enum
@@ -130,14 +131,14 @@ struct Waypoint {
 // Waypoints reais próximos ao BASE_LAT/BASE_LON
 static const Waypoint WAYPOINTS[] = {
     // WP0 — Segue 100m para o Norte a partir da base
-    { -5.206745, -37.322164, 80.0f, false, 0      },  
+    { -5.206745, -37.322164, 100.0f, false, 0      },  
     
     // WP1 — Faz a curva 100m para o Leste (Primeiro ponto de inspeção)
-    { -5.206745, -37.321264, 80.0f, true,  20000  },  
+    { -5.206745, -37.321264, 100.0f, true,  20000  },  
     // WP2 — Desce 100m para o Sul
-    { -5.207645, -37.321264, 80.0f, false, 0      },  
+    { -5.207645, -37.321264, 100.0f, false, 0      },  
     // WP3 — Retorna 100m para o Oeste, voltando para exatamente em cima da base (Segundo ponto de inspeção)
-    { -5.207645, -37.322164, 80.0f, true,  20000  },
+    { -5.207645, -37.322164, 100.0f, true,  20000  },
 };
 static const uint8_t NUM_WAYPOINTS = sizeof(WAYPOINTS) / sizeof(Waypoint);
 

@@ -16,6 +16,9 @@ public class AppConfig {
     // ── CoAP ──────────────────────────────────────────────────────────────────
     private final int    coapPort;
     private final String coapResourceDrone;
+    private final int    coapDtlsPort;
+    private final String coapDtlsPskIdentity;
+    private final String coapDtlsPskKey;
 
     // ── MQTT ──────────────────────────────────────────────────────────────────
     private final String brokerHost;
@@ -53,6 +56,9 @@ public class AppConfig {
 
         coapPort           = requireInt(props, "coap.port", 1, 65535);
         coapResourceDrone  = requireString(props, "coap.resource.drone");
+        coapDtlsPort       = requireInt(props, "coap.dtls.port", 1, 65535);
+        coapDtlsPskIdentity = requireString(props, "coap.dtls.psk.identity");
+        coapDtlsPskKey     = System.getenv("DTLS_PSK_KEY");
 
         // Variáveis de ambiente sobrescrevem .properties (para Docker)
         brokerHost         = envOrProp("MQTT_BROKER_HOST",
@@ -173,6 +179,9 @@ public class AppConfig {
     public String getGatewayId()          { return gatewayId; }
     public int    getCoapPort()           { return coapPort; }
     public String getCoapResourceDrone()  { return coapResourceDrone; }
+    public int    getCoapDtlsPort()       { return coapDtlsPort; }
+    public String getCoapDtlsPskIdentity() { return coapDtlsPskIdentity; }
+    public String getCoapDtlsPskKey()     { return coapDtlsPskKey; }
     public String getBrokerHost()         { return brokerHost; }
     public int    getBrokerPort()         { return brokerPort; }
     public String getBrokerUser()         { return brokerUser; }

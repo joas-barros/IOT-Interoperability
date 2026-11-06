@@ -31,6 +31,13 @@
         </dependency>
 
         <dependency>
+            <groupId>org.eclipse.californium</groupId>
+            <artifactId>scandium</artifactId>
+            <version>${californium.version}</version>  <!-- 4.0.0-M6 -->
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
             <groupId>org.eclipse.paho</groupId>
             <artifactId>org.eclipse.paho.client.mqttv3</artifactId>
             <version>${paho.version}</version>
