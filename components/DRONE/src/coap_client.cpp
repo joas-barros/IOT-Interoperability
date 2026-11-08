@@ -19,7 +19,7 @@ static constexpr uint8_t  COAP_OPT_CONTENT    = 12;
 // ------------------------------------------------------------
 bool CoapClient::begin() {
     Serial.println("[CoAP] Iniciando cliente CoAP...");
-    DtlsConnectResult res = dtlsClient.connect(GATEWAY_IP, GATEWAY_DTLS_PORT);
+    DtlsConnectResult res = dtlsClient.connect(GATEWAY_IP, GATEWAY_PORT);
     if (res != DTLS_OK) {
         Serial.printf("[CoAP] Falha no handshake DTLS (err=%d). "
                       "Verifique PSK e conectividade.\n", res);
@@ -27,7 +27,7 @@ bool CoapClient::begin() {
     }
     Serial.printf("[CoAP] Pronto | Gateway: %s:%d | Endpoint: %s | "
                   "Handshake: %lums\n",
-                  GATEWAY_IP, GATEWAY_DTLS_PORT, COAP_ENDPOINT,
+                  GATEWAY_IP, GATEWAY_PORT, COAP_ENDPOINT,
                   dtlsClient.lastHandshakeMs());
     return true;
 }

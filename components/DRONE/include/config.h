@@ -16,9 +16,11 @@
 // ------------------------------------------------------------
 //  GATEWAY CoAP 
 // ------------------------------------------------------------
-#define GATEWAY_IP        "10.211.243.112"   
+#define GATEWAY_IP        "10.211.243.112"  
+ 
 #define GATEWAY_PORT      5683              // porta padrão CoAP
-#define GATEWAY_DTLS_PORT  5684
+// #define GATEWAY_PORT  5684 // porta padrão CoAP sobre DTLS (seguro)
+
 #define COAP_ENDPOINT     "dados/drone"     // URI do recurso no servidor CoAP
 
 // Timeout aguardando ACK (ms)
