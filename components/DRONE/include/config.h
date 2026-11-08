@@ -16,7 +16,7 @@
 // ------------------------------------------------------------
 //  GATEWAY CoAP 
 // ------------------------------------------------------------
-#define GATEWAY_IP        "10.211.243.112"  
+#define GATEWAY_IP        "10.139.22.112"  
  
 #define GATEWAY_PORT      5683              // porta padrão CoAP
 // #define GATEWAY_PORT  5684 // porta padrão CoAP sobre DTLS (seguro)
