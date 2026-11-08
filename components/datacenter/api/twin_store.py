@@ -37,7 +37,7 @@ ADIABATIC_LAPSE_RATE = 0.0065
 # Quantas leituras de CO2 manter para calcular tendência
 CO2_HISTORY_SIZE = 10
 
-BATTERY_RESERVE_PCT = 15  # Percentual de bateria que não deve ser usado para voo
+BATTERY_RESERVE_PCT = 25  # Percentual de bateria que não deve ser usado para voo
 
 # Tempo máximo sem mensagem para considerar offline (segundos)
 OFFLINE_THRESHOLD_S = int(os.getenv("TWIN_OFFLINE_THRESHOLD_S", "30"))
@@ -296,7 +296,7 @@ class TwinStore:
         phase = data.flight_phase or "UNKNOWN"
         drain = BATTERY_DRAIN_PER_S.get(phase, 0.05)
 
-        usable = max(0, battery - BATTERY_RESERVE_PCT)  # Assume 15% de reserva
+        usable = max(0, battery - BATTERY_RESERVE_PCT)  
         if drain == 0:
             return 999.0  # Sem consumo, tempo infinito
         

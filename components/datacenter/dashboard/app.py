@@ -19,6 +19,7 @@ import requests
 import streamlit as st
 from streamlit_autorefresh import st_autorefresh
 from dotenv import load_dotenv
+from urllib.parse import urlencode
 
 import json
 
@@ -43,11 +44,45 @@ st_autorefresh(interval=REFRESH_S * 1000, key="data_refresh")
 
 # ── Helpers de API ────────────────────────────────────────────────────────────
 
+def _qs(params: dict) -> str:
+    return urlencode({k: v for k, v in params.items() if v is not None})
+
+@st.cache_resource
+def get_token() -> str:
+    """Autentica no datacenter e retorna o Bearer token. Cache de sessão."""
+    resp = requests.post(
+        f"{API_BASE}/api/v1/auth/token",
+        json={"username": "viewer", "password": "viewer123"},
+        timeout=5,
+    )
+    resp.raise_for_status()
+    return resp.json()["access_token"]
+
+def api_get(path: str) -> dict:
+    """GET autenticado na API do datacenter."""
+    token = get_token()
+    resp = requests.get(
+        f"{API_BASE}{path}",
+        headers={"Authorization": f"Bearer {token}"},
+        timeout=10,
+    )
+    if resp.status_code == 401:
+        # Token expirou — limpa cache e tenta uma vez
+        st.cache_resource.clear()
+        token = get_token()
+        resp = requests.get(
+            f"{API_BASE}{path}",
+            headers={"Authorization": f"Bearer {token}"},
+            timeout=10,
+        )
+    resp.raise_for_status()
+    return resp.json()
+
+
 @st.cache_data(ttl=REFRESH_S)
 def fetch_twins() -> dict:
     try:
-        r = requests.get(f"{API_BASE}/twins", timeout=3)
-        return r.json() if r.ok else {"drones": {}, "stations": {}}
+        return api_get("/api/v1/twins")
     except Exception as e:
         st.error(f"Falha ao buscar twins: {e}")
         return {"drones": {}, "stations": {}}
@@ -55,8 +90,7 @@ def fetch_twins() -> dict:
 @st.cache_data(ttl=REFRESH_S)
 def fetch_status() -> dict:
     try:
-        r = requests.get(f"{API_BASE}/status", timeout=3)
-        return r.json() if r.ok else {}
+        return api_get("/api/v1/status")
     except Exception as e:
         st.error(f"Falha ao buscar status do sistema: {e}")
         return {}
@@ -67,8 +101,7 @@ def fetch_latency(source_type: str | None, minutes: int) -> dict:
     if source_type:
         params["source_type"] = source_type
     try:
-        r = requests.get(f"{API_BASE}/metrics/latency", params=params, timeout=3)
-        return r.json() if r.ok else {"data": [], "summary": {}}
+        return api_get(f"/api/v1/metrics/latency?{_qs(params)}")
     except Exception as e:
         st.error(f"Falha ao buscar métricas de latência: {e}")
         return {"data": [], "summary": {}}
@@ -79,8 +112,7 @@ def fetch_sensor_data(source_type: str | None, minutes: int) -> list:
     if source_type:
         params["source_type"] = source_type
     try:
-        r = requests.get(f"{API_BASE}/data", params=params, timeout=5)
-        return r.json() if r.ok else []
+        return api_get(f"/api/v1/data?{_qs(params)}")
     except Exception as e:
         st.error(f"Falha ao buscar dados históricos de sensores: {e}")
         return []
@@ -88,19 +120,14 @@ def fetch_sensor_data(source_type: str | None, minutes: int) -> list:
 @st.cache_data(ttl=5)
 def fetch_delivery(minutes: int) -> dict:
     try:
-        r = requests.get(
-            f"{API_BASE}/metrics/delivery",
-            params={"minutes": minutes},
-            timeout=5,
-        )
-        return r.json() if r.ok else {}
+        return api_get(f"/api/v1/metrics/delivery?minutes={minutes}")
     except Exception as e:
         st.error(f"Falha ao buscar métricas de entrega: {e}")
         return {}
 
 def api_online() -> bool:
     try:
-        r = requests.get(f"{API_BASE}/status", timeout=2)
+        r = requests.get(f"{API_BASE}/health", timeout=2)  # endpoint público
         return r.ok
     except Exception:
         return False

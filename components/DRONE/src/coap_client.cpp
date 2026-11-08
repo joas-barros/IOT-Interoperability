@@ -5,26 +5,37 @@
 #include "coap_client.h"
 
 CoapClient  coapClient;
-CoapClient* CoapClient::_instance = nullptr;
+
+// ── Constantes do protocolo CoAP (RFC 7252) ──────────────────
+static constexpr uint8_t  COAP_VERSION        = 1;
+static constexpr uint8_t  COAP_TYPE_CON       = 0;  // Confirmable
+static constexpr uint8_t  COAP_TYPE_ACK       = 2;  // Acknowledgement
+static constexpr uint8_t  COAP_CODE_POST      = 0x02; // 0.02 POST
+static constexpr uint8_t  COAP_CODE_CHANGED   = 0x44; // 2.04 Changed
+static constexpr uint8_t  COAP_CODE_BAD_REQ   = 0x80; // 4.00 Bad Request
+static constexpr uint8_t  COAP_OPT_URI_PATH   = 11;
+static constexpr uint8_t  COAP_OPT_CONTENT    = 12;
 
 // ------------------------------------------------------------
-void CoapClient::begin() {
-    _instance = this;
-
-    // Registra callback de resposta do servidor CoAP
-    _coap.response(_onResponse);
-
-    // Inicia o stack UDP/CoAP
-    _coap.start();
-
-    Serial.printf("[CoAP] Cliente iniciado | Gateway: %s:%d | Endpoint: %s\n",
-                  GATEWAY_IP, GATEWAY_PORT, COAP_ENDPOINT);
+bool CoapClient::begin() {
+    Serial.println("[CoAP] Iniciando cliente CoAP...");
+    DtlsConnectResult res = dtlsClient.connect(GATEWAY_IP, GATEWAY_PORT);
+    if (res != DTLS_OK) {
+        Serial.printf("[CoAP] Falha no handshake DTLS (err=%d). "
+                      "Verifique PSK e conectividade.\n", res);
+        return false;
+    }
+    Serial.printf("[CoAP] Pronto | Gateway: %s:%d | Endpoint: %s | "
+                  "Handshake: %lums\n",
+                  GATEWAY_IP, GATEWAY_PORT, COAP_ENDPOINT,
+                  dtlsClient.lastHandshakeMs());
+    return true;
 }
 
 // ------------------------------------------------------------
 uint16_t CoapClient::send(const uint8_t* payload,
                            size_t         payloadLen,
-                           COAP_CONTENT_TYPE       contentFormat) {
+                           uint8_t       contentFormat) {
     if (!isReady()) {
         Serial.println("[CoAP] AVISO: Mensagem pendente. Ignorado.");
         return 0;
@@ -45,45 +56,86 @@ uint16_t CoapClient::send(const uint8_t* payload,
 }
 
 // ------------------------------------------------------------
+//  _doSend() — monta pacote CoAP binário e envia via DTLS
+// ------------------------------------------------------------
 uint16_t CoapClient::_doSend() {
-    IPAddress gatewayIP;
-    gatewayIP.fromString(GATEWAY_IP);
+    uint8_t  pkt[512];
+    uint16_t pos = 0;
+    uint16_t msgId = _msgIdCounter++;
 
+    // ── Header (4 bytes) ─────────────────────────────────────
+    // Byte 0: Ver=1, T=CON(0), TKL=0
+    pkt[pos++] = (COAP_VERSION << 6) | (COAP_TYPE_CON << 4) | 0x00;
+    pkt[pos++] = COAP_CODE_POST;
+    pkt[pos++] = (msgId >> 8) & 0xFF;
+    pkt[pos++] =  msgId       & 0xFF;
+
+    // ── Options (delta-encoded) ───────────────────────────────
+    // Option 11 (Uri-Path): segmentos do endpoint "dados/drone"
+    // Cada segmento é uma opção separada com delta acumulado
+    const char* endpoint = COAP_ENDPOINT; // ex: "dados/drone"
+    uint8_t lastOptNum = 0;
+
+    char seg[32];
+    const char* p = endpoint;
+
+    while (*p) {
+        const char* slash = strchr(p, '/');
+        size_t segLen = slash ? (size_t)(slash - p) : strlen(p);
+        memcpy(seg, p, segLen);
+        seg[segLen] = '\0';
+
+        uint8_t delta = COAP_OPT_URI_PATH - lastOptNum;
+        // Delta e length em 1 byte cada (ambos < 13 — sem extensão)
+        pkt[pos++] = (delta << 4) | (segLen & 0x0F);
+        memcpy(pkt + pos, seg, segLen);
+        pos += segLen;
+        lastOptNum = COAP_OPT_URI_PATH;
+
+        p = slash ? slash + 1 : p + segLen;
+    }
+
+    // Option 12 (Content-Format): delta = 12 - 11 = 1
+    pkt[pos++] = (1 << 4) | 0x01;  // delta=1, length=1
+    pkt[pos++] = _contentFormat;
+
+    // ── Payload marker + payload ──────────────────────────────
+    pkt[pos++] = 0xFF; // payload marker obrigatório (RFC 7252 §3.1)
+    memcpy(pkt + pos, _payloadBuf, _payloadLen);
+    pos += _payloadLen;
+
+    // ── Envia pelo canal DTLS ─────────────────────────────────
     _sendTime = millis();
     _metrics.totalSent++;
-
-    uint16_t msgId = _coap.send(
-        gatewayIP,
-        GATEWAY_PORT,
-        COAP_ENDPOINT,
-        COAP_CON,                     // Tipo: Confirmable (Exige que o servidor responda com ACK)
-        COAP_POST,                    // Método: POST
-        NULL,                         // Token (não precisamos gerenciar token manual aqui)
-        0,                            // Tamanho do token
-        (const uint8_t*)_payloadBuf,  // Cast obrigatório do payload para ponteiro de bytes
-        _payloadLen,           // Tamanho do payload
-        _contentFormat
-    );
-
     _pendingMsgId = msgId;
 
-    Serial.printf("[CoAP] Enviado | msgId=%d | seq=%lu | retry=%d | payload=%d bytes\n",
-                  msgId, _metrics.totalSent, _retryCount, _payloadLen);
+    int sent = dtlsClient.send(pkt, pos);
 
+    if (sent < 0) {
+        Serial.println("[CoAP] Erro ao enviar pelo canal DTLS.");
+        // Tenta reconectar na próxima iteração do loop
+        _state = COAP_STATE_FAILED;
+        return 0;
+    }
+
+    Serial.printf("[CoAP] Enviado | msgId=%d | seq=%lu | retry=%d | %d bytes\n",
+                  msgId, (unsigned long)_metrics.totalSent,
+                  _retryCount, pos);
     return msgId;
 }
 
 // ------------------------------------------------------------
+//  loop() — processa ACKs e verifica timeout
+// ------------------------------------------------------------
 void CoapClient::loop() {
-    // Processa pacotes UDP recebidos (ACKs do servidor)
-    _coap.loop();
-
-    // Verifica timeout e retransmite se necessário
     if (_state == COAP_STATE_WAITING_ACK) {
+        _pollAck();
         _checkTimeout();
     }
 }
 
+// ------------------------------------------------------------
+//  _checkTimeout() — retransmissão com backoff
 // ------------------------------------------------------------
 void CoapClient::_checkTimeout() {
     uint32_t elapsed = millis() - _sendTime;
@@ -115,32 +167,47 @@ void CoapClient::_checkTimeout() {
 }
 
 // ------------------------------------------------------------
-void CoapClient::_handleAck(uint16_t msgId, uint8_t responseCode) {
-    if (_state != COAP_STATE_WAITING_ACK) return;
+//  _pollAck() — tenta ler um pacote do canal DTLS
+// ------------------------------------------------------------
+void CoapClient::_pollAck() {
+    uint8_t buf[64];
 
-    uint32_t rtt = millis() - _sendTime;
-    _lastRTT     = rtt;
+    int len = dtlsClient.recv(buf, sizeof(buf));
 
-    // Atualiza métricas
-    _metrics.totalAcked++;
-    _metrics.rttSum += rtt;
-    if (rtt < _metrics.rttMin) _metrics.rttMin = rtt;
-    if (rtt > _metrics.rttMax) _metrics.rttMax = rtt;
-
-    _state = COAP_STATE_SUCCESS;
-
-    Serial.printf("[CoAP] ACK recebido | msgId=%d | code=0x%02X | RTT=%lums\n",
-                  msgId, responseCode, rtt);
+    if (len > 0) {
+        _handlePacket(buf, len);
+    }
 }
 
 // ------------------------------------------------------------
-// Callback estático — chamado pela biblioteca quando um pacote chega
-void CoapClient::_onResponse(CoapPacket& packet, IPAddress ip, int port) {
-    if (_instance == nullptr) return;
+//  _handlePacket() — parseia header CoAP e processa ACK
+// ------------------------------------------------------------
+void CoapClient::_handlePacket(const uint8_t* buf, int len) {
+    if (len < 4) {
+        Serial.println("[CoAP] Pacote inválido (tamanho < 4 bytes). Ignorado.");
+        return;
+    }
 
-    // Verifica se é um ACK (type == COAP_ACK = 2)
-    if (packet.type == COAP_ACK || packet.type == COAP_CON) {
-        _instance->_handleAck(packet.messageid, packet.code);
+    uint8_t  type  = (buf[0] >> 4) & 0x03;
+    uint8_t  code  =  buf[1];
+    uint16_t msgId = ((uint16_t)buf[2] << 8) | buf[3];
+
+    if ((type == COAP_TYPE_ACK) && (msgId == _pendingMsgId)) {
+        uint32_t rtt = millis() - _sendTime;
+        _lastRTT     = rtt;
+
+        _metrics.totalAcked++;
+        _metrics.rttSum += rtt;
+        if (rtt < _metrics.rttMin) _metrics.rttMin = rtt;
+        if (rtt > _metrics.rttMax) _metrics.rttMax = rtt;
+
+        _state = COAP_STATE_SUCCESS;
+
+        Serial.printf("[CoAP] ACK recebido | msgId=%d | code=0x%02X | RTT=%lums\n",
+                      msgId, code, rtt);
+    } else {
+        Serial.printf("[CoAP] Pacote inesperado | type=%d | code=0x%02X | msgId=%d\n",
+                      type, code, msgId);
     }
 }
 

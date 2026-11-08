@@ -5,8 +5,7 @@
 // ============================================================
 
 #include <Arduino.h>
-#include <WiFiUdp.h>
-#include <coap-simple.h>
+#include "dtls_client.h"
 #include "config.h"
 
 // Estado interno de uma mensagem em trânsito
@@ -39,14 +38,14 @@ class CoapClient
 public:
     // Inicializa o cliente CoAP e registra o callback de resposta
     // Deve ser chamado no setup(), após conectar ao Wi-Fi
-    void begin();
+    bool begin();
 
     // Envia payload via CoAP POST (CON) para o gateway.
     // Não bloqueante — registra o envio e retorna imediatamente.
     // Retorna o messageId da mensagem enviada (0 em caso de erro).
     uint16_t send(const uint8_t *payload,
                   size_t payloadLen,
-                  COAP_CONTENT_TYPE contentFormat);
+                  uint8_t contentFormat);
 
     // Processa pacotes CoAP recebidos e gerencia timeout/retry.
     // DEVE ser chamado em todo loop() — é a engine do cliente.
@@ -76,38 +75,31 @@ public:
     }
 
 private:
-    WiFiUDP _udp;
-    Coap _coap{_udp};
-
-    CoapSendState _state = COAP_STATE_IDLE;
-    uint16_t _pendingMsgId = 0;
-    uint32_t _sendTime = 0; // millis() do último envio/retry
-    uint8_t _retryCount = 0;
-    uint32_t _lastRTT = 0;
+    CoapSendState _state        = COAP_STATE_IDLE;
+    uint16_t      _pendingMsgId = 0;
+    uint32_t      _sendTime     = 0;
+    uint8_t       _retryCount   = 0;
+    uint32_t      _lastRTT      = 0;
+    uint16_t      _msgIdCounter = 1; // gerador sequencial de messageId
 
     CoapMetrics _metrics;
 
     // Buffer interno para retransmissões adapta o tamanho automaticamente
-    uint8_t _payloadBuf[JSON_BUFFER_SIZE] = {};
+    uint8_t  _payloadBuf[JSON_BUFFER_SIZE] = {};
+    size_t   _payloadLen    = 0;
+    uint8_t  _contentFormat = 50; // application/json
 
-    size_t _payloadLen = 0;
-    COAP_CONTENT_TYPE _contentFormat = COAP_APPLICATION_JSON;
+    // Monta e envia um pacote CoAP POST manualmente sobre DTLS
+    uint16_t _doSend();
 
-    // Callback estático para a biblioteca CoAP
-    // (bibliotecas C++ geralmente exigem função estática para callbacks)
-    static void _onResponse(CoapPacket &packet, IPAddress ip, int port);
+    // Tenta ler e processar um ACK CoAP do canal DTLS
+    void _pollAck();
 
-    // Ponteiro para a instância atual (necessário no callback estático)
-    static CoapClient *_instance;
-
-    // Processa o ACK recebido internamente
-    void _handleAck(uint16_t msgId, uint8_t responseCode);
-
-    // Verifica timeout e executa retransmissão se necessário
+    // Verifica timeout e retransmite se necessário
     void _checkTimeout();
 
-    // Executa o envio CoAP POST com o payload atual
-    uint16_t _doSend();
+    // Processa bytes recebidos como pacote CoAP
+    void _handlePacket(const uint8_t* buf, int len);
 };
 
 extern CoapClient coapClient;

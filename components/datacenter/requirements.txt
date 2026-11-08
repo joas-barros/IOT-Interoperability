@@ -24,3 +24,10 @@ httpx
 
 # Redis
 redis
+
+# Autenticação JWT 
+python-jose[cryptography]
+passlib[bcrypt]
+
+# Rate limiting 
+slowapi

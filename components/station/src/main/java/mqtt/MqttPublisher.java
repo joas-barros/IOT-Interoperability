@@ -7,7 +7,13 @@ import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManagerFactory;
+import java.io.FileInputStream;
 import java.nio.charset.StandardCharsets;
+import java.security.KeyStore;
+import java.security.cert.CertificateFactory;
+import java.security.cert.X509Certificate;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Map;
@@ -38,8 +44,32 @@ public class MqttPublisher implements MqttCallbackExtended {
         this.mapper = new ObjectMapper();
     }
 
-    public void connect() throws MqttException {
-        String brokerUrl = String.format("tcp://%s:%d",
+    private static SSLContext buildSslContext(String caCertPath) throws Exception {
+        // Carrega o certificado da CA
+        CertificateFactory factory = CertificateFactory.getInstance("X.509");
+        try (FileInputStream fis = new FileInputStream(caCertPath)) {
+            X509Certificate caCert = (X509Certificate) factory.generateCertificate(fis);
+
+            // Cria um TrustStore em memória com a CA
+            KeyStore trustStore = KeyStore.getInstance(KeyStore.getDefaultType());
+            trustStore.load(null, null);
+            trustStore.setCertificateEntry("ca", caCert);
+
+            // Inicializa o TrustManager
+            TrustManagerFactory tmf = TrustManagerFactory.getInstance(
+                    TrustManagerFactory.getDefaultAlgorithm()
+            );
+            tmf.init(trustStore);
+
+            // Monta o SSLContext
+            SSLContext sslContext = SSLContext.getInstance("TLS");
+            sslContext.init(null, tmf.getTrustManagers(), null);
+            return sslContext;
+        }
+    }
+
+    public void connect() throws Exception {
+        String brokerUrl = String.format("ssl://%s:%d",
                 config.getBrokerHost(), config.getBrokerPort());
 
         // ClientId único: stationId + timestamp para evitar conflito
@@ -184,12 +214,13 @@ public class MqttPublisher implements MqttCallbackExtended {
     }
 
     // ── Configuração da conexão ───────────────────────────────────────────────
-    private MqttConnectOptions buildConnectOptions() throws MqttException {
+    private MqttConnectOptions buildConnectOptions() throws Exception {
         MqttConnectOptions opts = new MqttConnectOptions();
 
         opts.setConnectionTimeout(config.getConnectionTimeout());
         opts.setKeepAliveInterval(config.getKeepAlive());
-        opts.setCleanSession(false);
+        opts.setCleanSession(true);
+        opts.setSocketFactory(buildSslContext("./mqtt-certs/ca.crt").getSocketFactory());
         opts.setAutomaticReconnect(true);
         opts.setMaxReconnectDelay(30_000);
 

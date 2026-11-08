@@ -16,6 +16,9 @@ public class AppConfig {
     // ── CoAP ──────────────────────────────────────────────────────────────────
     private final int    coapPort;
     private final String coapResourceDrone;
+    private final int    coapDtlsPort;
+    private final String coapDtlsPskIdentity;
+    private final String coapDtlsPskKey;
 
     // ── MQTT ──────────────────────────────────────────────────────────────────
     private final String brokerHost;
@@ -40,6 +43,10 @@ public class AppConfig {
     // ── Pipeline ──────────────────────────────────────────────────────────────
     private final long metricsIntervalMs;
 
+    // ── Autenticação ──────────────────────────────────────────────────────────
+    private final String authUsername;
+    private final String authPassword;
+
     // ─────────────────────────────────────────────────────────────────────────
 
     public AppConfig() {
@@ -49,6 +56,9 @@ public class AppConfig {
 
         coapPort           = requireInt(props, "coap.port", 1, 65535);
         coapResourceDrone  = requireString(props, "coap.resource.drone");
+        coapDtlsPort       = requireInt(props, "coap.dtls.port", 1, 65535);
+        coapDtlsPskIdentity = requireString(props, "coap.dtls.psk.identity");
+        coapDtlsPskKey     = System.getenv("DTLS_PSK_KEY");
 
         // Variáveis de ambiente sobrescrevem .properties (para Docker)
         brokerHost         = envOrProp("MQTT_BROKER_HOST",
@@ -78,6 +88,9 @@ public class AppConfig {
         retryQueueSize     = requireInt(props, "datacenter.retry.queue.size",   1,  10000);
 
         metricsIntervalMs  = requireLong(props, "pipeline.metrics.interval.ms", 5000, 3_600_000);
+
+        authPassword = requireString(props, "auth.password");
+        authUsername = requireString(props, "auth.username");
 
         logSummary();
     }
@@ -166,6 +179,9 @@ public class AppConfig {
     public String getGatewayId()          { return gatewayId; }
     public int    getCoapPort()           { return coapPort; }
     public String getCoapResourceDrone()  { return coapResourceDrone; }
+    public int    getCoapDtlsPort()       { return coapDtlsPort; }
+    public String getCoapDtlsPskIdentity() { return coapDtlsPskIdentity; }
+    public String getCoapDtlsPskKey()     { return coapDtlsPskKey; }
     public String getBrokerHost()         { return brokerHost; }
     public int    getBrokerPort()         { return brokerPort; }
     public String getBrokerUser()         { return brokerUser; }
@@ -189,5 +205,15 @@ public class AppConfig {
     }
     public String getMetricsUrl() {
         return datacenterUrl + endpointMetrics;
+    }
+
+
+    public String getDatacenterUsername() {
+        return authUsername;
+    }
+
+
+    public String getDatacenterPassword() {
+        return authPassword;
     }
 }

@@ -8,10 +8,18 @@ import org.eclipse.californium.core.CoapExchange;
 import org.eclipse.californium.core.CoapResource;
 import org.eclipse.californium.core.CoapServer;
 import org.eclipse.californium.core.coap.CoAP;
+import org.eclipse.californium.core.network.CoapEndpoint;
+import org.eclipse.californium.elements.config.Configuration;
+import org.eclipse.californium.scandium.DTLSConnector;
+import org.eclipse.californium.scandium.config.DtlsConfig;
+import org.eclipse.californium.scandium.config.DtlsConnectorConfig;
+import org.eclipse.californium.scandium.dtls.pskstore.SinglePskStore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pipeline.DataPipeline;
 
+import java.net.InetSocketAddress;
+import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.concurrent.atomic.AtomicLong;
@@ -45,7 +53,33 @@ public class GatewayCoapServer {
         this.pipeline = pipeline;
 
         // Cria o servidor Californium na porta UDP configurada
-        this.server = new CoapServer(config.getCoapPort());
+        this.server = new CoapServer();
+
+        // ── Endpoint DTLS/PSK na porta 5684 ──────────────────────────────
+        DtlsConnectorConfig.Builder dtlsBuilder =
+                DtlsConnectorConfig.builder(new Configuration())
+                        .setAddress(new InetSocketAddress(config.getCoapDtlsPort()))
+                        // PSK store: valida identidade e retorna a chave compartilhada
+                        .setPskStore(new SinglePskStore(
+                                config.getCoapDtlsPskIdentity(),
+                                config.getCoapDtlsPskKey().getBytes(StandardCharsets.ISO_8859_1)))
+                        // Papel: servidor DTLS
+                        .set(DtlsConfig.DTLS_ROLE, DtlsConfig.DtlsRole.SERVER_ONLY);
+
+        DTLSConnector dtlsConnector = new DTLSConnector(dtlsBuilder.build());
+
+        CoapEndpoint dtlsEndpoint = CoapEndpoint.builder()
+                .setConnector(dtlsConnector)
+                        .build();
+
+        server.addEndpoint(dtlsEndpoint);
+
+        // ── Endpoint UDP simples na porta 5683 (loopback — testes locais) ─
+        CoapEndpoint udpEndpoint = CoapEndpoint.builder()
+                .setInetSocketAddress(
+                        new InetSocketAddress("127.0.0.1", config.getCoapPort())
+                ).build();
+        server.addEndpoint(udpEndpoint);
 
         // Registra o recurso do drone
         server.add(new DroneResource());

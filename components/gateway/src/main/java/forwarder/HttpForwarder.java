@@ -47,6 +47,12 @@ public class HttpForwarder {
     private final AtomicLong latencySum      = new AtomicLong(0);
     private final AtomicLong latencyCount    = new AtomicLong(0);
 
+    // ── Autenticação JWT ──────────────────────────────────────────────────────
+    private final String datacenterBaseUrl;
+    private final String authUsername;
+    private final String authPassword;
+    private volatile String bearerToken;
+
     public HttpForwarder(AppConfig config) {
         this.config   = config;
         this.mapper   = new ObjectMapper();
@@ -60,6 +66,42 @@ public class HttpForwarder {
                 .version(HttpClient.Version.HTTP_1_1)
                 .connectTimeout(Duration.ofMillis(config.getConnectTimeoutMs()))
                 .build();
+
+        this.datacenterBaseUrl = config.getDatacenterUrl();
+        this.authUsername = config.getDatacenterUsername(); // adicionar no AppConfig
+        this.authPassword = config.getDatacenterPassword(); // adicionar no AppConfig
+        this.bearerToken  = authenticate();
+    }
+
+    private String authenticate() {
+        try {
+            String body = String.format(
+                    "{\"username\":\"%s\",\"password\":\"%s\"}",
+                    authUsername, authPassword);
+
+            HttpRequest req = HttpRequest.newBuilder()
+                    .uri(URI.create(datacenterBaseUrl + "/api/v1/auth/token"))
+                    .header("Content-Type", "application/json")
+                    .timeout(Duration.ofSeconds(10))
+                    .POST(HttpRequest.BodyPublishers.ofString(body))
+                    .build();
+
+            HttpResponse<String> resp = httpClient.send(
+                    req, HttpResponse.BodyHandlers.ofString());
+
+            if (resp.statusCode() != 200) {
+                throw new RuntimeException("Auth falhou: HTTP " + resp.statusCode());
+            }
+
+            // Extrai access_token do JSON de resposta
+            var json = mapper.readValue(resp.body(), java.util.Map.class);
+            String token = (String) json.get("access_token");
+            log.info("[HTTP] JWT obtido com sucesso.");
+            return token;
+
+        } catch (Exception e) {
+            throw new RuntimeException("[HTTP] Falha de autenticação no datacenter", e);
+        }
     }
 
     /**
@@ -131,6 +173,7 @@ public class HttpForwarder {
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(config.getIngestUrl()))
                     .header("Content-Type", "application/json")
+                    .header("Authorization", "Bearer " + bearerToken)
                     .header("X-Gateway-Id", config.getGatewayId())
                     .header("X-Source-Type", data.sourceType)
                     .timeout(Duration.ofMillis(config.getReadTimeoutMs()))
@@ -161,6 +204,15 @@ public class HttpForwarder {
 
     private void handleHttpError(NormalizedData data, int attempt,
                                  int status, String body) {
+
+        // token expirado → renova e reenvia imediatamente (não conta como retry)
+        if (status == 401) {
+            log.warn("[HTTP] Token expirado — renovando JWT...");
+            this.bearerToken = authenticate();
+            sendWithRetry(data, attempt);  // retenta com token novo
+            return;
+        }
+
         totalError.incrementAndGet();
         log.warn("[HTTP] Erro {} | src={} seq={} | body={}",
                 status, data.sourceId, data.seq,
