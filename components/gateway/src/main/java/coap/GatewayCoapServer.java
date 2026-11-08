@@ -77,7 +77,7 @@ public class GatewayCoapServer {
         // ── Endpoint UDP simples na porta 5683 (loopback — testes locais) ─
         CoapEndpoint udpEndpoint = CoapEndpoint.builder()
                 .setInetSocketAddress(
-                        new InetSocketAddress("127.0.0.1", config.getCoapPort())
+                        new InetSocketAddress(config.getCoapPort())
                 ).build();
         server.addEndpoint(udpEndpoint);
 
