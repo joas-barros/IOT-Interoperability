@@ -301,5 +301,7 @@ public class HttpForwarder {
         log.info("╚══════════════════════════════════════════╝");
     }
 
+    public String getBearerToken() { return bearerToken; }
+
     private record RetryEntry(NormalizedData data, int attempt, long retryAfter) {}
 }

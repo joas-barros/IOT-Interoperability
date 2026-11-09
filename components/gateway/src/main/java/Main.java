@@ -151,6 +151,7 @@ public class Main {
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(java.net.URI.create(config.getMetricsUrl()))
                     .header("Content-Type", "application/json")
+                    .header("Authorization", "Bearer " + forwarder.getBearerToken())
                     .POST(HttpRequest.BodyPublishers.ofString(json))
                     .timeout(java.time.Duration.ofSeconds(5))
                     .build();
