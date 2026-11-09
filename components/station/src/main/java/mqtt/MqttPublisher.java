@@ -221,7 +221,11 @@ public class MqttPublisher implements MqttCallbackExtended {
         opts.setConnectionTimeout(config.getConnectionTimeout());
         opts.setKeepAliveInterval(config.getKeepAlive());
         opts.setCleanSession(true);
-        opts.setSocketFactory(buildSslContext("./mqtt-certs/ca.crt").getSocketFactory());
+
+        if (config.isTlsEnabled()) {
+            opts.setSocketFactory(buildSslContext("./mqtt-certs/ca.crt").getSocketFactory());
+        }
+
         opts.setAutomaticReconnect(true);
         opts.setMaxReconnectDelay(30_000);
 
