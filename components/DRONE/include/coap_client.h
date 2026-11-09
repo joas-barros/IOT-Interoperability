@@ -7,6 +7,13 @@
 #include <Arduino.h>
 #include "dtls_client.h"
 #include "config.h"
+#include <WiFiUdp.h>
+
+// Content-Format CoAP (RFC 7252 §12.3)
+enum COAP_CONTENT_TYPE : uint8_t {
+    COAP_APPLICATION_JSON = 50,  // application/json
+    COAP_APPLICATION_CBOR = 60   // application/cbor
+};
 
 // Estado interno de uma mensagem em trânsito
 enum CoapSendState
@@ -59,6 +66,10 @@ public:
 
     // Métricas da sessão completa
     const CoapMetrics &getMetrics() const { return _metrics; }
+
+    #if !COAP_USE_DTLS
+        WiFiUDP  _udp;     
+    #endif
 
     // Imprime resumo de métricas no Serial
     void printMetrics() const { _metrics.print(); }

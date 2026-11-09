@@ -18,17 +18,20 @@ static constexpr uint8_t  COAP_OPT_CONTENT    = 12;
 
 // ------------------------------------------------------------
 bool CoapClient::begin() {
-    Serial.println("[CoAP] Iniciando cliente CoAP...");
+#if COAP_USE_DTLS
     DtlsConnectResult res = dtlsClient.connect(GATEWAY_IP, GATEWAY_PORT);
     if (res != DTLS_OK) {
         Serial.printf("[CoAP] Falha no handshake DTLS (err=%d). "
                       "Verifique PSK e conectividade.\n", res);
         return false;
     }
-    Serial.printf("[CoAP] Pronto | Gateway: %s:%d | Endpoint: %s | "
-                  "Handshake: %lums\n",
-                  GATEWAY_IP, GATEWAY_PORT, COAP_ENDPOINT,
-                  dtlsClient.lastHandshakeMs());
+    Serial.printf("[CoAP] DTLS OK | Gateway: %s:%d | Handshake: %lums\n",
+                  GATEWAY_IP, GATEWAY_PORT, dtlsClient.lastHandshakeMs());
+#else
+    _udp.begin(0);  // porta efêmera local
+    Serial.printf("[CoAP] UDP puro | Gateway: %s:%d | Endpoint: %s\n",
+                  GATEWAY_IP, GATEWAY_PORT, COAP_ENDPOINT);
+#endif
     return true;
 }
 
@@ -36,6 +39,21 @@ bool CoapClient::begin() {
 uint16_t CoapClient::send(const uint8_t* payload,
                            size_t         payloadLen,
                            uint8_t       contentFormat) {
+
+    #if COAP_USE_DTLS
+        // Reconexão automática após falha ou sessão caída
+        if (_state == COAP_STATE_FAILED || !dtlsClient.isConnected()) {
+            Serial.println("[CoAP] Sessão DTLS inativa — reconectando...");
+            DtlsConnectResult res = dtlsClient.connect(GATEWAY_IP, GATEWAY_PORT);
+            if (res != DTLS_OK) {
+                Serial.printf("[CoAP] Reconexão falhou (err=%d). Descartando seq.\n", res);
+                return 0;
+            }
+            _state = COAP_STATE_IDLE;
+            Serial.println("[CoAP] Reconexão DTLS bem-sucedida.");
+        }
+    #endif
+
     if (!isReady()) {
         Serial.println("[CoAP] AVISO: Mensagem pendente. Ignorado.");
         return 0;
@@ -109,14 +127,23 @@ uint16_t CoapClient::_doSend() {
     _metrics.totalSent++;
     _pendingMsgId = msgId;
 
-    int sent = dtlsClient.send(pkt, pos);
-
-    if (sent < 0) {
-        Serial.println("[CoAP] Erro ao enviar pelo canal DTLS.");
-        // Tenta reconectar na próxima iteração do loop
-        _state = COAP_STATE_FAILED;
-        return 0;
-    }
+    #if COAP_USE_DTLS
+        int sent = dtlsClient.send(pkt, pos);
+        if (sent < 0) {
+            Serial.println("[CoAP] Erro ao enviar pelo canal DTLS.");
+            _state = COAP_STATE_FAILED;
+            return 0;
+        }
+    #else
+        _udp.beginPacket(GATEWAY_IP, GATEWAY_PORT);
+        _udp.write(pkt, pos);
+        if (!_udp.endPacket()) {
+            Serial.println("[CoAP] Erro ao enviar UDP.");
+            _state = COAP_STATE_FAILED;
+            return 0;
+        }
+        int sent = pos;
+    #endif
 
     Serial.printf("[CoAP] Enviado | msgId=%d | seq=%lu | retry=%d | %d bytes\n",
                   msgId, (unsigned long)_metrics.totalSent,
@@ -128,6 +155,14 @@ uint16_t CoapClient::_doSend() {
 //  loop() — processa ACKs e verifica timeout
 // ------------------------------------------------------------
 void CoapClient::loop() {
+
+    #if COAP_USE_DTLS
+        if (_state == COAP_STATE_WAITING_ACK && !dtlsClient.isConnected()) {
+            Serial.println("[CoAP] Sessão DTLS caiu durante espera de ACK. Resetando.");
+            _state = COAP_STATE_FAILED;
+        }
+    #endif
+    
     if (_state == COAP_STATE_WAITING_ACK) {
         _pollAck();
         _checkTimeout();
@@ -171,8 +206,16 @@ void CoapClient::_checkTimeout() {
 // ------------------------------------------------------------
 void CoapClient::_pollAck() {
     uint8_t buf[64];
+    int len = 0;
 
-    int len = dtlsClient.recv(buf, sizeof(buf));
+#if COAP_USE_DTLS
+    len = dtlsClient.recv(buf, sizeof(buf));
+#else
+    int available = _udp.parsePacket();
+    if (available > 0) {
+        len = _udp.read(buf, sizeof(buf));
+    }
+#endif
 
     if (len > 0) {
         _handlePacket(buf, len);

@@ -155,7 +155,7 @@ bool PayloadBuilder::_buildJson(uint8_t* buffer, size_t bufferSize,
                                  const SensorData& sd,
                                  uint32_t seq) {
 
-    StaticJsonDocument<JSON_DOC_SIZE> doc;
+    JsonDocument doc;
 
     doc["id"]   = DRONE_ID;
     doc["ts"]   = ntpSync.getTimestamp();
