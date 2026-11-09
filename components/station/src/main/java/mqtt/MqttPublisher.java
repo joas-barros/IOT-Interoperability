@@ -69,7 +69,8 @@ public class MqttPublisher implements MqttCallbackExtended {
     }
 
     public void connect() throws Exception {
-        String brokerUrl = String.format("ssl://%s:%d",
+        String brokerUrl = String.format("%s://%s:%d",
+                config.isTlsEnabled() ? "ssl" : "tcp",
                 config.getBrokerHost(), config.getBrokerPort());
 
         // ClientId único: stationId + timestamp para evitar conflito

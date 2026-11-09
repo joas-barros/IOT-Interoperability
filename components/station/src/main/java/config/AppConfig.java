@@ -230,4 +230,8 @@ public class AppConfig {
     public double  getUvBase()            { return uvBase; }
     public double  getUvSigma()           { return uvSigma; }
     public long    getRandomSeed()        { return randomSeed; }
+
+    public boolean isTlsEnabled() {
+        return brokerPort == 8883;
+    }
 }
