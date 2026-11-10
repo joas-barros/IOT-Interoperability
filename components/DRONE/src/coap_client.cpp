@@ -79,7 +79,15 @@ uint16_t CoapClient::send(const uint8_t* payload,
 uint16_t CoapClient::_doSend() {
     uint8_t  pkt[512];
     uint16_t pos = 0;
-    uint16_t msgId = _msgIdCounter++;
+
+    // ── Gera novo msgId apenas na primeira tentativa ──────────
+    uint16_t msgId;
+    if (_retryCount == 0) {
+        msgId = _msgIdCounter++;
+        _pendingMsgId = msgId;   // salva para validar ACK
+    } else {
+        msgId = _pendingMsgId;   // retransmissão: mesmo msgId (RFC 7252 §4.2)
+    }
 
     // ── Header (4 bytes) ─────────────────────────────────────
     // Byte 0: Ver=1, T=CON(0), TKL=0
@@ -209,7 +217,14 @@ void CoapClient::_pollAck() {
     int len = 0;
 
 #if COAP_USE_DTLS
-    len = dtlsClient.recv(buf, sizeof(buf));
+    // Tenta ler por até 200ms (ACK chega em ~30-50ms normalmente)
+    uint32_t deadline = millis() + 200;
+    while (millis() < deadline) {
+        len = dtlsClient.recv(buf, sizeof(buf));
+        if (len > 0) break;
+        if (len < 0) return;  // sessão caiu
+        delay(5);
+    }
 #else
     int available = _udp.parsePacket();
     if (available > 0) {
