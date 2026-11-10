@@ -7,6 +7,7 @@ import normalizer.DroneNormalizer;
 import normalizer.StationNormalizer;
 import org.eclipse.californium.core.config.CoapConfig;
 import org.eclipse.californium.elements.config.UdpConfig;
+import org.eclipse.californium.scandium.config.DtlsConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pipeline.DataPipeline;
@@ -221,6 +222,7 @@ public class Main {
 
     public static void main(String[] args) {
         try {
+            DtlsConfig.register();
             CoapConfig.register();
             UdpConfig.register();
 
