@@ -69,18 +69,14 @@ public class GatewayCoapServer {
 
         DTLSConnector dtlsConnector = new DTLSConnector(dtlsBuilder.build());
 
-        try {
-            dtlsConnector.start();
-        } catch (IOException e) {
-            throw new RuntimeException("[CoAP] Falha ao iniciar DTLSConnector na porta "
-                    + config.getCoapDtlsPort(), e);
-        }
-
         CoapEndpoint dtlsEndpoint = CoapEndpoint.builder()
                 .setConnector(dtlsConnector)
                         .build();
 
         server.addEndpoint(dtlsEndpoint);
+
+        log.info("[CoAP] Endpoint DTLS registrado | porta udp/{} | PSK identity: {}",
+                config.getCoapDtlsPort(), config.getCoapDtlsPskIdentity());
 
         // ── Endpoint UDP simples na porta 5683 (loopback — testes locais) ─
         CoapEndpoint udpEndpoint = CoapEndpoint.builder()
