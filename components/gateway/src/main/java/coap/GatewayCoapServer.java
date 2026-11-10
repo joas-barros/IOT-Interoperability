@@ -18,6 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pipeline.DataPipeline;
 
+import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
 import java.time.Instant;
@@ -67,6 +68,13 @@ public class GatewayCoapServer {
                         .set(DtlsConfig.DTLS_ROLE, DtlsConfig.DtlsRole.SERVER_ONLY);
 
         DTLSConnector dtlsConnector = new DTLSConnector(dtlsBuilder.build());
+
+        try {
+            dtlsConnector.start();
+        } catch (IOException e) {
+            throw new RuntimeException("[CoAP] Falha ao iniciar DTLSConnector na porta "
+                    + config.getCoapDtlsPort(), e);
+        }
 
         CoapEndpoint dtlsEndpoint = CoapEndpoint.builder()
                 .setConnector(dtlsConnector)
