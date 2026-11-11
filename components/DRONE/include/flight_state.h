@@ -34,6 +34,14 @@ public:
     bool    isBatteryAlert() const { return _battery <= BATTERY_ALERT_PCT; }
     bool    isMissionDone()  const { return _missionDone; }
 
+    // Taxa de consumo efetiva do último ciclo (%/s, após fatores de temp e vento)
+    // Exposta no payload para o dataset de ML
+    float   getDrainRate()   const { return _lastDrainRate; }
+
+    // Temperatura atual (armazenada a cada update() para uso interno)
+    // Necessária para o cálculo do fator de temperatura no _drainBattery
+    void    setCurrentTemp(float temp_c) { _currentTemp = temp_c; }
+
     // Tempo decorrido na fase atual (ms)
     uint32_t getPhaseElapsed() const { return millis() - _phaseStartMs; }
 
@@ -56,6 +64,8 @@ private:
 
     // Sistema
     float    _battery       = BATTERY_INITIAL;
+    float    _lastDrainRate = 0.0f;   // taxa efetiva do último ciclo (%/s)
+    float    _currentTemp   = BATTERY_TEMP_REF; // temperatura atual (°C)
     uint32_t _phaseStartMs  = 0;
     uint32_t _takeoffStartMs = 0;
     uint32_t _lastUpdateMs  = 0;
@@ -85,7 +95,8 @@ private:
     float _calcHeading(double lat1, double lon1,
                        double lat2, double lon2) const;
 
-    // Drena bateria baseado na fase e tempo decorrido
+    // Drena bateria baseado na fase, tempo decorrido, temperatura e heading
+    // Atualiza _lastDrainRate com a taxa efetiva aplicada
     void _drainBattery(float dt);
 };
 

@@ -53,6 +53,11 @@ static bool missionReported = false;
 // Contadores de ciclo do loop para diagnóstico
 static uint32_t loopCount = 0;
 
+// Última temperatura lida pelo SensorSim — alimenta o fator de
+// temperatura do _drainBattery() em cada ciclo do loop, mesmo
+// quando não é hora de publicar um payload.
+static float lastTempC = SENSOR_TEMP_BASE;
+
 // ------------------------------------------------------------
 //  Funções auxiliares
 // ------------------------------------------------------------
@@ -224,6 +229,9 @@ void loop() {
     }
 
     // ---- 3. Avança máquina de estados de voo ----
+    // Alimenta a temperatura atual antes de update() para que
+    // _drainBattery() use o fator de temperatura correto neste ciclo.
+    flightState.setCurrentTemp(lastTempC);
     bool transitioned = flightState.update();
 
     if (transitioned) {
@@ -246,6 +254,7 @@ void loop() {
             flightState.getAlt(),
             wifiManager.getRSSI()
         );
+        lastTempC = sd.temp_c;  // atualiza para os próximos ciclos sem publicação
 
         // 4b. Monta e valida payload
         bool ok = payloadBuilder.build(

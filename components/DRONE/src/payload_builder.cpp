@@ -1,7 +1,7 @@
 // ============================================================
 //  payload_builder.cpp — Montagem e Validação do Payload JSON
 //
-//  Schema do payload (15 campos):
+//  Schema do payload (16 campos):
 //
 //  Chave  | Tipo       | Descrição
 //  -------|------------|----------------------------------
@@ -20,9 +20,10 @@
 //  "bok"  | bool       | true = bateria saudável
 //  "rssi" | int        | RSSI Wi-Fi dBm
 //  "seq"  | uint       | Número de sequência
+//  "dr"   | float32    | Taxa de consumo efetiva (%/s) — feature ML
 //
-//  Tamanho CBOR esperado: ~90 bytes
-//  Tamanho JSON esperado: ~200 bytes
+//  Tamanho CBOR esperado: ~96 bytes
+//  Tamanho JSON esperado: ~215 bytes
 // ============================================================
 
 #include "payload_builder.h"
@@ -133,6 +134,12 @@ bool PayloadBuilder::_buildCbor(uint8_t* buffer, size_t bufferSize,
     w.writeTextString("rssi"); w.writeInt(sd.rssi_dbm);
     w.writeTextString("seq");  w.writeUInt(seq);
 
+    // ── Feature ML ──
+    // Taxa de consumo efetiva do último ciclo (%/s), já com fatores
+    // de temperatura, vento e ruído aplicados. Fundamental para o
+    // dataset de treinamento do Random Forest.
+    w.writeTextString("dr");   w.writeFloat(fs.getDrainRate());
+
     if (!w.isOk()) {
         snprintf(_lastError, sizeof(_lastError),
                  "CBOR overflow (buf=%d)", bufferSize);
@@ -172,6 +179,7 @@ bool PayloadBuilder::_buildJson(uint8_t* buffer, size_t bufferSize,
     doc["bok"]  = !fs.isBatteryAlert();
     doc["rssi"] = sd.rssi_dbm;
     doc["seq"]  = seq;
+    doc["dr"]   = serialized(String(fs.getDrainRate(), 4));  // feature ML
 
     size_t written = serializeJson(doc, (char*)buffer, bufferSize);
 

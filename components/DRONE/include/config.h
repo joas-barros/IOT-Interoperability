@@ -177,12 +177,34 @@ static const uint8_t NUM_WAYPOINTS = sizeof(WAYPOINTS) / sizeof(Waypoint);
 #define PRE_MISSION_DELAY_MS  5000
 
 // ------------------------------------------------------------
+//  VARIABILIDADE DE CONSUMO DE BATERIA (ML feature engineering)
+// ------------------------------------------------------------
+
+// Fator de temperatura: cada grau acima da referência aumenta o consumo em X%
+// Base fisiológica: baterias LiPo perdem eficiência com calor
+// Valor: 1% por °C de desvio — ex: 35°C → +7% de consumo vs 28°C base
+#define BATTERY_TEMP_FACTOR       0.01f
+
+// Temperatura de referência para o fator — deve ser igual a SENSOR_TEMP_BASE
+#define BATTERY_TEMP_REF          28.0f
+
+// Fator de vento: simula resistência aerodinâmica por heading
+// Vento simulado vindo do Norte. fator = 1 + WIND * |cos(heading_rad)|
+// heading 0°/180° (Norte/Sul) → consumo máximo (+8%)
+// heading 90°/270° (Leste/Oeste) → consumo na base
+#define BATTERY_WIND_FACTOR       0.08f
+
+// Ruído estocástico residual: variação aleatória por ciclo (±X% do drain base)
+// Simula imperfeições mecânicas, aquecimento do motor, etc.
+#define BATTERY_NOISE_AMPLITUDE   0.05f
+
+// ------------------------------------------------------------
 //  PAYLOAD
 // ------------------------------------------------------------
 
 // Número de campos no map CBOR (pares chave/valor de topo)
-// id, ts, f, wp, lat, lon, alt, hdg, vel, tmp, hum, bat, bat_ok, rssi, seq
-#define CBOR_MAP_FIELDS        15
+// id, ts, f, wp, lat, lon, alt, hdg, vel, tmp, hum, bat, bat_ok, rssi, seq, dr
+#define CBOR_MAP_FIELDS        16
 
 // Tamanho do buffer CBOR (bytes)
 // Payload real ~90 bytes; buffer com folga para depuração
