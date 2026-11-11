@@ -174,6 +174,9 @@ public class GatewayCoapServer {
                 payload.length, contentFormat,
                 exchange.getSourceAddress());
 
+        // Responde com 2.04 CHANGED — ESP32 vai registrar o RTT aqui
+        exchange.respond(CoAP.ResponseCode.CHANGED);
+
         try {
             DroneData drone;
             String fmt;
@@ -206,9 +209,6 @@ public class GatewayCoapServer {
             // Enfileira no pipeline — retorna IMEDIATAMENTE
             // O ACK é enviado ANTES do dado ser normalizado e encaminhado
             pipeline.submitDrone(drone);
-
-            // Responde com 2.04 CHANGED — ESP32 vai registrar o RTT aqui
-            exchange.respond(CoAP.ResponseCode.CHANGED);
         } catch (Exception e) {
             deserialErrors.incrementAndGet();
             log.error("[CoAP] Erro ao desserializar payload ({} bytes, fmt={}): {}",
