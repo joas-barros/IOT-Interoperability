@@ -1,4 +1,5 @@
 #include "dtls_client.h"
+#include <esp_task_wdt.h>   // esp_task_wdt_reset() — alimenta watchdog durante handshake
 
 DtlsClient dtlsClient;
 
@@ -33,6 +34,7 @@ DtlsConnectResult DtlsClient::connect(const char* host, uint16_t port) {
     mbedtls_ssl_config_init(&_conf);
     mbedtls_entropy_init(&_entropy);
     mbedtls_ctr_drbg_init(&_ctrDrbg);
+    _initialized = true;   // contextos inicializados — close() pode liberar com segurança
 
     int ret;
 
@@ -99,6 +101,9 @@ DtlsConnectResult DtlsClient::connect(const char* host, uint16_t port) {
 
     do {
         ret = mbedtls_ssl_handshake(&_ssl);
+        // Alimenta o watchdog do ESP32 durante o handshake (pode levar até 10s).
+        // Sem isso, o watchdog (~5s padrão) reinicia o dispositivo no meio do handshake.
+        esp_task_wdt_reset();
     } while (ret == MBEDTLS_ERR_SSL_WANT_READ ||
              ret == MBEDTLS_ERR_SSL_WANT_WRITE);
 
@@ -159,6 +164,15 @@ int DtlsClient::recv(uint8_t* buf, size_t maxLen) {
 //  close() — encerra sessão e libera recursos
 // ------------------------------------------------------------
 void DtlsClient::close() {
+    // Só chama mbedTLS se os contextos foram de fato inicializados.
+    // Evita UB caso connect() tenha falhado antes de mbedtls_ssl_init().
+    if (!_initialized) {
+        _udp.stop();
+        _connected = false;
+        _handshakeMs = 0;
+        return;
+    }
+
     if (_connected) {
         mbedtls_ssl_close_notify(&_ssl);
     }
@@ -172,7 +186,8 @@ void DtlsClient::close() {
     // Fecha UDP
     _udp.stop();
 
-    _connected = false;
+    _connected   = false;
+    _initialized = false;
     _handshakeMs = 0;
 }
 

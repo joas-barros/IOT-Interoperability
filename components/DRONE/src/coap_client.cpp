@@ -217,8 +217,8 @@ void CoapClient::_pollAck() {
     int len = 0;
 
 #if COAP_USE_DTLS
-    // Tenta ler por até 200ms (ACK chega em ~30-50ms normalmente)
-    uint32_t deadline = millis() + 200;
+    // Tenta ler por até 1000ms (ACK chega em ~30-50ms normalmente)
+    uint32_t deadline = millis() + 1000;
     while (millis() < deadline) {
         len = dtlsClient.recv(buf, sizeof(buf));
         if (len > 0) break;

@@ -66,8 +66,9 @@ private:
     IPAddress _serverIp;
     uint16_t  _serverPort = 0;
 
-    bool     _connected   = false;
-    uint32_t _handshakeMs = 0;
+    bool     _connected    = false;
+    bool     _initialized  = false;   // true após mbedtls_ssl_init() completar
+    uint32_t _handshakeMs  = 0;
 
     // ── Callbacks de I/O exigidos pelo mbedTLS ────────────────
     // mbedTLS exige funções estáticas para send/recv do BIO
