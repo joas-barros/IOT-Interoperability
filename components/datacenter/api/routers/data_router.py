@@ -45,7 +45,7 @@ def get_sensor_data(
 
 
 @router.post("/api/v1/ingest", status_code=200, summary="Ingestão de dados normalizados")
-@limiter.limit("30/minute")
+@limiter.limit("500/minute")
 async def ingest(
     request: Request,
     _user: UserContext = Depends(require_admin),
@@ -54,7 +54,7 @@ async def ingest(
     Recebe NormalizedData do gateway, persiste no InfluxDB
     e atualiza o Digital Twin do dispositivo.
     Requer autenticação com perfil **admin**.
-    Rate limit: 30 requisições/minuto por IP.
+    Rate limit: 500 requisições/minuto por IP.
     """
     from api.models import NormalizedData
 
