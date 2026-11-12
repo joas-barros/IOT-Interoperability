@@ -1,3 +1,6 @@
 .env
 logs/*
 .vscode/.checkmarxIgnored
+
+ml/models/*.pkl
+ml/img/*.png

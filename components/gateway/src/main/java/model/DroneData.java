@@ -29,6 +29,7 @@ public class DroneData {
     @JsonProperty("bok")   public Boolean batteryOk;    // true = acima do limiar
     @JsonProperty("rssi")  public Integer rssiDbm;
     @JsonProperty("seq")   public Long    seq;
+    @JsonProperty("dr")    public Double  drainRate;    // taxa efetiva de consumo (%/s) — feature ML
 
     // ── Adicionado pelo gateway no momento do recebimento ─────────────────
     // Não vem do ESP32 — preenchido pelo CoapServer antes de normalizar

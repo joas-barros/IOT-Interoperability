@@ -31,3 +31,8 @@ passlib[bcrypt]
 
 # Rate limiting 
 slowapi
+
+# Machine Learning
+scikit-learn 
+joblib 
+matplotlib

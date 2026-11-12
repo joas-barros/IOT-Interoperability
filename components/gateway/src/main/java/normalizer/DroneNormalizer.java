@@ -65,6 +65,7 @@ public class DroneNormalizer {
         // ── Voo ──
         nd.flightPhase    = drone.flightPhase;
         nd.waypointIndex  = drone.waypointIndex;
+        nd.drainRatePctS  = drone.drainRate;     // campo "dr" do payload ESP32
 
         log.debug("[DroneNorm] {} → {}", drone, nd);
         return nd;

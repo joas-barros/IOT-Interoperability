@@ -289,19 +289,15 @@ class TwinStore:
     def _estimate_return_min(self, data: NormalizedData) -> float:
         """
         Estima quanto tempo de voo resta antes do retorno forçado.
-        Baseado na bateria atual e na taxa de consumo da fase.
+
+        Delega ao BatteryPredictor (ml/predictor.py):
+          - Se o modelo RF estiver carregado → predição Random Forest
+          - Caso contrário → fallback linear (bat_utilizável / drain_rate)
+
+        O predictor é injetado pelo main.py no startup via set_predictor().
         """
-
-        battery = data.battery_pct or 0
-        phase = data.flight_phase or "UNKNOWN"
-        drain = BATTERY_DRAIN_PER_S.get(phase, 0.05)
-
-        usable = max(0, battery - BATTERY_RESERVE_PCT)  
-        if drain == 0:
-            return 999.0  # Sem consumo, tempo infinito
-        
-        remaining_s = usable / drain
-        return round(remaining_s / 60, 1)  # Retorna em minutos
+        from api.main import predictor as _predictor
+        return _predictor.predict(data)
     
     def _coverage_radius(self, data: NormalizedData) -> float:
         """

@@ -42,13 +42,17 @@ from api.routers.auth_router    import router as auth_router
 from api.routers.twins_router   import router as twins_router
 from api.routers.data_router    import router as data_router
 from api.routers.metrics_router import router as metrics_router
+from api.routers.ml_router      import router as ml_router
+
+from ml.predictor import BatteryPredictor
 
 load_dotenv()
 
-# ── Singleton: TwinStore e InfluxWriter ───────────────────────────────────────
+# ── Singletons ────────────────────────────────────────────────────────────────
 twin_store = TwinStore()
 influx:    Optional[InfluxWriter] = None
 stats_lock: Optional[asyncio.Lock] = None
+predictor: BatteryPredictor = BatteryPredictor()   # carregado no import; fallback linear se sem modelo
 
 # Contadores de sessão
 session_stats = {
@@ -73,6 +77,7 @@ async def lifespan(app: FastAPI):
     print(f"  InfluxDB   : {os.getenv('INFLUX_URL', 'http://localhost:8086')}")
     print(f"  Redis      : {os.getenv('REDIS_URL', 'redis://localhost:6379')}")
     print(f"  JWT expire : {os.getenv('JWT_EXPIRE_MINUTES', '60')} min")
+    print(f"  ML modo    : {predictor.mode.upper()} ({'modelo carregado' if predictor.ready else 'fallback linear — rode ml/train_model.py'})")
     print("=" * 55)
 
     influx = InfluxWriter()
@@ -111,13 +116,16 @@ app.add_middleware(
 )
 
 # ── Routers ────────────────────────────────────────────────────────────────────
-app.include_router(auth_router)     # POST /api/v1/auth/token      (público)
-app.include_router(twins_router)    # GET  /api/v1/twins/**         (viewer+)
-app.include_router(data_router)     # GET  /api/v1/data             (viewer+)
-                                    # POST /api/v1/ingest            (admin)
-app.include_router(metrics_router)  # GET  /api/v1/metrics/**       (viewer+)
-                                    # GET  /api/v1/status            (viewer+)
-                                    # POST /api/v1/gateway/metrics   (admin)
+app.include_router(auth_router)     # POST /api/v1/auth/token           (público)
+app.include_router(twins_router)    # GET  /api/v1/twins/**             (viewer+)
+app.include_router(data_router)     # GET  /api/v1/data                 (viewer+)
+                                    # POST /api/v1/ingest                (admin)
+app.include_router(metrics_router)  # GET  /api/v1/metrics/**           (viewer+)
+                                    # GET  /api/v1/status                (viewer+)
+                                    # POST /api/v1/gateway/metrics       (admin)
+app.include_router(ml_router)       # POST /api/v1/ml/predict/battery   (viewer+)
+                                    # GET  /api/v1/ml/status             (viewer+)
+                                    # POST /api/v1/ml/reload             (admin)
 
 # ── Health check público (sem autenticação) ────────────────────────────────────
 @app.get("/health", tags=["Sistema"], include_in_schema=False)
