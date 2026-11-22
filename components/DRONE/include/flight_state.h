@@ -10,7 +10,11 @@
 class FlightState {
 public:
     // Inicializa no estado IDLE com posição de base
-    void begin();
+    void begin(
+        uint8_t battery_pct  = BATTERY_INITIAL,
+        float   alt_m        = MISSION_ALT_M,
+       float   speed_ms     = 12.0f
+    );
 
     // Avança a máquina de estados.
     // Deve ser chamado em cada ciclo do loop().
@@ -61,6 +65,10 @@ private:
     // Movimento
     float _velocity = 0.0f;
     float _heading  = 0.0f;
+
+    // parametros para a fase de missão
+    float _missionAltM   = MISSION_ALT_M;
+    float _missionSpeedMs = 12.0f;
 
     // Sistema
     float    _battery       = BATTERY_INITIAL;

@@ -15,21 +15,23 @@ static const float RETURN_SPEED_MS    = 15.0f;  // velocidade de retorno (m/s)
 static const float WAYPOINT_THRESH_M  = 5.0f;   // distância para considerar WP atingido (m)
 
 // ------------------------------------------------------------
-void FlightState::begin() {
+void FlightState::begin(uint8_t battery_pct, float alt_m, float speed_ms) {
     _phase        = PHASE_IDLE;
     _lat          = BASE_LAT;
     _lon          = BASE_LON;
     _alt          = 0.0f;
     _velocity     = 0.0f;
     _heading      = 0.0f;
-    _battery      = BATTERY_INITIAL;
+    _battery      = float(battery_pct);
+    _missionAltM   = alt_m;
+    _missionSpeedMs = speed_ms;
     _wpIndex      = 0;
     _missionDone  = false;
     _phaseStartMs = millis();
     _lastUpdateMs = millis();
 
-    Serial.printf("[VÔOO] Iniciado em IDLE | Base: %.6f, %.6f\n",
-                  BASE_LAT, BASE_LON);
+    Serial.printf("[VÔOO] Iniciado em IDLE | Bat=%d%% | Alt=%.0fm | Vel=%.0fm/s\n",
+                  battery_pct, alt_m, speed_ms);
 }
 
 // ------------------------------------------------------------
@@ -91,7 +93,7 @@ void FlightState::_updateIdle() {
 void FlightState::_updateTakeoff() {
     // Sobe linearmente até MISSION_ALT_M
     float elapsed = getPhaseElapsed() / 1000.0f;  // segundos
-    float targetAlt = MISSION_ALT_M;
+    float targetAlt = _missionAltM;
 
     _alt = min(_alt + TAKEOFF_SPEED_MS * (millis() - _lastUpdateMs + 1) / 1000.0f,
                targetAlt);
@@ -118,7 +120,7 @@ void FlightState::_updateMission() {
     float dt = (millis() - _lastUpdateMs + 1) / 1000.0f;
 
     bool arrived = _moveToward(wp.lat, wp.lon,
-                               MISSION_SPEED_MS, WAYPOINT_THRESH_M, dt);
+                               _missionSpeedMs, WAYPOINT_THRESH_M, dt);
 
     if (arrived) {
         Serial.printf("[VÔOO] Waypoint %d atingido | %.6f, %.6f\n",

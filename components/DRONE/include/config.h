@@ -61,7 +61,7 @@
 #define BASE_LON          -37.32216460818565
 
 // Altitude alvo de missão (metros)
-#define MISSION_ALT_M     10.0f
+#define MISSION_ALT_M     30.0f
 
 // Raio máximo de deslocamento horizontal em missão (metros)
 #define MISSION_RADIUS_M  200.0f
@@ -70,7 +70,7 @@
 #define BATTERY_INITIAL   100
 
 // Limiar de bateria para alerta (%) — ativa flag alerta_bat no payload
-#define BATTERY_ALERT_PCT  15
+#define BATTERY_ALERT_PCT  25
 
 // ------------------------------------------------------------
 //  FASES DE VOO — enum
@@ -144,7 +144,7 @@ static const Waypoint WAYPOINTS[] = {
     // WP1 — Faz a curva 100m para o Leste (Primeiro ponto de inspeção)
     { -5.206745, -37.321264, 10.0f, true,  20000  },  
     // WP2 — Desce 100m para o Sul
-    { -5.207645, -37.321264, 10.0f, false, 0      },  
+    { -5.207645, -37.321264, 10.0f, true, 20000   },  
     // WP3 — Retorna 100m para o Oeste, voltando para exatamente em cima da base (Segundo ponto de inspeção)
     { -5.207645, -37.322164, 10.0f, true,  20000  },
 };
@@ -216,3 +216,37 @@ static const uint8_t NUM_WAYPOINTS = sizeof(WAYPOINTS) / sizeof(Waypoint);
 
 // Tamanho do buffer de serialização JSON (bytes)
 #define JSON_BUFFER_SIZE  512
+
+// Modo coleta de dataset
+#define DATASET_MODE  0   // 1 = coleta de dataset, 0 = operação normal 
+
+#if DATASET_MODE
+
+struct DatasetConfig {
+    uint8_t battery_pct;   // bateria inicial (%)
+    float   alt_m;         // altitude alvo (m)
+    float   speed_ms;      // velocidade de cruzeiro (m/s)
+};
+
+// Tabela de missões — 20 combinações (5 bat × 2 alt × 2 vel)
+static const DatasetConfig DATASET_CONFIGS[] = {
+    {100, 10.0f,  8.0f}, {100, 10.0f, 12.0f},
+    {100, 20.0f,  8.0f}, {100, 20.0f, 12.0f},
+    { 85, 10.0f,  8.0f}, { 85, 10.0f, 12.0f},
+    { 85, 20.0f,  8.0f}, { 85, 20.0f, 12.0f},
+    { 70, 10.0f,  8.0f}, { 70, 10.0f, 12.0f},
+    { 70, 20.0f,  8.0f}, { 70, 20.0f, 12.0f},
+    { 55, 10.0f,  8.0f}, { 55, 10.0f, 12.0f},
+    { 55, 20.0f,  8.0f}, { 55, 20.0f, 12.0f},
+    { 40, 10.0f,  8.0f}, { 40, 10.0f, 12.0f},
+    { 40, 20.0f,  8.0f}, { 40, 20.0f, 12.0f},
+};
+
+#define DATASET_NUM_MISSIONS (sizeof(DATASET_CONFIGS) / sizeof(DatasetConfig))
+
+#undef  PRE_MISSION_DELAY_MS
+#define PRE_MISSION_DELAY_MS  500
+#undef  RANDOM_SEED
+#define RANDOM_SEED           0      // semente real — variabilidade entre missões
+
+#endif
