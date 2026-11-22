@@ -53,6 +53,11 @@ static bool missionReported = false;
 // Contadores de ciclo do loop para diagnóstico
 static uint32_t loopCount = 0;
 
+// Última temperatura lida pelo SensorSim — alimenta o fator de
+// temperatura do _drainBattery() em cada ciclo do loop, mesmo
+// quando não é hora de publicar um payload.
+static float lastTempC = SENSOR_TEMP_BASE;
+
 // ------------------------------------------------------------
 //  Funções auxiliares
 // ------------------------------------------------------------
@@ -203,27 +208,58 @@ void loop() {
 
     // ---- 2. Missão já concluída ----
     if (missionReported) {
-        delay(10000); // Pausa 10 segundos no solo para você ver os logs
 
+    #if DATASET_MODE
+        static uint8_t missionIdx = 0;
+
+        Serial.printf("\n[DATASET] Missão %d/%d concluída (bat=%d%% alt=%.0fm vel=%.0fm/s)\n",
+                    missionIdx + 1, (int)DATASET_NUM_MISSIONS,
+                    DATASET_CONFIGS[missionIdx].battery_pct,
+                    DATASET_CONFIGS[missionIdx].alt_m,
+                    DATASET_CONFIGS[missionIdx].speed_ms);
+
+        missionIdx++;
+
+        if (missionIdx >= DATASET_NUM_MISSIONS) {
+            Serial.println("[DATASET] ✓ Todas as missões coletadas. Reinicie para nova sessão.");
+            while (true) delay(10000);
+        }
+
+        // Configura próxima missão com os parâmetros da tabela
+        const DatasetConfig& cfg = DATASET_CONFIGS[missionIdx];
+        Serial.printf("[DATASET] Próxima: missão %d/%d | bat=%d%% alt=%.0fm vel=%.0fm/s\n",
+                    missionIdx + 1, (int)DATASET_NUM_MISSIONS,
+                    cfg.battery_pct, cfg.alt_m, cfg.speed_ms);
+
+        coapClient.resetMetrics();
+        Serial.printf("[DATASET] Pausando 3 minutos antes da próxima missão...\n");
+        delay(180000);  // 3 minutos — garante gap > MISSION_GAP_MIN no InfluxDB
+        flightState.begin(cfg.battery_pct, cfg.alt_m, cfg.speed_ms);
+        missionReported = false;
+        lastPublishMs   = millis();
+
+    #else
+        delay(10000);
         Serial.println("\n[MAIN] =========================================");
         Serial.println("[MAIN] INICIANDO NOVO EXPERIMENTO...");
-        
-        // Inverte o formato (JSON <-> CBOR)
+
         payloadBuilder.toggleFormat();
         Serial.printf("[MAIN] Novo formato selecionado: %s\n", payloadBuilder.modeName());
 
-        // Reseta as métricas do CoAP e a Máquina de Estados (Bateria, Posição, etc)
         coapClient.resetMetrics();
         flightState.begin();
-        
-        // Rearma as flags para o loop continuar rodando
+
         missionReported = false;
-        lastPublishMs = millis();
+        lastPublishMs   = millis();
         Serial.println("[MAIN] =========================================\n");
+    #endif
         return;
     }
 
     // ---- 3. Avança máquina de estados de voo ----
+    // Alimenta a temperatura atual antes de update() para que
+    // _drainBattery() use o fator de temperatura correto neste ciclo.
+    flightState.setCurrentTemp(lastTempC);
     bool transitioned = flightState.update();
 
     if (transitioned) {
@@ -246,6 +282,7 @@ void loop() {
             flightState.getAlt(),
             wifiManager.getRSSI()
         );
+        lastTempC = sd.temp_c;  // atualiza para os próximos ciclos sem publicação
 
         // 4b. Monta e valida payload
         bool ok = payloadBuilder.build(

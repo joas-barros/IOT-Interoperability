@@ -15,21 +15,23 @@ static const float RETURN_SPEED_MS    = 15.0f;  // velocidade de retorno (m/s)
 static const float WAYPOINT_THRESH_M  = 5.0f;   // distância para considerar WP atingido (m)
 
 // ------------------------------------------------------------
-void FlightState::begin() {
+void FlightState::begin(uint8_t battery_pct, float alt_m, float speed_ms) {
     _phase        = PHASE_IDLE;
     _lat          = BASE_LAT;
     _lon          = BASE_LON;
     _alt          = 0.0f;
     _velocity     = 0.0f;
     _heading      = 0.0f;
-    _battery      = BATTERY_INITIAL;
+    _battery      = float(battery_pct);
+    _missionAltM   = alt_m;
+    _missionSpeedMs = speed_ms;
     _wpIndex      = 0;
     _missionDone  = false;
     _phaseStartMs = millis();
     _lastUpdateMs = millis();
 
-    Serial.printf("[VÔOO] Iniciado em IDLE | Base: %.6f, %.6f\n",
-                  BASE_LAT, BASE_LON);
+    Serial.printf("[VÔOO] Iniciado em IDLE | Bat=%d%% | Alt=%.0fm | Vel=%.0fm/s\n",
+                  battery_pct, alt_m, speed_ms);
 }
 
 // ------------------------------------------------------------
@@ -91,7 +93,7 @@ void FlightState::_updateIdle() {
 void FlightState::_updateTakeoff() {
     // Sobe linearmente até MISSION_ALT_M
     float elapsed = getPhaseElapsed() / 1000.0f;  // segundos
-    float targetAlt = MISSION_ALT_M;
+    float targetAlt = _missionAltM;
 
     _alt = min(_alt + TAKEOFF_SPEED_MS * (millis() - _lastUpdateMs + 1) / 1000.0f,
                targetAlt);
@@ -118,7 +120,7 @@ void FlightState::_updateMission() {
     float dt = (millis() - _lastUpdateMs + 1) / 1000.0f;
 
     bool arrived = _moveToward(wp.lat, wp.lon,
-                               MISSION_SPEED_MS, WAYPOINT_THRESH_M, dt);
+                               _missionSpeedMs, WAYPOINT_THRESH_M, dt);
 
     if (arrived) {
         Serial.printf("[VÔOO] Waypoint %d atingido | %.6f, %.6f\n",
@@ -232,7 +234,46 @@ float FlightState::_calcHeading(double lat1, double lon1,
 // ------------------------------------------------------------
 void FlightState::_drainBattery(float dt) {
     if (_phase == PHASE_IDLE && _battery >= BATTERY_INITIAL) return;
-    _battery = max(0.0f, _battery - PHASE_BATTERY_DRAIN[_phase] * dt);
+
+    float baseDrain = PHASE_BATTERY_DRAIN[_phase];
+
+    // ── Fator de temperatura ────────────────────────────────────
+    // Cada °C acima da referência aumenta o consumo em BATTERY_TEMP_FACTOR
+    // Ex: 35°C → fator = 1 + (35-28)*0.01 = 1.07 (+7%)
+    float tempDelta  = _currentTemp - BATTERY_TEMP_REF;
+    float tempFactor = 1.0f + tempDelta * BATTERY_TEMP_FACTOR;
+    tempFactor = constrain(tempFactor, 0.85f, 1.20f); // limita a ±20%
+
+    // ── Fator de vento ─────────────────────────────────────────
+    // Vento simulado vindo do Norte. Componente frontal = |cos(heading)|.
+    // heading 0°/180° → resistência máxima (+8%); heading 90°/270° → sem resistência
+    // Só aplica em fases com deslocamento horizontal
+    float windFactor = 1.0f;
+    if (_phase == PHASE_MISSION || _phase == PHASE_RETURN) {
+        float headingRad = _heading * (float)M_PI / 180.0f;
+        windFactor = 1.0f + BATTERY_WIND_FACTOR * fabsf(cosf(headingRad));
+    }
+
+    // ── Ruído estocástico ──────────────────────────────────────
+    // Variação aleatória residual: soma de uniformes → aproximação gaussiana
+    // Simula imperfeições mecânicas, aquecimento do motor, etc.
+    float noiseSum = 0.0f;
+    for (int i = 0; i < 4; i++) {
+        noiseSum += (float)random(-1000, 1001) / 1000.0f;
+    }
+    float noiseFactor = 1.0f + (noiseSum / 4.0f) * BATTERY_NOISE_AMPLITUDE;
+
+    // ── Consumo efetivo ────────────────────────────────────────
+    float effectiveDrain = baseDrain * tempFactor * windFactor * noiseFactor;
+
+    _lastDrainRate = effectiveDrain;  // expõe para o payload/dataset de ML
+    _battery = max(0.0f, _battery - effectiveDrain * dt);
+
+#ifdef BATTERY_DRAIN_LOG
+    Serial.printf("[BAT] fase=%s dr=%.4f (base=%.4f tF=%.2f wF=%.2f nF=%.2f) bat=%.1f%%\n",
+                  PHASE_NAMES[_phase], effectiveDrain, baseDrain,
+                  tempFactor, windFactor, noiseFactor, _battery);
+#endif
 }
 
 // ------------------------------------------------------------

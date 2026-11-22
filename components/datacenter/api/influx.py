@@ -90,9 +90,11 @@ class InfluxWriter:
         if data.rssi_dbm is not None: point = point.field("rssi_dbm", data.rssi_dbm)
         if data.seq is not None: point = point.field("seq", data.seq)
 
-        # Waypoint (drone)
+        # Waypoint e drain rate (drone)
         if data.waypoint_index is not None:
             point = point.field("waypoint_index", data.waypoint_index)
+        if data.drain_rate_pct_s is not None:
+            point = point.field("drain_rate_pct_s", data.drain_rate_pct_s)
 
         # ── Timestamp: usa o sensor_ts para posicionamento correto ─────────
         # Isso garante que o ponto aparece no gráfico no momento em que

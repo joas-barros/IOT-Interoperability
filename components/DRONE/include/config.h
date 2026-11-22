@@ -61,7 +61,7 @@
 #define BASE_LON          -37.32216460818565
 
 // Altitude alvo de missão (metros)
-#define MISSION_ALT_M     10.0f
+#define MISSION_ALT_M     30.0f
 
 // Raio máximo de deslocamento horizontal em missão (metros)
 #define MISSION_RADIUS_M  200.0f
@@ -70,7 +70,7 @@
 #define BATTERY_INITIAL   100
 
 // Limiar de bateria para alerta (%) — ativa flag alerta_bat no payload
-#define BATTERY_ALERT_PCT  15
+#define BATTERY_ALERT_PCT  25
 
 // ------------------------------------------------------------
 //  FASES DE VOO — enum
@@ -144,7 +144,7 @@ static const Waypoint WAYPOINTS[] = {
     // WP1 — Faz a curva 100m para o Leste (Primeiro ponto de inspeção)
     { -5.206745, -37.321264, 10.0f, true,  20000  },  
     // WP2 — Desce 100m para o Sul
-    { -5.207645, -37.321264, 10.0f, false, 0      },  
+    { -5.207645, -37.321264, 10.0f, true, 20000   },  
     // WP3 — Retorna 100m para o Oeste, voltando para exatamente em cima da base (Segundo ponto de inspeção)
     { -5.207645, -37.322164, 10.0f, true,  20000  },
 };
@@ -177,12 +177,34 @@ static const uint8_t NUM_WAYPOINTS = sizeof(WAYPOINTS) / sizeof(Waypoint);
 #define PRE_MISSION_DELAY_MS  5000
 
 // ------------------------------------------------------------
+//  VARIABILIDADE DE CONSUMO DE BATERIA (ML feature engineering)
+// ------------------------------------------------------------
+
+// Fator de temperatura: cada grau acima da referência aumenta o consumo em X%
+// Base fisiológica: baterias LiPo perdem eficiência com calor
+// Valor: 1% por °C de desvio — ex: 35°C → +7% de consumo vs 28°C base
+#define BATTERY_TEMP_FACTOR       0.01f
+
+// Temperatura de referência para o fator — deve ser igual a SENSOR_TEMP_BASE
+#define BATTERY_TEMP_REF          28.0f
+
+// Fator de vento: simula resistência aerodinâmica por heading
+// Vento simulado vindo do Norte. fator = 1 + WIND * |cos(heading_rad)|
+// heading 0°/180° (Norte/Sul) → consumo máximo (+8%)
+// heading 90°/270° (Leste/Oeste) → consumo na base
+#define BATTERY_WIND_FACTOR       0.08f
+
+// Ruído estocástico residual: variação aleatória por ciclo (±X% do drain base)
+// Simula imperfeições mecânicas, aquecimento do motor, etc.
+#define BATTERY_NOISE_AMPLITUDE   0.05f
+
+// ------------------------------------------------------------
 //  PAYLOAD
 // ------------------------------------------------------------
 
 // Número de campos no map CBOR (pares chave/valor de topo)
-// id, ts, f, wp, lat, lon, alt, hdg, vel, tmp, hum, bat, bat_ok, rssi, seq
-#define CBOR_MAP_FIELDS        15
+// id, ts, f, wp, lat, lon, alt, hdg, vel, tmp, hum, bat, bat_ok, rssi, seq, dr
+#define CBOR_MAP_FIELDS        16
 
 // Tamanho do buffer CBOR (bytes)
 // Payload real ~90 bytes; buffer com folga para depuração
@@ -194,3 +216,37 @@ static const uint8_t NUM_WAYPOINTS = sizeof(WAYPOINTS) / sizeof(Waypoint);
 
 // Tamanho do buffer de serialização JSON (bytes)
 #define JSON_BUFFER_SIZE  512
+
+// Modo coleta de dataset
+#define DATASET_MODE  0   // 1 = coleta de dataset, 0 = operação normal 
+
+#if DATASET_MODE
+
+struct DatasetConfig {
+    uint8_t battery_pct;   // bateria inicial (%)
+    float   alt_m;         // altitude alvo (m)
+    float   speed_ms;      // velocidade de cruzeiro (m/s)
+};
+
+// Tabela de missões — 20 combinações (5 bat × 2 alt × 2 vel)
+static const DatasetConfig DATASET_CONFIGS[] = {
+    {100, 10.0f,  8.0f}, {100, 10.0f, 12.0f},
+    {100, 20.0f,  8.0f}, {100, 20.0f, 12.0f},
+    { 85, 10.0f,  8.0f}, { 85, 10.0f, 12.0f},
+    { 85, 20.0f,  8.0f}, { 85, 20.0f, 12.0f},
+    { 70, 10.0f,  8.0f}, { 70, 10.0f, 12.0f},
+    { 70, 20.0f,  8.0f}, { 70, 20.0f, 12.0f},
+    { 55, 10.0f,  8.0f}, { 55, 10.0f, 12.0f},
+    { 55, 20.0f,  8.0f}, { 55, 20.0f, 12.0f},
+    { 40, 10.0f,  8.0f}, { 40, 10.0f, 12.0f},
+    { 40, 20.0f,  8.0f}, { 40, 20.0f, 12.0f},
+};
+
+#define DATASET_NUM_MISSIONS (sizeof(DATASET_CONFIGS) / sizeof(DatasetConfig))
+
+#undef  PRE_MISSION_DELAY_MS
+#define PRE_MISSION_DELAY_MS  500
+#undef  RANDOM_SEED
+#define RANDOM_SEED           0      // semente real — variabilidade entre missões
+
+#endif

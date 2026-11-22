@@ -56,8 +56,9 @@ class NormalizedData(BaseModel):
     seq: Optional[int] = None
 
     # ── Voo (exclusivos do drone) ─────────────────────────────────────────
-    flight_phase:    Optional[str] = None   # null para estação
-    waypoint_index:  Optional[int] = None   # null para estação
+    flight_phase:      Optional[str]   = None   # null para estação
+    waypoint_index:    Optional[int]   = None   # null para estação
+    drain_rate_pct_s:  Optional[float] = None   # taxa efetiva de consumo (%/s) — feature ML
 
     @field_validator("sensor_ts", "gateway_ts", mode="before")
     @classmethod

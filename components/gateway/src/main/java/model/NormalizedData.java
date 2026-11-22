@@ -38,6 +38,7 @@ public class NormalizedData {
     // ── Voo (exclusivos do drone) ──────────────────────────────────────────
     public String  flightPhase;       // null para estação
     public Integer waypointIndex;     // null para estação
+    public Double  drainRatePctS;     // taxa efetiva de consumo (%/s) — feature ML; null para estação
 
     @Override
     public String toString() {
