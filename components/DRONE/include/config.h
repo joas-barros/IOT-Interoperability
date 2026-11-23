@@ -18,8 +18,8 @@
 // ------------------------------------------------------------
 #define GATEWAY_IP        "10.139.22.112"  
  
-//#define GATEWAY_PORT      5683              // porta padrão CoAP
-#define GATEWAY_PORT  5684 // porta padrão CoAP sobre DTLS (seguro)
+#define GATEWAY_PORT      5683              // porta padrão CoAP
+//#define GATEWAY_PORT  5684 // porta padrão CoAP sobre DTLS (seguro)
 
 #if GATEWAY_PORT == 5684
   #define COAP_USE_DTLS 1
@@ -61,7 +61,7 @@
 #define BASE_LON          -37.32216460818565
 
 // Altitude alvo de missão (metros)
-#define MISSION_ALT_M     30.0f
+#define MISSION_ALT_M     100.0f
 
 // Raio máximo de deslocamento horizontal em missão (metros)
 #define MISSION_RADIUS_M  200.0f
@@ -142,11 +142,11 @@ static const Waypoint WAYPOINTS[] = {
     { -5.206745, -37.322164, 10.0f, false, 0      },  
     
     // WP1 — Faz a curva 100m para o Leste (Primeiro ponto de inspeção)
-    { -5.206745, -37.321264, 10.0f, true,  20000  },  
+    { -5.206745, -37.321264, 10.0f, true,  60000  },  
     // WP2 — Desce 100m para o Sul
-    { -5.207645, -37.321264, 10.0f, true, 20000   },  
+    { -5.207645, -37.321264, 10.0f, true, 60000   },  
     // WP3 — Retorna 100m para o Oeste, voltando para exatamente em cima da base (Segundo ponto de inspeção)
-    { -5.207645, -37.322164, 10.0f, true,  20000  },
+    { -5.207645, -37.322164, 10.0f, true,  60000  },
 };
 static const uint8_t NUM_WAYPOINTS = sizeof(WAYPOINTS) / sizeof(Waypoint);
 
@@ -228,18 +228,19 @@ struct DatasetConfig {
     float   speed_ms;      // velocidade de cruzeiro (m/s)
 };
 
-// Tabela de missões — 20 combinações (5 bat × 2 alt × 2 vel)
+// Tabela de missões — 40 combinações (5 bat × 2 alt × 2 vel)
 static const DatasetConfig DATASET_CONFIGS[] = {
-    {100, 10.0f,  8.0f}, {100, 10.0f, 12.0f},
-    {100, 20.0f,  8.0f}, {100, 20.0f, 12.0f},
-    { 85, 10.0f,  8.0f}, { 85, 10.0f, 12.0f},
-    { 85, 20.0f,  8.0f}, { 85, 20.0f, 12.0f},
-    { 70, 10.0f,  8.0f}, { 70, 10.0f, 12.0f},
-    { 70, 20.0f,  8.0f}, { 70, 20.0f, 12.0f},
-    { 55, 10.0f,  8.0f}, { 55, 10.0f, 12.0f},
-    { 55, 20.0f,  8.0f}, { 55, 20.0f, 12.0f},
-    { 40, 10.0f,  8.0f}, { 40, 10.0f, 12.0f},
-    { 40, 20.0f,  8.0f}, { 40, 20.0f, 12.0f},
+    // — Bloco 1 —
+    {100, 50.0f,  8.0f}, {100, 50.0f, 12.0f},
+    {100, 100.0f, 8.0f}, {100, 100.0f, 12.0f},
+    { 85, 50.0f,  8.0f}, { 85, 50.0f, 12.0f},
+    { 85, 100.0f, 8.0f}, { 85, 100.0f, 12.0f},
+    { 70, 50.0f,  8.0f}, { 70, 50.0f, 12.0f},
+    { 70, 100.0f, 8.0f}, { 70, 100.0f, 12.0f},
+    { 55, 50.0f,  8.0f}, { 55, 50.0f, 12.0f},
+    { 55, 100.0f, 8.0f}, { 55, 100.0f, 12.0f},
+    { 40, 50.0f,  8.0f}, { 40, 50.0f, 12.0f},
+    { 40, 100.0f, 8.0f}, { 40, 100.0f, 12.0f},
 };
 
 #define DATASET_NUM_MISSIONS (sizeof(DATASET_CONFIGS) / sizeof(DatasetConfig))
